@@ -1,0 +1,41 @@
+
+
+
+<ion-content class="game-content">
+
+  <div class="game-background">
+
+    <button class="close-btn" (click)="closeModal()">✖</button>
+
+    @if (!isUnlocked) {
+
+      <div class="grid">
+
+        @for (slot of slots; track slot.id) {
+          <div
+            class="slot"
+            [ngClass]="slot.mode"
+            (click)="addBook(slot)">
+
+            @for (book of slot.books; track $index; let i = $index) {
+              <div
+                class="book"
+                [ngClass]="[book.color, book.type]"
+                (click)="changeColor(slot, i); $event.stopPropagation()">
+              </div>
+            }
+
+          </div>
+        }
+
+      </div>
+
+    }
+
+    @if (isUnlocked) {
+
+    }
+
+  </div>
+
+</ion-content>

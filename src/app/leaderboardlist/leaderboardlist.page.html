@@ -1,0 +1,98 @@
+<ion-header class="transparent-header">
+  <ion-toolbar>
+
+    <!-- Back Button -->
+    <ion-buttons slot="start" class="back-btn">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <div class="leaderboard-title">
+      LEADERBOARD
+    </div>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background" fullscreen="true">
+
+  <!-- Header Row -->
+  <ion-row class="header-row">
+
+    <ion-col size="1" class="col-center">
+      Rank
+    </ion-col>
+
+    <ion-col size="2" class="col-center">
+      Avatar
+    </ion-col>
+
+    <ion-col size="4" class="col-center">
+      Player
+    </ion-col>
+
+    <ion-col size="2.5" class="col-center">
+      Stage
+    </ion-col>
+
+    <ion-col size="2.5" class="col-center">
+      Duration
+    </ion-col>
+
+  </ion-row>
+
+  <!-- Leaderboard Rows -->
+<ion-row
+  *ngFor="let player of leaderboard; let i = index"
+  class="cardleader"
+  [class.my-player]="player.user_id === currentUserId">
+
+    <!-- Rank -->
+    <ion-col size="1">
+      <div class="rank-text">
+        #{{ player.rank }}
+      </div>
+    </ion-col>
+
+    <!-- Avatar -->
+    <ion-col size="2">
+      <div class="avatar-wrapper">
+        <div class="avatar">
+          {{ player.avatar }}
+        </div>
+      </div>
+    </ion-col>
+
+    <!-- Player Name -->
+    <ion-col size="4">
+      <div class="player-name">
+        {{ player.username }}
+      </div>
+    </ion-col>
+
+    <!-- Level -->
+    <ion-col size="2.5">
+      <div class="level-text">
+        Level {{ player.level_no }}
+      </div>
+    </ion-col>
+
+    <!-- Duration -->
+    <ion-col size="2.5">
+      <div class="duration-text">
+        {{ player.total_hours }}
+      </div>
+    </ion-col>
+
+  </ion-row>
+
+  <div *ngIf="isLoading" class="game-loader">
+  <div class="loader-content">
+    <div class="spinner"></div>
+    <div class="loader-text">
+      {{ loadingMessage }}
+    </div>
+  </div>
+</div>
+</ion-content>

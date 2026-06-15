@@ -1,0 +1,49 @@
+
+
+<ion-content [fullscreen]="true" class="background">
+
+  <div
+        class="settings-menu-btn"
+        (click)="toggleSettings()">
+      
+        <img
+          src="assets/images/hr-room/settingsmenu.png"
+          alt="settings">
+      
+      </div>
+      
+      <!-- SETTINGS OVERLAY -->
+      
+      <div
+        class="settings-overlay"
+        *ngIf="showSettings">
+      
+        <!-- BLUR BACKGROUND -->
+        <div
+          class="settings-backdrop"
+          (click)="toggleSettings()">
+        </div>
+      
+        <!-- SETTINGS POPUP -->
+        
+      <app-settings
+      *ngIf="showSettings"
+      (closePopup)="showSettings = false">
+      </app-settings>
+      
+      </div>
+
+  <div class="rank-container">
+    <div class="rank-label">YOUR RANK</div>
+    <div class="rank-number">#{{ userRank }}</div>
+  </div>
+  
+<div class="top-center">
+  <ion-button
+    class="leaderboard-btn"
+    (click)="goToLeaderboard()">
+    <ion-icon name="trophy-outline" slot="start"></ion-icon>
+    Leaderboard List
+  </ion-button>
+</div>
+</ion-content>

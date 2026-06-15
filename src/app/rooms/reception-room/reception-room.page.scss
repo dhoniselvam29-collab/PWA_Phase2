@@ -1,0 +1,1393 @@
+ion-content {
+  --background: black;
+  // --overflow: hidden;
+  // overflow: hidden !important;
+}
+
+* {
+  cursor: default !important;
+}
+
+/* ================= WRAPPER ================= */
+.game-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ================= SCENE ================= */
+.scene {
+  position: relative;
+  width: 100%;
+  // max-width: 1600px;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; 
+  height: 100%;
+}
+
+.scene-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block; 
+}
+
+.fade-image {
+  animation: fadeIn 0.35s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ================= IMAGE ================= */
+.scene-image {
+  width: 100%;
+  height: 100%;
+  // object-fit: contain;
+  pointer-events: none; 
+}
+
+/* Opening animation */
+.opening {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+/* ================= HOTSPOTS ================= */
+.hotspot {
+  position: absolute;
+  cursor: pointer;
+}
+
+.settings-menu-btn {
+  position: fixed;
+
+  top: 18px;
+  left: 18px;
+
+  width: 50px;
+  height: 50px;
+
+  z-index: 999999;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #dfe4ea,
+      #7d8896
+    );
+
+  border: 3px solid #eef3f8;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.7),
+    inset 0 -4px 0 rgba(0,0,0,0.25),
+    0 10px 22px rgba(0,0,0,0.45);
+
+  cursor: pointer;
+}
+
+.settings-menu-btn img {
+  width: 25px;
+  height: 25px;
+}
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.settings-overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 9999999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: fadeIn 0.2s ease;
+}
+
+/* =========================================================
+   BACKDROP BLUR
+========================================================= */
+
+.settings-backdrop {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0,0,0,0.45);
+
+  backdrop-filter: blur(10px);
+
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* =========================================================
+   POPUP POSITION
+========================================================= */
+
+.settings-popup-ui {
+  position: relative;
+  z-index: 10;
+}
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes fadeIn {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+/* DEBUG MODE */
+.debug {
+  border: 2px dashed red;
+  background: rgba(255, 0, 0, 0.15);
+  color: white;
+  font-size: clamp(10px, 0.8vw, 14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================= FRONT ================= */
+.table-hotspot {
+  left: 32%;
+  top: 39%;
+  width: 35%;
+  height: 23%;
+}
+
+.center-table {
+    left: 34%;
+    top: 73%;
+    width: 31%;
+    height: 10%;
+}
+
+/* ================= RECEPTION TABLE ================= */
+.pen-box {
+    right: 14.5%;
+    bottom: 40%;
+    width: 15%;
+    height: 22%;
+}
+
+.laptop {
+    left: 39%;
+    top: 18%;
+    width: 25.5%;
+    height: 29%;
+}
+
+.flower-vase {
+    left: 5%;
+    top: 10%;
+    width: 21%;
+    height: 49%;
+}
+
+.telephone {
+    right: 61%;
+    top: 51%;
+    width: 11%;
+    height: 8%;
+}
+
+/* ================= FLOWER VASE ================= */
+.page-hotspot {
+    right: 11%;
+    bottom: 4%;
+    width: 32%;
+    height: 12%;
+}
+
+/* ================= CENTER TABLE ================= */
+.remote {
+    left: 68.7%;
+    top: 39%;
+    width: 7%;
+    height: 19%;
+}
+
+/* ================= NAVIGATION ARROWS ================= */
+.nav-arrow {
+  position: absolute;
+  top: 52%;
+  transform: translateY(-50%);
+  width: clamp(36px, 4vw, 72px);
+  cursor: pointer;
+  z-index: 5000;
+}
+
+.nav-arrow.left { left: 2.4%; }
+.nav-arrow.right { right: 2.4%; }
+
+/* ================= BACK ARROW ================= */
+.back-arrow.center {
+  position: absolute;
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(34px, 3.5vw, 72px);
+  cursor: pointer;
+}
+
+/* ================= INVENTORY ================= */
+
+.inventory {
+  position: absolute;
+  top: 2.5%;
+  right: 3%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1vw, 10px);
+  z-index: 5000;
+}
+
+/* ================= INVENTORY ITEM ================= */
+
+.inventory-item {
+  width: clamp(40px, 5vw, 61px);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(18px, 2.2vw, 30px);
+  font-weight: 900;
+  color: #ebe8d7;
+  background: linear-gradient(145deg, #3a4455, #1f2733);
+  // background: linear-gradient(145deg, #000000, #737b87);
+  border-radius: 14px;
+  box-shadow:
+    inset 0 2px 4px rgba(255,255,255,0.2),
+    0 6px 12px rgba(0,0,0,0.5);
+  transition: transform 0.2s ease;
+  cursor: grab;
+  border: 1px solid #c0c0c0;
+}
+
+.inventory-item:hover {
+  transform: scale(1.05);
+}
+
+.inventory-item img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+
+/* ================= REMOTE UI (SCALES WITH IMAGE) ================= */
+.remote-ui {
+   position: absolute;
+    top: 48%;
+    left: 21.5%;
+    width: 50%;
+    height: 11%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    transform: rotate(13.6deg);
+}
+
+/* Base font scale for picker */
+// .remote-ui {
+//   font-size: 1.1vw;
+// }
+
+/* Picker */
+.picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  width: 20%;
+}
+
+.picker button {
+  background: none;
+  border: none;
+  color: #ddd;
+  font-size: clamp(10px, 1vw, 18px);
+  cursor: pointer;
+}
+
+.digit {
+  font-size: clamp(16px, 1.8vw, 30px);
+  font-weight: 500;
+  margin: 0.2em 0;
+}
+
+/* ================= LETTER M and A ================= */
+.letter-m {
+  position: absolute;
+  top: 43%;
+  left: 49%;
+  transform: translate(-50%, -50%) rotate(17deg);
+  font-size: clamp(90px, 11vw, 220px);
+  font-weight: 900;
+  color: #ebe8d7;
+  cursor: pointer;
+  transition: all 0.9s ease;
+}
+
+.letter-m.fly {
+  top: 2%;
+  left: 64%;
+  // transform: translate(-50%, -50%) scale(0.35);
+   transform: scale(0.35);
+}
+
+.letter-a {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  font-size: clamp(90px, 11vw, 220px);
+  font-weight: 900;
+  color: #ebe8d7;
+  cursor: pointer;
+  transition: all 0.7s ease;
+}
+
+.letter-a.fly {
+  top: 20%;
+  left: 74%;
+  transform: translate(-50%, -50%) scale(0.35);
+}
+
+/* ================= BLACK BOX (BACK VIEW) ================= */
+.black-box {
+    left: 26.2%;
+    top: 38.9%;
+    width: 4.2%;
+    height: 7.4%;
+}
+
+/* =======================================================
+   PUZZLE 2 – BLACK BOX (HEX INTERACTION)
+   ======================================================= */
+
+/* Overlay that sits ON TOP of black-box.png */
+.black-box-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+}
+
+/* ================= HEX CONTAINER ================= */
+.hex {
+  position: absolute;
+  aspect-ratio: 1;
+  cursor: pointer;
+}
+
+/* Positioning of each hex (tweak freely) */
+.hex-red {
+  top: 22%;
+  left: 43%;
+  width: 14%;
+}
+
+.hex-blue {
+  top: 47%;
+  left: 31%;
+  width: 14%;
+}
+
+.hex-yellow {
+  top: 47%;
+  left: 55%;
+  width: 14%;
+}
+
+/* ================= HEX OUTLINE ================= */
+.hex-outline {
+  position: absolute;
+  inset: 0;
+}
+
+.hex-outline polygon {
+  fill: none;
+  stroke: white;
+  stroke-width: 4;
+}
+
+/* ================= DOT ================= */
+.dot {
+  position: absolute;
+  width: 10%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  top: 18%;
+  left: 45%;
+}
+
+.dot.red {
+  background: red;
+}
+
+.dot.blue {
+  background: #2daaff;
+}
+
+.dot.yellow {
+  background: gold;
+}
+
+/* ================= RECTANGLES ================= */
+.rect {
+  position: absolute;
+  width: 30%;
+  height: 10%;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+}
+
+/* COLORS */
+.rect.red { background: red; }
+.rect.blue { background: #2daaff; }
+.rect.yellow { background: gold; }
+
+/* ================= EDGE POSITIONS ================= */
+
+/* TOP LEFT */
+.rect.top.left {
+   transform: translate(-50%, -50%) rotate(-26deg) translateY(-57%);
+    top: 19%;
+    left: 30%;
+}
+
+/* TOP RIGHT */
+.rect.top.right {
+   transform: translate(-50%, -50%) rotate(26deg) translateY(-73%);
+    top: 21%;
+    left: 70%;
+}
+
+/* MIDDLE LEFT */
+.rect.middle.left {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-48%);
+  left: 0%;
+}
+
+/* MIDDLE RIGHT */
+.rect.middle.right {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-48%);
+  left: 90%;
+}
+
+/* BOTTOM LEFT */
+.rect.bottom.left {
+   transform: translate(-50%, -50%) rotate(206deg) translateY(-32%);
+    top: 83%;
+    left: 29%;
+}
+
+/* BOTTOM RIGHT */
+.rect.bottom.right {
+  transform: translate(-50%, -50%) rotate(-26deg) translateY(-45%);
+    top: 90%;
+    left: 75%;
+}
+
+/* ================= HEXAGON ITEM (PUZZLE 3) ================= */
+
+/* ================= TORCH ITEM ================= */
+
+.torch-item {
+    position: absolute;
+    top: 31.9%;
+    left: 20.5%;
+    width: 5%;
+    height: 8%;
+    // border: 2px solid red;
+    cursor: pointer;
+    transform: rotate(34deg);
+  z-index: 6; /* 🔥 above hex */
+}
+
+.torch-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.7s ease;
+}
+
+.torch-img.fly {
+  transform: translate(600%, -550%) scale(0.4);
+}
+
+.hexagon-item {
+    position: absolute;
+    top: 31.8%;
+    left: 21%;
+    width: 4.5%;
+    height: 5.5%;
+    // border: 2px solid lime;
+    cursor: pointer;
+    z-index: 4;
+}
+
+/* When locked (torch not collected) */
+.hex-item-img.locked {
+  opacity: 0.35;
+  filter: grayscale(60%);
+  pointer-events: none;
+}
+
+.hex-item-img {
+  width: 100%;
+  height: 100%;
+  // object-fit: contain;
+  transition: transform 0.7s ease, opacity 0.7s ease;
+}
+
+.hex-item-img.fly {
+  transform: translate(900%, -150%) scale(0.4);
+  // opacity: 0.6;
+}
+
+/* ================= BLUE VESSEL (SHOWPIECE) ================= */
+
+.blue-vessel {
+    // top: 29.4%;
+    // left: 25.2%;
+    // width: 6%;
+    // height: 10%;
+    pointer-events: none;
+    top: 29.3%;
+    left: 24.5%;
+    width: 6.5%;
+    height: 10%;
+    /* temporary */
+    // border: 2px solid blue;
+}
+
+.blue-vessel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ================= BACK RIGHT TABLE HOTSPOT ================= */
+
+.back-table {
+    position: absolute;
+    top: 45%;
+    right: 14.5%;
+    width: 19%;
+    height: 13%;
+    cursor: pointer;
+}
+
+/* ================= GLASS VESSEL ================= */
+
+// .glass-vessel {
+//     position: absolute;
+//     top: 39.2%;
+//     left: 68%;
+//     width: 16%;
+//     aspect-ratio: 1;
+//     // transform: translate(-50%, -50%);
+// }
+.glass-vessel {
+    position: absolute;
+    top: 41%;
+    left: 67%;
+    width: 18%;
+    height: 30%;
+}
+
+.glass-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+   pointer-events: none;
+}
+
+/* ================= KEY INSIDE GLASS ================= */
+
+.key-inside {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  width: 24%;
+  opacity: 0.4;   /* light color */
+  transform: translate(-50%, -50%);
+  transition: all 0.8s ease;
+  z-index: 10;    
+  cursor: pointer; 
+}
+
+.key-inside.unlocked {
+  opacity: 1;
+}
+
+.key-inside.rise {
+  top: -18%;
+}
+
+/* FLY TO INVENTORY */
+.key-inside.fly {
+  top: -40%;
+  left: 130%;
+  transform: scale(0.35);
+  opacity: 0.8;
+}
+
+/* ================= ROMAN BOXES ================= */
+/* Roman boxes positioned INSIDE glass */
+.roman-box-container {
+  position: absolute;
+  top: -16%;
+  left: 51%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 8%;
+  width: 80%;
+  justify-content: center;
+  z-index: 5;   /* 🔥 above glass */
+}
+
+.roman-box {
+  width: 28%;
+  aspect-ratio: 1;
+  color: #222428;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0.15vw solid #4d4d4d;
+  font-size: clamp(10px, 2vw, 35px);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.roman-box:hover {
+  transform: scale(1.08);
+}
+
+
+.front-key-hole {
+    position: absolute;
+    bottom: 44.7%;
+    left: 24.5%;
+    width: 0.9%;
+}
+
+.front-key-hole img {
+  width: 100%;
+}
+
+/* Small cupboard clickable area */
+.small-cupboard-hotspot {
+    position: absolute;
+    bottom: 35%;
+    left: 17%;
+    width: 9%;
+    height: 19%;
+}
+
+.cupboard-key-hole {
+    position: absolute;
+    top: 29%;
+    left: 59.5%;
+    width: 2.5%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+.cupboard-key-hole img {
+  width: 100%;
+  pointer-events: none;
+}
+
+.cupboard-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  // object-fit: contain;
+  animation: cupboardOpen 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  z-index: 5;
+}
+
+@keyframes cupboardOpen {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  40% {
+    opacity: 0.6;
+    transform: scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ================= FILLED HEXAGON ================= */
+
+.hex-drop-zone {
+    position: absolute;
+    top: 57%;
+    left: 50%;
+    width: 14%;
+    aspect-ratio: 1;
+    transform: translate(-50%, -55%);
+    z-index: 6;
+}
+
+.filled-hex-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+   transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+}
+
+.fade-in {
+  animation: fadeInHex 0.4s ease forwards;
+}
+
+@keyframes fadeInHex {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ================= COLOR HEX LAYER ================= */
+
+.color-layer {
+  position: absolute;
+  top: 28%;
+  left: 36%;
+  width: 60%;
+  aspect-ratio: 1;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.color-layer.ng-leave {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.color-hex-base {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.color-hex {
+  position: absolute;
+  width: 38%;
+  aspect-ratio: 1;
+  clip-path: polygon(
+    50% 3%, 95% 25%, 95% 75%,
+    50% 97%, 5% 75%, 5% 25%
+  );
+  cursor: pointer;
+  transition: background 0.3s ease;
+   transform: rotate(30deg); 
+}
+
+/* Positioning */
+.color-hex.top {
+  top: -1%;
+  left: 12%;
+}
+
+.color-hex.bottom {
+  bottom: 25%;
+  left: 12.8%;
+}
+
+.color-hex.right {
+  top: 18%;
+  right: 85.2%;
+}
+
+/* Colors */
+.blue { background: #632bbd; }
+.silver {background: linear-gradient(
+  135deg,
+  #8C8C8C 0%,
+  #C0C0C0 25%,
+  #EEEEEE 45%,
+  #C0C0C0 65%,
+  #A6A6A6 85%,
+  #8C8C8C 100%
+);
+}
+.bronze {
+  background: linear-gradient(135deg, #bb6416 0%, #d58b42 25%, #edac66 45%, #bd7835 65%, #B06A28 85%, #532e0d 100%);
+//   background: linear-gradient(
+//   135deg,
+//   #8F5420 0%,
+//   #CD7F32 25%,
+//   #F0B06A 45%,
+//   #CD7F32 65%,
+//   #B06A28 85%,
+//   #8F5420 100%
+// );
+}
+.green { background: #17753f; }
+.golden {background: linear-gradient(
+  135deg,
+  #9C7E26 0%,
+  #D4AF37 25%,
+  #F2D97A 45%,
+  #D4AF37 65%,
+  #B8962E 85%,
+  #9C7E26 100%
+);
+}
+
+/* LETTER D */
+.letter-d {
+  position: absolute;
+  top: 55.8%;
+  left: 49.4%;
+  transform: translate(-50%, -50%) scale(1);
+  font-size: clamp(20px, 4vw, 65px);
+  font-weight: 900;
+  color: #ebe8d7;
+  cursor: pointer;
+  transition: all 0.9s ease;
+  z-index: 20;
+}
+
+/* Flying state */
+.letter-d.fly {
+  top: 26%;
+  left: 64%;
+  transform: translate(-50%, -50%) scale(0.35);
+}
+
+/* ================= DOOR LETTER ZONE ================= */
+
+.door-letter-zone {
+  position: absolute;
+    top: 37.5%;
+    left: 49.9%;
+    transform: translate(-50%, -50%);
+    width: 8%;
+    height: 9%;
+    font-size: 3vw;
+    // border: 1px solid black;
+}
+
+.door-letter {
+  position: absolute;
+  font-size: 0.85em;
+  // font-size: clamp(18px, 3vw, 44px);
+  font-weight: 900;
+  color: #deb887;
+  // -webkit-text-stroke: 1px #000000;
+  // text-shadow: -2px -1px 0 #d7d8da, 2px -1px 0 #d7d8da, -2px 1px 0 #d7d8da, 2px 1px 0 #d7d8da;
+  -webkit-text-stroke: 0.1px #000000;
+  text-shadow: -2px -1px 0 #fff, 2px -1px 0 #fff, -2px 1px 0 #fff, 2px 1px 0 #fff;
+   // text-shadow: -2px -1px 0 #a6a6a6, 2px -1px 0 #c0c0c0, -2px 1px 0 #ebe8d7, 2px 1px 0 #ebe8d7;
+}
+
+/* Exact manual placement */
+.door-m {
+  left: 25.2%;
+  top: 39%;
+  transform: translate(-50%, -50%);
+}
+
+.door-a {
+    left: 51%;
+    top: 38%;
+    transform: translate(-48%, -48%);
+}
+
+.door-d {
+    right: 4.8%;
+    top: 40%;
+  transform: translate(-50%, -50%);
+}
+
+/* ================= HINT MESSAGES ================= */
+
+.hint-message {
+  position: absolute;
+  color: #161616;
+  font-weight: 600;
+  font-size: clamp(14px, 1.6vw, 20px);
+  text-shadow: -2px -1px 0 #d7d8da, 2px -1px 0 #d7d8da, -2px 1px 0 #d7d8da, 2px 1px 0 #d7d8da;
+  // letter-spacing: 1px;
+  opacity: 0;
+  animation: fadeInHint 0.3s ease forwards;
+  transition: transform 0.3s ease;
+  z-index: 50;
+}
+
+@keyframes fadeInHint {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.hint-message.fade-out {
+  animation: fadeOutHint 0.3s ease forwards;
+}
+
+@keyframes fadeOutHint {
+  from { opacity: 1; transform: translateX(-50%) translateY(0px); }
+  to   { opacity: 0; transform: translateX(-50%) translateY(8px); }
+}
+
+.cupboard-center-hint {
+    position: absolute;
+    top: 56%;
+    left: 49.5%;
+    transform: translate(-50%, -50%);
+    width: 28%;
+    height: 67%;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.hint-message.cupboard {
+  top: 64%;
+  left: 49%;
+  transform: translate(-50%, -50%) rotate(1deg) !important;
+}
+
+.hint-message.hex {
+    top: 79%;
+    left: 49%;
+    transform: translate(-50%, -50%) rotate(2.5deg) !important;
+    font-weight: 600 !important;
+    font-size: clamp(14px, 1.6vw, 18px) !important;
+    text-shadow: -2px -1px 0 #161616, 2px -1px 0 #161616, -2px 1px 0 #161616, 2px 1px 0 #161616 !important;
+    color: #d7d8da;
+}
+
+/* ================= GLASS EMPTY MESSAGE ================= */
+
+.hint-message.glass {
+  top: 27%;
+  left: 77.5%;
+  transform: translate(-50%, -50%) rotate(-4deg);
+}
+
+.hint-message.center {
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ================= COLOR PUZZLE MESSAGE ================= */
+
+.hint-message.colorSolved {
+    top: 68%;
+    left: 49.5%;
+    transform: translate(-50%, -50%) rotate(2deg) !important;
+    text-shadow: -2px -1px 0 #161616, 2px -1px 0 #161616, -2px 1px 0 #161616, 2px 1px 0 #161616 !important;
+    color: #d7d8da;
+}
+
+/* ================= PUZZLE 2 MESSAGE ================= */
+
+.hint-message.puzzle2 {
+  top: 44%;
+  left: 49.5%;
+  transform: translate(-50%, -50%) rotate(-5deg);
+  text-shadow: -2px -1px 0 #161616, 2px -1px 0 #161616, -2px 1px 0 #161616, 2px 1px 0 #161616 !important;
+  color: #d7d8da;
+  font-size: clamp(14px, 1.6vw, 24px);
+}
+
+/* ================= PUZZLE 1 MESSAGE ================= */
+
+.hint-message.puzzle1 {
+  top: 43%;
+  left: 49%;
+  transform: translate(-50%, -50%) rotate(15deg) !important;
+  text-shadow: -2px -1px 0 #161616, 2px -1px 0 #161616, -2px 1px 0 #161616, 2px 1px 0 #161616 !important;
+  color: #d7d8da;
+  font-size: clamp(14px, 1.6vw, 26px);
+}
+
+.trophy-hint-hotspot {
+    position: absolute;
+    top: 25%;
+    right: 23%;
+    width: 11%;
+    height: 17%;
+    cursor: pointer;
+    z-index: 3;
+}
+
+/* ================= TROPHY MESSAGE ================= */
+
+.hint-message.trophy {
+  top: 20%;
+  right: 15.8%;
+  transform: rotate(-6deg);
+  font-size: clamp(14px, 1.6vw, 18px);
+}
+
+/* ================= DOOR MESSAGE ================= */
+
+.hint-message.door {
+    top: 27%;
+    left: 49.5%;
+    transform: translate(-50%, -50%) rotate(0deg) !important;
+    font-size: clamp(14px, 1.8vw, 15px);
+    font-weight: 700;
+}
+
+/* ================= LAPTOP HOTSPOT ================= */
+
+.laptop-hint-hotspot {
+  position: absolute;
+  top: 41%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56%;
+  height: 62%;
+  cursor: pointer;
+}
+/* ================= LAPTOP MESSAGE ================= */
+
+.hint-message.laptop {
+    top: 51%;
+    left: 56%;
+    transform: translate(-50%, -50%) rotate(0deg) !important;
+    text-shadow: -2px -1px 0 #161616, 2px -1px 0 #161616, -2px 1px 0 #161616, 2px 1px 0 #161616 !important;
+    color: #d7d8da;
+    font-size: clamp(14px, 1.6vw, 22px);
+}
+/* ================= TELEPHONE HOTSPOT ================= */
+
+.telephone-hint-hotspot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 74%;
+    height: 65%;
+    cursor: pointer;
+}
+/* ================= TELEPHONE MESSAGE ================= */
+
+.hint-message.telephone {
+    top: 12%;
+    left: 52%;
+    transform: translate(-50%, -50%) rotate(0deg) !important;
+    width: 20%;
+    text-align: center;
+    font-size: clamp(14px, 1.6vw, 24px);
+}
+
+/* ================= LAMP HOTSPOT ================= */
+
+.lamp-hint-hotspot {
+    position: absolute;
+    top: 39%;
+    right: 17%;
+    width: 5.4%;
+    height: 9%;
+    cursor: pointer;
+    z-index: 3;
+}
+/* ================= LAMP MESSAGE ================= */
+.hint-message.lamp {
+    top: 40%;
+    right: 21.7%;
+    transform: rotate(-5deg);
+    font-size: clamp(14px, 1.8vw, 16px);
+    width: 4%;
+}
+
+/* ================= UNDER TABLE HOTSPOT ================= */
+
+.under-table {
+    position: absolute;
+    bottom: 4%;
+    left: 34.7%;
+    width: 30%;
+    height: 9%;
+    cursor: pointer;
+    z-index: 3;
+}
+/* ================= UNDER TABLE MESSAGE ================= */
+
+.hint-message.underTable {
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%) rotate(0deg) !important;
+    font-size: clamp(16px, 1.8vw, 20px);
+    text-shadow: -2px -1px 0 #161616, 2px -1px 0 #161616, -2px 1px 0 #161616, 2px 1px 0 #161616 !important;
+    color: #d7d8da;
+}
+
+/* ================= GAME FINISHED ================= */
+
+// .game-finished {
+//   pointer-events: none;
+// }
+// .door-unlocked-overlay {
+//   pointer-events: none;
+// }
+
+/* ================= Transition ================= */
+
+// .unlock-fade {
+//   animation: unlockFade 0.8s ease;
+// }
+
+// @keyframes unlockFade {
+//   from {
+//     opacity: 0.6;
+//     filter: brightness(1.2);
+//   }
+//   to {
+//     opacity: 1;
+//     filter: brightness(1);
+//   }
+// }
+.door-enter-hotspot {
+  position: absolute;
+  top: 20%;
+  left: 37%;
+  width: 26%;
+  height: 49%;
+  cursor: pointer;
+  z-index: 99999;
+}
+
+/* ================= LEVEL TRANSITION ================= */
+
+.screen-fade {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at center,
+      #1c2738 0%,
+      #0d1117 55%,
+      #000000 100%
+    );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.screen-fade.active {
+  opacity: 1;
+}
+
+/* ================= CONTENT ================= */
+
+.transition-content {
+  text-align: center;
+  animation: transitionFade 0.8s ease forwards;
+}
+
+/* ================= SUBTITLE ================= */
+
+.transition-subtitle {
+  color: rgba(255,255,255,0.55);
+  font-size: clamp(14px, 1.4vw, 22px);
+  letter-spacing: 0.4em;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  animation: subtitleFade 1.2s ease infinite alternate;
+}
+
+/* ================= TITLE ================= */
+
+.transition-title {
+  font-size: clamp(38px, 5vw, 90px);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: #f5f7fa;
+  text-shadow:
+    0 0 12px rgba(255,255,255,0.25),
+    0 0 28px rgba(120,180,255,0.25);
+  animation:
+    glowPulse 1.8s ease-in-out infinite;
+}
+
+/* ================= LINE ================= */
+
+.transition-line {
+  width: 0;
+  height: 3px;
+  margin: 1.8rem auto 0;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #8ab4ff,
+      transparent
+    );
+  animation: lineExpand 1s ease forwards;
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0.7;
+    text-shadow:
+      0 0 8px rgba(255,255,255,0.15),
+      0 0 18px rgba(120,180,255,0.18);
+  }
+  100% {
+    opacity: 1;
+    text-shadow:
+      0 0 18px rgba(255,255,255,0.35),
+      0 0 38px rgba(120,180,255,0.35);
+  }
+}
+
+@keyframes lineExpand {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 280px;
+    opacity: 1;
+  }
+}
+
+@keyframes transitionFade {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes subtitleFade {
+  from {
+    opacity: 0.35;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+
+// .screen-fade.active {
+//   opacity: 1;
+// }
+
+/* ================= BULB HINTS ================= */
+
+.hint-bulb {
+  position: absolute;
+  bottom: 3%;
+  left: 2%;
+  width: 4%;
+  min-width: 40px;
+  max-width: 70px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.hint-bulb img {
+  width: 100%;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.hint-bulb:hover img {
+  transform: scale(1.08);
+}
+
+.hint-panel {
+  position: absolute;
+  bottom: 3%;
+  left: 7%;
+  width: 304px;
+  max-width: 28vw;
+  padding: 10px 14px;
+  background: rgba(20, 20, 20, 0.95);
+  border: 2px solid #f3d36b;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  animation: hintSlide 0.25s ease;
+  z-index: 100;
+}
+
+.hint-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.hint-title {
+  color: #f3d36b;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.hint-text {
+  color: white;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+@keyframes hintSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* ================= Debug ================= */
+.debug {
+  border: none;
+  background: transparent;
+  color: transparent;
+}

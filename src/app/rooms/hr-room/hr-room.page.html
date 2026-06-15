@@ -1,0 +1,1750 @@
+<ion-content fullscreen>
+
+  <div class="game-wrapper">
+    <div class="scene fade">
+      <div class="scene-inner">
+
+        <!-- ================= SETTINGS BUTTON ================= -->
+
+<!-- SETTINGS BUTTON ONLY -->
+
+<!-- SETTINGS BUTTON -->
+
+<div
+  class="settings-menu-btn"
+  (click)="toggleSettings()">
+
+  <img
+    src="assets/images/hr-room/settingsmenu.png"
+    alt="settings">
+
+</div>
+
+<!-- SETTINGS OVERLAY -->
+
+<div
+  class="settings-overlay"
+  *ngIf="showSettings">
+
+  <!-- BLUR BACKGROUND -->
+  <div
+    class="settings-backdrop"
+    (click)="toggleSettings()">
+  </div>
+
+  <!-- SETTINGS POPUP -->
+  
+<app-settings
+*ngIf="showSettings"
+(closePopup)="showSettings = false">
+</app-settings>
+
+</div>
+
+
+        <!-- ================= MAIN IMAGE ================= -->
+        <ng-container *ngIf="images[currentView] as img">
+          <img
+  class="scene-image fade-image"
+  [ngClass]="{
+    'table-view-image': currentView === 'table1' || currentView === 'table2'
+  }"
+  [src]="img"
+  (load)="imageLoaded = true"
+  (error)="imageLoaded = true"
+  alt="hr-scene">
+        </ng-container>
+
+        <!-- ================= MAIN VIEW ================= -->
+        <ng-container *ngIf="imageLoaded && currentView === 'main'">
+
+          <div
+          class="hotspot table-hotspot"
+          (click)="navigateTo('table1')">
+        </div>
+
+          <div class="hotspot bookshelf-hotspot" (click)="navigateTo('bookshelf')">
+          </div>
+
+          <div 
+          class="bookshelf-hotspot shelf-1"
+          (click)="navigateTo('bookshelf1')">
+        </div>
+      
+        <!-- Middle Shelf -->
+        <div 
+          class="bookshelf-hotspot shelf-2"
+          (click)="navigateTo('bookshelf2')">
+        </div>
+      
+        <!-- Right Shelf -->
+        <div 
+          class="bookshelf-hotspot shelf-3"
+          (click)="navigateTo('bookshelf3')">
+        </div>
+
+          <div
+          class="hotspot left-locker-hotspot"
+          (click)="navigateTo('zoomedlocker')">
+        </div>
+
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'table1' && imageLoaded">
+
+          <!-- <div class="hotspot mobile-hotspot"
+     (click)="navigateTo('mobilezoom')">
+</div> -->
+
+<!-- TRAY HOTSPOT -->
+<div class="hotspot tray-hotspot"
+     (click)="navigateTo('tray')">
+</div>
+
+          <!-- RIGHT ARROW -->
+          <ion-img
+            src="assets/images/reception-room/right-arrow.png"
+            class="nav-arrow right"
+            (click)="navigateTo('table2')">
+          </ion-img>
+        
+          <!-- BACK ARROW -->
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goToMain()">
+          </ion-img>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'table2' && imageLoaded">
+
+          <!-- <div class="hotspot mobile-hotspot-table2"
+     (click)="navigateTo('mobilezoom')">
+</div> -->
+
+<div class="socket-zone" (click)="openSocketZoom()"></div>
+
+<!-- TRAY HOTSPOT -->
+<div class="hotspot tray-hotspot-table2"
+     (click)="navigateTo('tray')">
+</div>
+
+<div
+  class="monitor-hotspot"
+  (click)="navigateTo('zoomedmonitor')">
+</div>
+
+
+          <!-- ✅ STATIC WIRE (CLICK TO DRAG) -->
+          <!-- <img
+            *ngIf="!isWireConnected"
+            src="assets/images/hr-room/wire.png"
+            class="table-wire"
+            (mousedown)="startDrag('WIRE', $event)"
+          /> -->
+        
+          <!-- ✅ FLOATING WIRE (DRAGGING) -->
+          <!-- <img
+    *ngIf="isDragging"
+    src="assets/images/hr-room/wire.png"
+    class="drag-wire"
+    [style.left.px]="dragX"
+    [style.top.px]="dragY"
+  /> -->
+        
+          <!-- ✅ CONNECTED WIRE -->
+          <!-- <img
+            *ngIf="isWireConnected"
+            src="assets/images/hr-room/wire.png"
+            class="table-wire-connected"
+          /> -->
+
+         
+
+
+          <!-- ✅ PASSWORD SYSTEM -->
+          
+        
+          <!-- LEFT -->
+          <ion-img
+            src="assets/images/reception-room/left-arrow.png"
+            class="nav-arrow left"
+            (click)="navigateTo('table1')">
+          </ion-img>
+        
+          <!-- BACK -->
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goToMain()">
+          </ion-img>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'zoomedtable2' ">
+          <div class="switch-board">
+
+            <!-- LEFT SWITCH -->
+            <div 
+              class="switch" 
+              [class.on]="leftSwitchOn"
+              (click)="toggleLeftSwitch()">
+              <div class="switch-knob"></div>
+            </div>
+          
+            <!-- RIGHT SWITCH -->
+            <div 
+              class="switch" 
+              [class.on]="rightSwitchOn"
+              (click)="toggleRightSwitch()">
+              <div class="switch-knob"></div>
+            </div>
+          
+          </div>
+          <ion-img
+          src="assets/images/reception-room/back-arrow.png"
+          class="back-arrow center"
+          (click)="goBack()">
+        </ion-img>
+
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'zoomedmonitor' && imageLoaded ">
+
+          <div
+    class="computer-click-zone"
+    (click)="handleComputerClick()"
+  ></div>
+
+          <div *ngIf="showHrBg" 
+          class="hr-bg-screen"
+          (click)="onHrBgClick()"
+          [class.fade-out]="hrBgClicked">
+     
+       <img src="assets/images/hr-room/hr_bg.png" />
+     </div>
+
+          <div *ngIf="!showHrBg && isComputerPowered" class="password-overlay">
+        
+            <!-- EMPLOYEE DATA -->
+            <!-- <div *ngIf="shouldShowEmployeeData"  class="employee-data">
+        
+              <div class="terminal-line">
+                Hello Intern.
+              </div>
+            
+              <div class="terminal-line">
+                Your access is currently limited.
+              </div>
+            
+              <br>
+            
+              <div class="terminal-line success-text">
+                Use your  mobile to request an upgrade.
+              </div>
+        
+            </div>
+         -->
+            <!-- PASSWORD INPUT -->
+            <!-- PASSWORD INPUT -->
+<div *ngIf="!showWelcomeMessage && !showLaptopWallpaper" class="login-container">
+
+  <div class="password-box">
+
+    <div class="password-title">ENTER YOUR PASSWORD</div>
+
+    <input
+    type="text"
+    maxlength="10"
+    [(ngModel)]="passwordInput"
+    (ngModelChange)="validatePasswordInput()"
+    autocomplete="off"
+  />
+
+  <div *ngIf="emptyPasswordError" class="error-text">
+    Enter your password
+  </div>
+  
+  <div *ngIf="passwordError" class="error-text">
+    Incorrect Password
+  </div>
+
+    <!-- LOGIN BUTTON -->
+    <div class="login-div">
+    <button class="login-btn" (click)="submitPassword()">
+      LOGIN
+    </button>
+  </div>
+    <!-- ERROR MESSAGE -->
+    
+
+  </div>
+
+</div>
+
+<div *ngIf="showWelcomeMessage" class="welcome-screen">
+
+  <div class="welcome-text">
+    The system has detected your arrival...<br>
+    yet your purpose remains unverified.<br><br>
+  
+    Others sought greater authority before you...<br>
+    some ascended, others were erased from the records.<br><br>
+  
+    Find your office device...<br>
+    send your request and await judgment.<br><br>
+  
+    If deemed worthy,<br>
+    your role shall be rewritten.
+  </div>
+
+  <!-- NEXT ARROW -->
+  <div 
+    *ngIf="showNextArrow" 
+    class="next-arrow"
+    (click)="goToCodeScreen()">
+    ➜
+  </div>
+
+</div>
+
+<div *ngIf="showLaptopWallpaper" class="laptop-wallpaper">
+  <img src="assets/images/hr-room/lapwallpaper.png" />
+</div>
+
+<div 
+  *ngIf="showComputerPopup && showLaptopWallpaper" 
+  class="computer-popup"
+  (click)="openMessageRequest()">
+  📩 You have a new message request
+</div>
+
+<!-- MESSAGE SCREEN -->
+<!-- MESSAGE SCREEN -->
+<!-- MESSAGE SCREEN -->
+<div *ngIf="showMessageScreen" class="message-screen">
+
+  <div class="message-box1">
+
+    <div class="message-title">
+      Message Request
+    </div>
+
+    <div class="message-para">
+
+      Role upgrade request submitted by Employee ID <span>ZI73</span>.
+    </div>
+
+    <button class="approve-btn" (click)="approveRequest()">
+     APPROVE
+    </button>
+
+  </div>
+
+</div>
+
+<!-- SUCCESS POPUP -->
+<div *ngIf="showApprovalScreen" class="approval-screen">
+
+  <div class="approval-box">
+
+    <!-- CLOSE -->
+    <div
+      class="close-success"
+      (click)="closeApprovalPopup()">
+      ✕
+    </div>
+
+    <img src="assets/images/hr-room/success.gif" />
+
+    <div class="success-text">
+      Request Approved Successfully
+    </div>
+
+    <div class="success-subtext">
+      Access upgrade granted for Employee ID ZI73
+    </div>
+
+  </div>
+
+</div>
+        
+          </div>
+
+          <ion-img
+    src="assets/images/reception-room/back-arrow.png"
+    class="back-arrow center zoom-monitor-back"
+    (click)="navigateTo('table2')">
+  </ion-img>
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'bookshelf' 
+  || currentView === 'bookshelf1' 
+  || currentView === 'bookshelf2' 
+  || currentView === 'bookshelf3'">
+
+  <!-- BACK ARROW -->
+  <ion-img
+    src="assets/images/reception-room/back-arrow.png"
+    class="back-arrow center"
+    (click)="goBack()">
+  </ion-img>
+
+</ng-container>
+
+        <ng-container *ngIf="currentView === 'tray'">
+
+          <div class="tray-wrapper">
+
+          </div>
+          <ion-img src="assets/images/reception-room/back-arrow.png" class="back-arrow center" (click)="goBack()">
+          </ion-img>
+
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'zoomedlocker'">
+
+          <div
+  class="zoom-locker-click"
+  (click)="openLetterPopup()">
+</div>
+
+<!-- ================= LETTER LOCK POPUP ================= -->
+<div *ngIf="showLetterPopup" class="letter-popup">
+
+  <div class="letter-box">
+
+    <!-- ROW 1 -->
+    <div class="letter-row">
+      <div class="letter letter1" (click)="cycleLetter(0,0)">{{ letterRows[0][0] }}</div>
+      <div class="letter letter2" (click)="cycleLetter(0,1)">{{ letterRows[0][1] }}</div>
+    </div>
+
+    <!-- ROW 2 -->
+    <div class="letter-row">
+      <div class="letter letter3" (click)="cycleLetter(1,0)">{{ letterRows[1][0] }}</div>
+      <div class="letter letter4" (click)="cycleLetter(1,1)">{{ letterRows[1][1] }}</div>
+    </div>
+
+    <!-- ROW 3 -->
+    <div class="letter-row">
+      <div class="letter letter1" (click)="cycleLetter(2,0)">{{ letterRows[2][0] }}</div>
+      <div class="letter letter3" (click)="cycleLetter(2,1)">{{ letterRows[2][1] }}</div>
+    </div>
+
+    <!-- OK BUTTON -->
+    <!-- <button class="ok-btn" (click)="checkLetterPuzzle()">OK</button> -->
+
+    <!-- CLOSE -->
+    <div class="close-btn" (click)="closeLetterPopup()">✕</div>
+
+  </div>
+
+</div>
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goBack()">
+          </ion-img>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'openedkeylocker' && imageLoaded">
+
+          <!-- KEY INSIDE LOCKER -->
+          <img
+            *ngIf="!hrInventory.includes('KEY')"
+            src="assets/images/reception-room/key.png"
+            class="key-inside-locker"
+            (click)="collectKey()"
+            alt="Key"
+          />
+        
+          <!-- BACK -->
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goBack()">
+          </ion-img>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'mobilezoom'">
+
+
+          <div class="mobile-inner-hotspot"
+          (click)="navigateTo('table')">
+     </div>
+
+          <ion-img src="assets/images/reception-room/back-arrow.png"
+                   class="back-arrow center"
+                   (click)="goBack()">
+          </ion-img>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'table' && imageLoaded">
+          <div class="table-scene">
+
+            <!-- 📱 PHONE BODY (ALWAYS VISIBLE) -->
+            <img
+              src="assets/images/hr-room/mobile.png"
+              class="mobile-on-table"
+            />
+          
+            <!-- 📲 APPS SCREEN (INSIDE PHONE SCREEN AREA) -->
+            <!-- <img
+              src="assets/images/hr-room/mobileapps.png"
+              class="mobile-apps-screen"
+              *ngIf="showMobileApps"
+            /> -->
+
+            <!-- ================= MOBILE APP MENU ================= -->
+<!-- ================= MOBILE UI ================= -->
+<div *ngIf="showMobileApps" class="mobile-apps-ui">
+
+  <div class="status-icons">
+    <img src="assets/images/hr-room/signal.png" />
+    <img src="assets/images/hr-room/wifi.png" />
+    <img src="assets/images/hr-room/phone.png" />
+  </div>
+
+  <!-- <div class="app-content"> -->
+    <div *ngIf="showWallpaper" class="wallpaper-bg">
+      <img src="assets/images/hr-room/wallpaper.png" />
+    </div>
+
+  <img 
+    *ngIf="showMenuIcon" 
+    src="assets/images/hr-room/menu.png" 
+    class="menu-icon"
+    (click)="openMenuApps()"
+  />
+  <!-- ================= APPS HOME ================= -->
+  <div *ngIf="showAppsRow && activeApp === 'apps'" class="apps-row">
+
+    <!-- SETTINGS -->
+    <div class="app-item" (click)="openNativeApp()">
+      <img src="assets/images/hr-room/settings.png" class="app-icon" />
+      <div class="app-name">Settings</div>
+    </div>
+  
+    <!-- CLUES -->
+    <div class="app-item" (click)="openReactApp()">
+      <img src="assets/images/hr-room/clues.png" class="app-icon" />
+      <div class="app-name">Clues</div>
+    </div>
+  
+    <!-- CLOCK -->
+    <div class="app-item" (click)="openTimerApp()">
+      <img src="assets/images/hr-room/clock1.png" class="app-icon" />
+      <div class="app-name">Clock</div>
+    </div>
+  
+    <!-- MAIL -->
+    <div class="app-item" (click)="openMailApp()">
+      <img src="assets/images/hr-room/gmail.png" class="app-icon" />
+      <div class="app-name">Mail</div>
+    </div>
+  
+    <!-- DOCS -->
+    <div class="app-item" (click)="openDocsApp()">
+      <img src="assets/images/hr-room/docs.png" class="app-icon" />
+      <div class="app-name">Docs</div>
+    </div>
+  
+    <!-- DRIVE -->
+    <div class="app-item" (click)="openDriveApp()">
+      <img src="assets/images/hr-room/drive.png" class="app-icon" />
+      <div class="app-name">Drive</div>
+    </div>
+  
+    <!-- FILES -->
+    <div class="app-item" (click)="openFilesApp()">
+      <img src="assets/images/hr-room/files.png" class="app-icon" />
+      <div class="app-name">Files</div>
+    </div>
+  
+    <!-- ZOOM -->
+    <div class="app-item" (click)="openZoomApp()">
+      <img src="assets/images/hr-room/zoom.png" class="app-icon" />
+      <div class="app-name">Zoom</div>
+    </div>
+  
+  </div>
+
+
+  <!-- ================= NATIVE APP SCREEN ================= -->
+  <!-- <div *ngIf="activeApp === 'native'" class="settings-panel">
+
+    <div class="settings-header">Notifications</div>
+  
+    <div class="settings-item">
+  
+      <div class="settings-text">Clues</div>
+  
+      <label class="toggle-switch">
+        <input type="checkbox" [(ngModel)]="isCluesUnlocked">
+        <span class="toggle-slider"></span>
+      </label>
+  
+    </div>
+  
+    <ion-img
+      src="assets/images/reception-room/back-arrow.png"
+      class="mobile-back"
+      (click)="closeApp()">
+    </ion-img>
+  
+  </div> -->
+
+  <div *ngIf="activeApp === 'native'" class="settings-container">
+
+    <div class="settings-title">
+      Settings
+    </div>
+    
+    <!-- Silent Mode -->
+    <div class="setting-item">
+      <div class="setting-header">
+        <span>Silent mode</span>
+        <span class="value">Off</span>
+      </div>
+    </div>
+  
+    <!-- Notifications -->
+    <div class="setting-item">
+
+      <!-- HEADER -->
+      <div class="setting-header" (click)="toggleSection('notifications')">
+        <span>Notifications</span>
+    
+        <span class="arrow" [class.open]="openSection === 'notifications'">
+          ▼
+        </span>
+      </div>
+    
+      <!-- ACCORDION CONTENT -->
+      <div class="accordion-content" *ngIf="openSection === 'notifications'">
+
+        <div class="settings-item">
+      
+          <div class="settings-text">Clues</div>
+      
+          <label class="toggle-switch">
+            <input type="checkbox" [(ngModel)]="isCluesUnlocked"  (ngModelChange)="toggleClues($event)"/>
+            <span class="toggle-slider"></span>
+          </label>
+      
+        </div>
+      
+      </div>
+    
+    </div>
+  
+    <!-- Storage -->
+   <!-- STORAGE -->
+<div class="setting-item">
+  <div class="setting-header" (click)="toggleSection('storage')">
+    <span>Storage</span>
+
+    <span class="arrow" [class.open]="openSection === 'storage'">
+      ▼
+    </span>
+  </div>
+
+  <div class="accordion-content" *ngIf="openSection === 'storage'">
+    <p>62 GB used of 128 GB</p>
+
+    <div class="progress-bar">
+      <div class="progress" style="width: 48%"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- BATTERY -->
+<div class="setting-item">
+  <div class="setting-header" (click)="toggleSection('battery')">
+    <span>Battery</span>
+
+    <span class="arrow" [class.open]="openSection === 'battery'">
+      ▼
+    </span>
+  </div>
+
+  <div class="accordion-content" *ngIf="openSection === 'battery'">
+    <p>72% remaining</p>
+
+    <div class="progress-bar">
+      <div class="progress" style="width: 72%"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- DEVICE -->
+<div class="setting-item">
+  <div class="setting-header" (click)="toggleSection('device')">
+    <span>Device</span>
+
+    <span class="arrow" [class.open]="openSection === 'device'">
+      ▼
+    </span>
+  </div>
+
+  <div class="accordion-content" *ngIf="openSection === 'device'">
+    <p>OnePlus Nord CE Lite</p>
+  </div>
+</div>
+  
+  </div>
+
+
+  <!-- ================= REACT APP SCREEN ================= -->
+  <!-- ================= CLUES APP ================= -->
+<div *ngIf="activeApp === 'react'" class="clues-panel">
+
+  <!-- ❌ BEFORE TOGGLE -->
+  <div *ngIf="!isCluesUnlocked" class="clues-empty">
+    No clues available.
+  </div>
+
+  <!-- ✅ AFTER TOGGLE -->
+
+    <div *ngIf="isCluesUnlocked" class="clues-content">
+
+      <div class="mail-clue-card">
+
+        <div class="confidential-stamp">
+          CONFIDENTIAL
+        </div>
+      
+        <div class="clue-header">
+          HR CONTACT
+        </div>
+      
+        <div class="mail-container">
+          {{ generatedMailId }}
+        </div>
+      
+        <div class="clue-footer">
+          Internal Use Only
+        </div>
+      
+      </div>
+  
+    </div>
+
+</div>
+
+
+  <!-- ================= TIMER APP ================= -->
+  <div *ngIf="activeApp === 'timer'" class="mobile-app-screen">
+
+    <!-- TITLE -->
+    <div class="timer-title">Clock</div>
+  
+    <!-- TIME SECTION -->
+    <div class="timer-box">
+  
+      <!-- HOURS -->
+      <div class="time-wrapper">
+        <div class="time-block">
+  
+          <div *ngIf="editMode" class="arrow up" (click)="increaseHour()">▲</div>
+  
+          <div class="time-value">
+            {{ editMode ? (editHours | number:'2.0') : (displayHours | number:'2.0') }}
+          </div>
+  
+          <div *ngIf="editMode" class="arrow down" (click)="decreaseHour()">▼</div>
+  
+        </div>
+        <div class="label">HRS</div>
+      </div>
+  
+      <div class="colon">:</div>
+  
+      <!-- MINUTES -->
+      <div class="time-wrapper">
+        <div class="time-block">
+  
+          <div *ngIf="editMode" class="arrow up" (click)="increaseMinute()">▲</div>
+  
+          <div class="time-value">
+            {{ editMode ? (editMinutes | number:'2.0') : (displayMinutes | number:'2.0') }}
+          </div>
+  
+          <div *ngIf="editMode" class="arrow down" (click)="decreaseMinute()">▼</div>
+  
+        </div>
+        <div class="label">MINS</div>
+      </div>
+  
+    </div>
+  
+    <!-- BUTTON -->
+    <button class="timer-btn" (click)="toggleTimeEdit()">
+      {{ editMode ? 'Set' : 'Edit' }}
+    </button>
+  
+  </div>
+
+  <!-- MAIL APP -->
+  <div *ngIf="activeApp === 'mail'" class="mobile-app-screen mail-app" [ngClass]="{
+    'transparent-bg': mailState === 'loading' || mailState === 'success'
+  }">
+
+    <!-- LOADING -->
+    <div *ngIf="mailState === 'loading'" class="mail-loading">
+      <img src="assets/images/hr-room/gmail.gif" />
+    </div>
+  
+    <!-- MAIL UI -->
+    <div *ngIf="mailState === 'form'" class="gmail-container">
+  
+      <!-- HEADER -->
+      <div class="gmail-header">
+        New Message
+      </div>
+  
+      <!-- BODY -->
+      <div class="gmail-body-wrapper">
+  
+        <div class="field" (click)="focusInput(toInput)">
+          <span>To</span>
+          <input #toInput [(ngModel)]="mailTo" />
+        </div>
+  
+        <div class="field" (click)="focusInput(empInput)">
+          <span>Emp ID</span>
+          <input #empInput [(ngModel)]="empId" />
+        </div>
+  
+        <div class="divider"></div>
+  
+        <p class="message-box">
+          Dear HR Team,
+          <br><br>
+          I kindly request you to upgrade my role.
+          <br><br>
+          Thank you
+        </p>
+  
+        <!-- ✅ SEND BUTTON NOW BELOW MESSAGE -->
+        <div class="send-wrapper">
+          <button (click)="sendMail()">Send</button>
+        </div>
+  
+      </div>
+  
+    </div>
+  
+    <!-- SUCCESS -->
+    <div *ngIf="mailState === 'success'" class="mail-success">
+      <img src="assets/images/hr-room/success.gif" alt="success" />
+      <p>Request Sent Successfully</p>
+    </div>
+
+    <!-- <div *ngIf="mailState === 'approved'" class="mail-approved">
+      <img src="assets/images/hr-room/gmail.gif" alt="Mail">
+      <p>Congratulations! Your request has been approved.</p>
+    </div> -->
+
+    <div *ngIf="mailState === 'approved'" class="mail-approved">
+
+      <div class="mail-card">
+    
+        <div class="mail-header">
+          <h3>HR Management</h3>
+        </div>
+    
+        <div class="mail-body">
+          <p class="mail-title">🎉 Congratulations!</p>
+    
+          <p class="mail-text">
+            Your role has been upgraded
+          </p>
+    
+          <p class="mail-sub">
+            Keep up the great work 🚀
+          </p>
+        </div>
+    
+      </div>
+    
+    </div>
+  
+  </div>
+
+<!-- ERROR POPUP -->
+<div *ngIf="showMailError" class="error-popup">
+  <div class="error-box" (click)="$event.stopPropagation()">
+    <span class="close" (click)="closeMailError()">✖</span>
+    <p class="mail-popup">Invalid mail id and invalid Emp id</p>
+  </div>
+</div>
+
+  <div *ngIf="activeApp === 'docs'" class="app-screen">
+    <div class="app-header">Docs</div>
+    <div class="empty-state">No documents available at the moment.</div>
+  </div>
+  
+  <!-- DRIVE -->
+  <div *ngIf="activeApp === 'drive'" class="app-screen">
+    <div class="app-header">Drive</div>
+    <div class="empty-state">No files have been uploaded yet.</div>
+  </div>
+  
+  <!-- FILES -->
+  <div *ngIf="activeApp === 'files'" class="app-screen">
+    <div class="app-header">Files</div>
+    <div class="empty-state">No files found in this folder.</div>
+  </div>
+  
+  <!-- ZOOM -->
+  <div *ngIf="activeApp === 'zoom'" class="app-screen">
+    <div class="app-header">Zoom</div>
+    <div class="empty-state">No meetings scheduled right now.</div>
+  </div>
+  <div class="mobile-footer" *ngIf="showAppsRow">
+
+    <!-- ☰ -->
+    <div class="nav-btn" (click)="mobileBack()">
+      <img src="assets/images/hr-room/recent_icon.png" class="nav-icon" />
+    </div>
+  
+    <!-- ◻ HOME -->
+    <div class="nav-btn" (click)="goToMobileHome()">
+      <img src="assets/images/hr-room/home_icon.png" class="nav-icon" />
+    </div>
+  
+    <!-- ← -->
+    <div class="nav-btn" (click)="mobileBack()">
+      <img src="assets/images/hr-room/back_icon.png" class="nav-icon" />
+    </div>
+  
+  </div>
+<!-- </div> -->
+</div>
+          
+            <!-- 🔓 UNLOCK IMAGE -->
+            <div class="unlock-overlay" *ngIf="showUnlock">
+              <img
+                src="assets/images/hr-room/unlock.png"
+                class="unlock-image"
+                (dblclick)="hideUnlockScreen()"
+              />
+              <div class="lock-time">
+                {{ lockTime }}
+              </div>
+            
+              <!-- DATE -->
+              <div class="lock-date">
+                {{ lockDate }}
+              </div>
+            </div>
+          
+            <!-- 🔢 PATTERN SCREEN -->
+            <div
+              class="mobile-pattern-area"
+              *ngIf="showPattern"
+              [class.fade-out]="hidePatternUI">
+          
+              <div class="pattern-container">
+
+                <div class="pattern-title">Unlock Pattern</div>
+              
+                <div class="pattern-grid"
+     (mousedown)="startPattern($event)"
+     (mousemove)="onPatternMove($event)"
+     (mouseup)="endPattern()"
+     (mouseleave)="endPattern()">
+
+  <svg class="pattern-svg">
+    <polyline [attr.points]="svgPath"></polyline>
+  </svg>
+
+  <div 
+    class="pattern-dot"
+    *ngFor="let dot of patternDots; let i = index"
+    [attr.data-id]="i+1">
+  </div>
+
+</div>
+              
+              </div>
+          
+            </div>
+
+<!-- ================= TIMER SCREEN ================= -->
+<div *ngIf="showTimer" class="timer-screen fade-scale">
+
+  <!-- DISPLAY MODE -->
+  <div 
+    *ngIf="!editTime"
+    class="timer-display"
+    (click)="enableTimeEdit()">
+    {{ currentTime }}
+  </div>
+
+  <!-- EDIT MODE -->
+  <input
+    *ngIf="editTime"
+    class="timer-input"
+    type="time"
+    step="1"
+    [(ngModel)]="editableTime"
+    (blur)="saveManualTime()"
+    (keydown.enter)="saveManualTime()"
+  />
+
+</div>
+          
+          </div>
+        
+          <!-- 🔙 Back Arrow (Placed LAST so it stays on top) -->
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center table-back"
+            (click)="goBack()">
+          </ion-img>
+        
+        
+        </ng-container>
+
+        <!-- UNPLUGGED -->
+        <!-- <ng-container *ngIf="currentView === 'unplugged'">
+          <ion-img
+            src="assets/images/hr-room/left-arrow.png"
+            class="nav-arrow left"
+            (click)="goToMain()">
+          </ion-img>
+        </ng-container> -->
+
+        <ng-container *ngIf="currentView === 'unplugged' && imageLoaded">
+
+          <!-- DRAG START ZONE (over plug head at bottom) -->
+         
+        
+          <!-- SOCKET DROP ZONE -->
+          
+        
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goBack()">
+          </ion-img>
+        
+        </ng-container>
+
+        <!-- ================= ARROWS (DECLARED ONLY ONCE) ================= -->
+        <ng-container *ngIf="imageLoaded && (currentView === 'main' || currentView === 'exit' || currentView === 'side')">
+
+          <ion-img
+            src="assets/images/reception-room/left-arrow.png"
+            class="nav-arrow left"
+            (click)="rotateLeft()">
+          </ion-img>
+        
+          <ion-img
+            src="assets/images/reception-room/right-arrow.png"
+            class="nav-arrow right"
+            (click)="rotateRight()">
+          </ion-img>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'side' && imageLoaded">
+
+          <div
+          class="locker-zone"
+          (click)="handleLockerClick()">
+        </div>
+
+        <div
+  class="noticeboard-zone"
+  (click)="openNoticeBoard()">
+</div>
+
+<div
+    class="bluebox-zone"
+    (click)="openBlueBox()">
+  </div>
+
+  <div
+  class="letter-frame-zone"
+  (click)="openLetterFrame()">
+</div>
+          <!-- <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goBack()">
+          </ion-img> -->
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'bluebox' && imageLoaded">
+
+          <div
+  class="box-click-zone"
+  (click)="handleBoxClick()">
+</div>
+
+          <!-- Drop Zone -->
+          <div
+    class="box-drop-zone"
+    (click)="useKeyOnBox()"
+  ></div>
+        
+          <!-- Back Arrow -->
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goBack()">
+          </ion-img>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'openedbox' && imageLoaded">
+
+          <!-- Battery inside -->
+  <img
+  src="assets/images/hr-room/battery.png"
+  class="battery-inside"
+  *ngIf="!hasBattery"
+  (click)="collectBattery()"
+/>
+
+<ion-img
+  src="assets/images/reception-room/back-arrow.png"
+  class="back-arrow center"
+  (click)="goBack()">
+</ion-img>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'zoomedframe' && imageLoaded">
+        
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goBack()">
+          </ion-img>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'exit' && imageLoaded">
+
+          <div
+  class="cupboard-zone"
+  (click)="navigateTo('cupboard')">
+</div>
+
+          <!-- CLOCK HOTSPOT -->
+          <div 
+            class="clock-zone" *ngIf="!batteryInsertedInClock" (click)="handleClockClick()">
+          </div>
+        
+          <!-- BIOMETRIC HOTSPOT -->
+          <div 
+            class="biometric-zone"
+            (click)="openBiometric()">
+          </div>
+
+          <div *ngIf="wallClockOn" class="digital-clock">
+            {{ clockTime }}
+          </div>
+
+          <div 
+    class="dustbin-zone"
+    (click)="openDustbin()">
+  </div>
+
+  <div
+  class="photo-frame-zone"
+  (click)="openPhotoFrame()">
+</div>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'openedexit' && imageLoaded">
+
+          <!-- CENTER BLUR AREA -->
+          <div
+            class="openedexit-success-hotspot"
+            (click)="goToSuccessScreen()">
+          </div>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'cupboard' && imageLoaded">
+
+          <div class="palette-container">
+        
+            <div class="palette purple"
+                 [class.blink]="blinkWrong"
+                 (click)="selectPalette(0)">
+        
+                {{ cupboardDigits[0] }}
+                <span *ngIf="cursorIndex === 0" class="cursor">|</span>
+        
+            </div>
+        
+            <div class="palette blue" [class.blink]="blinkWrong">
+        
+                {{ cupboardDigits[1] }}
+                <span *ngIf="cursorIndex === 1" class="cursor">|</span>
+        
+            </div>
+        
+            <div class="palette yellow" [class.blink]="blinkWrong">
+        
+                {{ cupboardDigits[2] }}
+                <span *ngIf="cursorIndex === 2" class="cursor">|</span>
+        
+            </div>
+        
+            <div class="palette green" [class.blink]="blinkWrong">
+        
+                {{ cupboardDigits[3] }}
+                <span *ngIf="cursorIndex === 3" class="cursor">|</span>
+        
+            </div>
+        
+            <div class="palette pink" [class.blink]="blinkWrong">
+        
+                {{ cupboardDigits[4] }}
+                <span *ngIf="cursorIndex === 4" class="cursor">|</span>
+        
+            </div>
+        
+          </div>
+
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goBack()">
+          </ion-img>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'photoframe'">
+
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goBack()">
+          </ion-img>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'dustbin' && imageLoaded">
+
+          <!-- Folded Paper inside dustbin -->
+          <img
+            src="assets/images/hr-room/foldedpaper.png"
+            class="folded-paper"
+            (click)="openUnfoldedPaper()"
+            alt="Folded Paper"
+          />
+        
+          <!-- Back Arrow -->
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goBack()">
+          </ion-img>
+        
+        </ng-container>
+
+        <!-- ================= OPEN CUPBOARD VIEW ================= -->
+<ng-container *ngIf="currentView === 'opencupboard' && imageLoaded">
+
+  <!-- BOOK CLICK AREA -->
+  <!-- <div
+    class="book-zone"
+    (click)="openBook()">
+  </div> -->
+
+  <!-- BACK -->
+  <ion-img
+    src="assets/images/reception-room/back-arrow.png"
+    class="back-arrow center"
+    (click)="goBack()">
+  </ion-img>
+
+</ng-container>
+
+<ng-container *ngIf="currentView === 'openedBook' && imageLoaded">
+
+  <ion-img
+    src="assets/images/reception-room/back-arrow.png"
+    class="back-arrow center"
+    (click)="goBack()">
+  </ion-img>
+
+</ng-container>
+
+        <ng-container *ngIf="currentView === 'unfoldedpaper' && imageLoaded">
+
+          <!-- Back Arrow -->
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goToExit()">
+          </ion-img>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'clock' && imageLoaded">
+
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goBack()">
+          </ion-img>
+        
+        </ng-container>
+        
+        <ng-container *ngIf="currentView === 'biometric' && imageLoaded">
+
+          <!-- <div
+  class="biometric-click-zone"
+  (click)="handleBiometricClick()">
+</div> -->
+        
+           <!-- BIOMETRIC DROP ZONE -->
+  <div class="biometric-drop-zone" (click)="handleBiometricClick()"></div>
+
+  <!-- ACCESS GRANTED -->
+  <div *ngIf="biometricResult === 'granted'" class="access-granted">
+    <div class="scan-line"></div>
+    <div class="access-text success">ACCESS GRANTED</div>
+  </div>
+
+  <!-- ACCESS DENIED -->
+  <div *ngIf="biometricResult === 'denied'" class="access-denied">
+    <div class="scan-line"></div>
+    <div class="access-text error">ACCESS DENIED</div>
+  </div>
+
+  <ion-img
+    src="assets/images/reception-room/back-arrow.png"
+    class="back-arrow center"
+    (click)="goBack()">
+  </ion-img>
+        
+        </ng-container>
+        <ng-container *ngIf="currentView === 'noticeboard' && imageLoaded">
+
+          <!-- Yellow Sticky -->
+          <div
+            class="yellow-zone"
+            (click)="openYellowNote()">
+          </div>
+        
+          <!-- Blue Sticky -->
+          <div
+            class="blue-zone"
+            (click)="openBlueNote()">
+          </div>
+        
+          <div
+  class="statistics-zone"
+  (click)="openStatistics()">
+</div>
+          <!-- Back -->
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goBack()">
+          </ion-img>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'yellowNote' && imageLoaded">
+
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goBack()">
+          </ion-img>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'blueNote' && imageLoaded">
+
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goBack()">
+          </ion-img>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'statistics' && imageLoaded">
+
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goBack()">
+          </ion-img>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'openedlocker'">
+
+          <img
+  src="assets/images/hr-room/mobiledevice.png" 
+  class="mobile-item"
+  (click)="openUnlockScreen()"
+/>
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="currentView = 'side'">
+          </ion-img>
+        
+        </ng-container>
+
+        <!-- <ng-container *ngIf="currentView === 'openedlocker'">
+
+          <img
+            class="scene-image locker-open-animation"
+            [src]="images.openedlocker"
+          />
+        
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="currentView = 'side'">
+          </ion-img>
+        
+        </ng-container> -->
+
+        <ng-container *ngIf="currentView === 'closedlocker' && imageLoaded">
+
+          <!-- LOCKERS -->
+          <div class="locker group-a" (click)="openLocker('groupA')"></div>
+          <div class="locker locker-4" (click)="openLocker('locker4')"></div>
+          <div class="locker group-b" (click)="openLocker('groupB')"></div>
+          <div class="locker group-c" (click)="openLocker('groupC')"></div>
+        
+          <!-- 🔥 LOCKER POPUP -->
+          <!-- <div *ngIf="showLockerPopup" class="locker-popup">
+        
+            <div class="locker-popup-box">
+        
+              <div class="locker-title">ENTER LOCKER CODE</div>
+        
+              <input
+                type="text"
+                maxlength="4"
+                [(ngModel)]="enteredCode"
+                class="locker-input"
+                placeholder="----"
+              />
+        
+              <div class="locker-buttons">
+        
+                <button (click)="submitCode()">ENTER</button>
+                <button (click)="closeLockerPopup()">CANCEL</button>
+        
+              </div>
+        
+              <div *ngIf="errorState" class="locker-error">
+                WRONG CODE
+              </div>
+        
+            </div>
+        
+          </div> -->
+
+          <div *ngIf="showPuzzlePopup" class="puzzle-wrapper">
+
+            <!-- MAIN PANEL -->
+            <div class="puzzle-box">
+          
+              <!-- TOP METAL DESIGN -->
+              <div class="top-metal-strip"></div>
+          
+              <!-- CLOSE -->
+              <!-- <div class="close-btn" (click)="goBack()">
+                ✕
+              </div> -->
+          
+              <!-- TILE AREA -->
+              <div class="puzzle-div">
+          
+                <!-- TILE 1 -->
+                <div class="tile-frame">
+          
+                  <img
+                    [src]="'assets/images/hr-room/color' + lockerTiles[0] + '.png'"
+                    class="puzzle-tile"
+                    (click)="cycleLockerTile(0)"
+                  />
+          
+                </div>
+          
+                <!-- TILE 2 -->
+                <div class="tile-frame">
+          
+                  <img
+                    [src]="'assets/images/hr-room/color' + lockerTiles[1] + '.png'"
+                    class="puzzle-tile"
+                    (click)="cycleLockerTile(1)"
+                  />
+          
+                </div>
+          
+                <!-- TILE 3 -->
+                <div class="tile-frame">
+          
+                  <img
+                    [src]="'assets/images/hr-room/color' + lockerTiles[2] + '.png'"
+                    class="puzzle-tile"
+                    (click)="cycleLockerTile(2)"
+                  />
+          
+                </div>
+          
+              </div>
+          
+              <!-- BOTTOM LINE -->
+              <div class="bottom-strip">
+          
+                <div class="line"></div>
+          
+                <div class="down-arrow" (click)="goBack()">
+                  ▼
+                </div>
+          
+                <div class="line"></div>
+          
+              </div>
+          
+            </div>
+          
+          </div>
+
+          <!-- <div class="puzzle-wrapper" *ngIf="showPuzzlePopup">
+
+            <div class="puzzle-box">
+          
+              <div class="tiles">
+                <div 
+                  class="tile" 
+                  *ngFor="let tile of lockerTiles; let i = index"
+                  (click)="cycleLockerTile(i)"
+                >
+                  {{ tile }}
+                </div>
+              </div>
+          
+              <button (click)="goBack()">Close</button>
+          
+            </div>
+          </div> -->
+        
+          <!-- BACK -->
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="currentView = 'side'">
+          </ion-img>
+        
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'panel'">
+
+          <!-- <img
+            class="scene-image"
+            [src]="images.panel"
+          /> -->
+        
+          <!-- GREEN INPUT -->
+          <div class="green-display" [class.error]="errorState">
+        
+            <input
+              type="text"
+              maxlength="4"
+              [(ngModel)]="enteredCode"
+              autocomplete="off"
+              placeholder="ENTER CODE"
+            />
+        
+          </div>
+        
+          <!-- ERROR TEXT -->
+          <div class="code-error" *ngIf="errorState">
+            CODE MISMATCH
+          </div>
+        
+          <!-- ENTER BUTTON -->
+          <button class="enter-btn" (click)="submitCode()">
+            ENTER
+          </button>
+        
+          <!-- BACK -->
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="currentView = 'closedlocker'">
+          </ion-img>
+        
+        </ng-container>
+
+        <!-- ================= COMPUTER VIEW ================= -->
+        <ng-container *ngIf="currentView === 'computer'">
+
+          <ion-img src="assets/images/reception-room/back-arrow.png" class="back-arrow center"
+            (click)="showUnplugged()">
+          </ion-img>
+
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'plugged'">
+
+          <ion-img src="assets/images/reception-room/back-arrow.png" class="back-arrow center"
+            (click)="goBackFromPlugged()">
+          </ion-img>
+
+        </ng-container>
+
+        <ng-container *ngIf="imageLoaded && currentView === 'plugged'">
+
+          <ion-img src="assets/images/reception-room/left-arrow.png" class="nav-arrow left" (click)="goToMain()">
+          </ion-img>
+
+        </ng-container>
+
+        <ng-container
+  *ngIf="
+    currentView === 'zoomedlocker' ||
+    currentView === 'closedlocker' ||
+    currentView === 'zoomedmonitor'
+  "
+>
+  <!-- Bulb -->
+  <div
+    class="hint-bulb"
+    (click)="toggleHint(currentView)"
+  >
+    <img
+      src="assets/images/common/bulb.png"
+      alt="Hint Bulb"
+    />
+  </div>
+
+  <!-- Hint Panel -->
+  <div
+    *ngIf="activeHint === currentView"
+    class="hint-panel"
+  >
+    <button
+      class="hint-close"
+      (click)="closeHint()"
+    >
+      ✕
+    </button>
+
+    <div class="hint-title">
+      Hint
+    </div>
+
+    <div class="hint-text">
+      {{ hintMessages[currentView] }}
+    </div>
+  </div>
+</ng-container>
+
+        <div class="hr-inventory">
+
+          <div
+            class="inventory-item"
+            *ngFor="let item of hrInventory"
+            (mousedown)="startDrag(item, $event)"
+            (click)="showInventoryItem(item)"
+          >
+        
+            <img *ngIf="item === 'KEY'" src="assets/images/reception-room/key.png" />
+            <!-- <img *ngIf="item === 'ID_CARD'" src="assets/images/hr-room/id_card.png" />
+             -->
+
+            <img *ngIf="item === 'BATTERY'" src="assets/images/hr-room/battery.png" />
+
+            <img *ngIf="item === 'ID_CARD'" src="assets/images/hr-room/id_card.png" />
+
+        
+          </div>
+        
+        </div>
+        
+        <div
+  class="id-card-preview-overlay"
+  *ngIf="showIdCardPreview"
+  (click)="showIdCardPreview = false">
+
+  <img
+    src="assets/images/hr-room/id_card.png"
+    class="id-card-preview"
+    (click)="$event.stopPropagation()">
+
+</div>
+    <!-- ================= DRAGGING ITEM ================= -->
+
+<div
+*ngIf="isDragging"
+class="drag-preview"
+[style.left.px]="dragX"
+[style.top.px]="dragY">
+
+<!-- KEY -->
+<img
+  *ngIf="dragItem === 'KEY'"
+  src="assets/images/reception-room/key.png"
+  class="drag-item-img">
+
+<!-- BATTERY -->
+<img
+  *ngIf="dragItem === 'BATTERY'"
+  src="assets/images/hr-room/battery.png"
+  class="drag-item-img">
+
+<!-- ID CARD -->
+<img
+  *ngIf="dragItem === 'ID_CARD'"
+  src="assets/images/hr-room/id_card.png"
+  class="drag-item-img id-drag-img">
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- <div *ngIf="showError" class="game-error"> -->
+    <div
+    *ngIf="showError"
+    class="game-error-popup"
+    [ngClass]="errorPositionClass">
+    
+    {{ errorMessage }}
+  
+  </div>
+  <!-- </div> -->
+
+  <div *ngIf="isLoading" class="game-loader">
+  <div class="loader-content">
+    <div class="spinner"></div>
+    <div class="loader-text">
+      {{ loadingMessage }}
+    </div>
+  </div>
+</div>
+
+</ion-content>

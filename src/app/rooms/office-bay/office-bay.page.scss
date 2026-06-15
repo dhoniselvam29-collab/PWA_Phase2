@@ -1,0 +1,1945 @@
+
+
+.scene-container {
+  position: relative;
+  width: 100%;
+
+}
+
+.scene-image {
+  width: 100%;
+  display: block;
+
+}
+
+
+
+// .instruction-box {
+//   position: fixed;
+//   top: 15%;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   color: #ffffff;
+//   font-family: 'Anton', sans-serif;
+//   font-size: 20px;
+//   color: #f5f5f5;
+//   letter-spacing: 1px;
+//   text-shadow: -2px -2px 0 #292626, 2px -2px 0 #797777, -2px 2px 0 #312c2c, 2px 2px 0 #6d5959, 0px 4px 8px rgba(0, 0, 0, 0.6);
+//   padding: 10px 28px;
+//   z-index: 999999;
+//   animation: popIn 0.3s ease;
+// }
+
+.instruction-box {
+
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  color: #161616;
+  font-weight: 600;
+  font-size: clamp(14px, 1.6vw, 20px);
+
+  text-shadow:
+    -2px -1px 0 #d7d8da,
+     2px -1px 0 #d7d8da,
+    -2px  1px 0 #d7d8da,
+     2px  1px 0 #d7d8da;
+
+  opacity: 0;
+
+  animation: fadeInHint 0.3s ease forwards;
+
+  transition: transform 0.3s ease;
+
+  z-index: 999999;
+
+  text-align: center;
+
+}
+
+@keyframes fadeInHint {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+/* ---------------- HOTSPOTS ---------------- */
+
+
+
+.hotspot-bookshelf {
+  position: absolute;
+  top: 32%;
+  left: 19%;
+  width: 10%;
+  height: 28%;
+  cursor: pointer;
+  z-index: 20;
+  background: transparent;
+}
+
+.hotspot-bookshelf2 {
+  position: absolute;
+  top: 37%;
+  left: 15%;
+  width: 15%;
+  height: 22%;
+  cursor: pointer;
+  z-index: 20;
+  background: transparent;
+}
+
+.hotspot-laptop {
+  position: absolute;
+  top: 48%;
+  left: 58%;
+  width: 39%;
+  height: 26%;
+  z-index: 20;
+  cursor: pointer;
+  background: transparent;
+}
+
+.hotspot-laptop-hint{
+  position: absolute;
+  top: 15%;
+    left: 23%;
+    width: 60%;
+    height: 58%;
+  background: rgba(107, 151, 70, 0.4);
+  z-index: 999;
+}
+
+.hotspot-laptop-screen {
+  position: absolute;
+  top: 18%;
+  left: 35%;
+  width: 40%;
+  height: 36%;
+  cursor: pointer;
+  z-index: 50;
+  // debugging
+  // background: rgba(255,0,0,.3);
+}
+
+
+.hotspot-drawer {
+  position: absolute;
+  top: 61%;
+  left: 32%;
+  width: 25%;
+  height: 20%;
+  cursor: pointer;
+  z-index: 20;
+  // background: rgba(255, 0, 0, 0.4);
+}
+
+// .drawer-container {
+//   position: relative;
+//   width: fit-content;
+//   margin: auto;
+// }
+
+.hotspot-drawer-hint {
+  position: absolute;
+    top: 29%;
+    left: 23%;
+    width: 55%;
+    height: 55%;
+    // background: rgba(255, 0, 0, 0.4);
+    z-index: 999;
+}
+
+
+
+.hotspot-drawer-lock {
+  position: absolute;
+  top: 17%;
+    left: 62%;
+    width: 12%;
+  height: 18%;
+  cursor: pointer;
+  z-index: 20;
+  background: transparent;
+}
+
+.hotspot-charger {
+  position: absolute;
+  top: 20%;
+  left: 19%;
+  width: 32%;
+  height: 45%;
+  cursor: pointer;
+  // background: rgba(219, 146, 98, 0.3);
+}
+
+
+.hotspot-id-card {
+  position: absolute;
+  top: 21%;
+  left: 51%;
+  width: 29%;
+  height: 44%;
+  z-index: 10;
+  cursor: pointer;
+
+  /* DEBUG VISIBILITY */
+  // background: rgba(255, 0, 0, 0.4);
+}
+
+/* ---------------- NAVIGATION ---------------- */
+
+
+.nav-btn,
+.close-btn {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  z-index: 1000;
+}
+
+/* LEFT NAV */
+
+.left {
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  background-image:
+    url('../../../assets/level2/left-arrow.png');
+}
+
+/* RIGHT NAV */
+
+.right {
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  background-image:
+    url('../../../assets/level2/right-arrow.png');
+}
+
+/* CLOSE BUTTON */
+
+.close-btn {
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-image:
+    url('../../../assets/level2/down-arrow.png');
+
+}
+.close-btn-excel {
+  bottom: 79%;
+  left: 83%;
+  transform: translateX(-50%);
+  background-image:
+    url('../../../assets/level2/down-arrow.png');
+
+}
+.close-btn-cupboard {
+  bottom: 6%;
+  left: 59%;
+  transform: translateX(-50%);
+  background-image:
+    url('../../../assets/level2/down-arrow.png');
+
+}
+
+.left { left: 15px; }
+.right { right: 15px; }
+
+/* ---------------- ZOOM OVERLAY ---------------- */
+
+.zoom-overlay {
+  position: fixed;
+  inset: 0;
+  background: black;
+  z-index: 999;
+  display: flex;
+}
+
+.zoom-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* ---------------- Settings ---------------- */
+
+.settings-menu-btn {
+  position: fixed;
+
+  top: 18px;
+  left: 18px;
+
+  width: 50px;
+  height: 50px;
+
+  z-index: 999999;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #dfe4ea,
+      #7d8896
+    );
+
+  border: 3px solid #eef3f8;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.7),
+    inset 0 -4px 0 rgba(0,0,0,0.25),
+    0 10px 22px rgba(0,0,0,0.45);
+
+  cursor: pointer;
+}
+
+.settings-menu-btn img {
+  width: 25px;
+  height: 25px;
+}
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.settings-overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 9999999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: fadeIn 0.2s ease;
+}
+
+/* =========================================================
+   BACKDROP BLUR
+========================================================= */
+
+.settings-backdrop {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0,0,0,0.45);
+
+  backdrop-filter: blur(10px);
+
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* =========================================================
+   POPUP POSITION
+========================================================= */
+
+.settings-popup-ui {
+  position: relative;
+  z-index: 10;
+}
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes fadeIn {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+/* ---------------- LAPTOP SECTION ---------------- */
+
+.laptop-wrapper {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.laptop-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.laptop-drop-zone {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.laptop-screen-area {
+  position: absolute;
+  top: 28%;
+  left: 30%;
+  width: 40%;
+  height: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.screen-content {
+  width: 100%;
+    height: 100%;
+    text-align: center;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    transform: rotate(9deg);
+}
+
+.screen-content.off {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Dark fade effect inside laptop screen only */
+.battery-overlay {
+  position: relative;
+  /* position: absolute; */
+  inset: 0;
+  /* background: rgba(0, 0, 0, 0.6); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(0deg);
+  top: -35%;
+  left: 12%;
+}
+
+/* Popup box */
+.battery-popup {
+  background: #2d2d2d;
+  width: 80%;
+  max-width: 420px;
+  padding: 25px;
+  border-radius: 8px;
+  color: #be2222;
+  font-family: "Segoe UI", Arial, sans-serif;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+}
+
+.battery-popup h2 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.battery-popup p {
+  margin: 0 0 20px;
+  font-size: 14px;
+  color: #cfcfcf;
+}
+
+.screen-content.on {
+  margin-left: 27%;
+  margin-top: 0%;
+  color: #d7e3de;}
+
+.welcome{
+  font-size: 20px;
+  margin-left: -18px;
+  font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+}
+
+
+/* ================= INVENTORY PANEL ================= */
+
+.inventory-panel {
+
+  position: fixed !important;
+  top: 3%;
+  right: 2%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 2147483647 !important;
+  pointer-events: auto;
+  isolation: isolate;
+}
+
+
+/* OPTIONAL TITLE */
+
+.inventory-title {
+  color: #d8d3c1;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+
+
+/* ================= INVENTORY ITEM ================= */
+
+.inventory-item {
+
+  width: clamp(50px, 5vw, 65px);
+  aspect-ratio: 1;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 2147483647 !important;
+  position: relative;
+
+  background:
+    linear-gradient(
+      145deg,
+      #3b4557,
+      #1c2430
+    );
+
+  border-radius: 14px;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    inset 0 2px 4px rgba(255,255,255,0.15),
+    0 6px 14px rgba(0,0,0,0.55);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  overflow: hidden;
+
+  cursor: grab;
+  border: 1px solid #c0c0c0;
+}
+
+
+/* HOVER EFFECT */
+
+.inventory-item:hover {
+
+  transform: scale(1.08);
+
+  box-shadow:
+    inset 0 2px 5px rgba(255,255,255,0.2),
+    0 8px 18px rgba(0,0,0,0.75);
+}
+
+
+/* ITEM IMAGE */
+
+.inventory-item img {
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  pointer-events: none;
+
+}
+
+
+/* ACCESS CARD LABEL */
+
+.card-label {
+
+  position: absolute;
+
+  bottom: 3px;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  color: #f1ead7;
+
+  background: rgba(0,0,0,0.5);
+
+  padding: 1px 5px;
+
+  border-radius: 5px;
+
+  letter-spacing: 1px;
+}
+
+
+/* FULL SCREEN OS OVERLAY */
+
+
+.os-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  // background: black;
+}
+
+/* ---------- Loading Screen ---------- */
+
+.windows-loading-full {
+  height: 100%;
+  width: 100%;
+  // background: #0a0a0a;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #444;
+  border-top: 5px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Black Transition ---------- */
+
+.black-screen-full {
+  height: 100%;
+  width: 100%;
+  background: black;
+}
+
+/* ---------- Login Screen ---------- */
+
+.windows-login-full {
+  height: 100%;
+  width: 100%;
+  background: url("../../../assets/level2/windows-wallpaper.png") no-repeat center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  color: white;
+}
+
+.windows-login-full input {
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  color: black;
+}
+
+.windows-login-full button {
+  padding: 8px 18px;
+  border-radius: 5px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  color: black !important;
+}
+
+/* ---------- Desktop Screen ---------- */
+
+.windows-desktop-full {
+  height: 100%;
+  width: 100%;
+  background: url("../../../assets/level2/desktop-wallpaper.png") no-repeat;
+background-size: cover;
+
+  // padding: 40px;
+  color: white;
+  // display: flex;
+  // flex-direction: column;
+  // gap: 20px;
+}
+
+.username{
+  margin-top: 11%;
+}
+
+
+.desktop-icon {
+  width: 150px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.os-back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.login-back-btn {
+  position: absolute;
+  top: 10%;
+  left: 20px;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.desktop-hotspot {
+  position: absolute;
+  left: 14%;
+  width: 9%;
+  height: 17%;
+top: 78%;
+  cursor: pointer;
+
+  /* DEBUG (remove later) */
+  //  background: rgba(255,0,0,0.3);
+}
+
+.desktop-hotspot-report {
+  position: absolute;
+  top: 33%;
+    left: 0%;
+    width: 8%;
+    height: 12%;
+  cursor: pointer;
+    // background: rgba(255,0,0,0.3);
+}
+
+.desktop-hotspot-finance {
+  position: absolute;
+  top: 33%;
+    left: 13%;
+    width: 8%;
+    height: 14%;
+  cursor: pointer;
+    // background: rgba(255,0,0,0.3);
+}
+
+
+/* Overlay */
+.excel-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 11000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main Window */
+.excel-window {
+  width: 70%;
+  height: 70%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+.excel-header {
+  background: #107c41;
+  color: white;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.excel-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.excel-controls button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Toolbar */
+.excel-toolbar {
+  background: #f3f3f3;
+  padding: 8px 15px;
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Sheet */
+.excel-sheet {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+}
+
+.excel-sheet table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.excel-sheet th,
+.excel-sheet td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+  color: black !important;
+}
+
+.excel-sheet th {
+  background: #e6f4ea;
+}
+
+.highlight {
+  // background: #fff3cd;
+  // font-weight: bold;
+}
+
+.windows-desktop-full {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+}
+
+/* Popup Window */
+.excel-window2 {
+  width: 45%;
+  height: 85%;
+  // background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // box-shadow: 0 0 30px rgba(0,0,0,0.7);
+}
+
+/* Image inside popup */
+.excel-image {
+  width: 100%;
+  height: 100%;
+
+  // object-fit: contain;
+
+  display: block;
+}
+
+.close-btn-excel2{
+  position: absolute;
+  top: 0px;
+  right: 2%;
+  width: 5%;
+  height: 5%;
+  border: none;
+  border-radius: 50%;
+  background: rgb(221 215 215 / 0%);
+  color: #ffffff00;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
+  transition: 0.2s ease;
+  }
+
+
+/* Logoff button bottom right */
+.logoff-btn {
+  position: absolute;
+  bottom: 25px;
+  right: 20px;
+
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+
+  font-family: "Segoe UI", sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.logoff-btn:hover {
+  background: rgba(255, 0, 0, 0.8);
+}
+
+
+.hotspot-desk {
+  position: absolute;
+  top: 60%;
+  left: 74%;
+  width: 12%;
+  height: 28%;
+  width: 20%;
+  z-index: 20;
+  // background: rgba(255, 0, 0, 0.3);
+}
+
+.hotspot-desk-hint {
+
+  position: absolute;
+  top: 20%;
+  left: 13%;
+  width: 70%;
+  height: 29%;
+  z-index: 9999;
+  cursor: pointer;
+  // background: rgba(255,0,0,0.4); // TEMP TEST
+}
+
+
+.desk-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.password-text {
+  position: absolute;
+
+  /* Adjust to match sticky center */
+  top: 60%;
+  left: 47%;
+  transform: translate(-50%, -50%);
+
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  z-index: 2;
+}
+
+canvas {
+  position: absolute;
+
+  /* same position as sticky */
+  top: 40%;
+  left: 35%;
+  width: 30%;
+  height: 30%;
+
+  z-index: 3;
+}
+
+.scribble-canvas {
+  position: absolute;
+  top: 55%;
+  left: 38%;
+  width: 19%;
+  height: 16%;
+  z-index: 3;
+}
+
+
+.eraser-mode {
+  cursor: url('../../../assets/level2/eraser.png'), auto;
+}
+
+
+
+.hotspot-eraser-shelf {
+  position: absolute;
+  top: 36%;
+  left: 38%;
+  width: 12%;
+  height: 26%;
+  width: 15%;
+  z-index: 20;
+  // background: rgba(255, 0, 0, 0.3);
+}
+
+.hotspot-eraser{
+  position: absolute;
+  top: 46%;
+  left: 37%;
+  width: 12%;
+  height: 27%;
+  width: 25%;
+  z-index: 20;
+  // background: rgba(255, 0, 0, 0.3);
+}
+
+.hotspot-hr-door {
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  width: 25%;
+  height: 45%;
+  cursor: pointer;
+  z-index: 20;
+  // background: rgba(0, 255, 0, 0.3);
+}
+
+.hotspot-hr-door-hint{
+  position: absolute;
+  top: 15%;
+  left: 28%;
+  width: 50%;
+  height: 70%;
+  cursor: pointer;
+  z-index: 20;
+  // background: rgba(0, 255, 0, 0.3);
+}
+
+.hotspot-access-machine {
+  position: absolute;
+  top: 35%;
+  left: 78%;
+  width: 12%;
+  height: 20%;
+  cursor: pointer;
+  z-index: 20;
+  // background: rgba(255, 0, 0, 0.3);
+}
+.cupboard-wrapper {
+  position: relative;
+  width: 55%;   /* adjust if needed */
+  height: 100%;
+}
+
+.hotspot-card {
+  position: absolute;
+  width: 9%;
+  height: 16%;
+  cursor: pointer;
+  z-index: 20;
+  // background: rgba(0,255,0,0.25); /* debug */
+}.cupboard-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hotspot-card {
+  position: absolute;
+
+  width: 6%;
+  height: 12%;
+
+  cursor: pointer;
+  z-index: 20;
+
+  // background: rgba(0,255,0,0.25); /* debug */
+}
+
+.card-label {
+  font-size: 10px;
+  color: white;
+  margin-top: 2px;
+}
+
+.access-result {
+  position: absolute;
+  bottom: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.success {
+  background: rgba(0, 255, 100, 0.15);
+  color: #00ff66;
+  border: 1px solid #00ff66;
+}
+
+.denied {
+  background: rgba(255, 0, 0, 0.15);
+  color: #ff3333;
+  border: 1px solid #ff3333;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.access-machine-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+
+.hotspot-torch{
+  position:absolute;
+  width: 15%;
+  height: 19%;
+  top: 58%;
+  left:58%;
+  cursor:pointer;
+  //  background: rgba(0,255,0,0.25); /* debug */
+}
+
+.hotspot-torch-pick{
+  position:absolute;
+  width: 32%;
+    height: 40%;
+    top: 50%;
+    left: 73%;
+  transform:translateX(-50%);
+  cursor:pointer;
+  // background: rgba(0,255,0,0.25); /* debug */
+}
+
+// powerflickering
+.power-flicker{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:white;
+  z-index:9999;
+  animation:flicker 0.2s infinite;
+}
+
+@keyframes flicker{
+
+  0%{opacity:0}
+  25%{opacity:1}
+  50%{opacity:0}
+  75%{opacity:1}
+  100%{opacity:0}
+
+}
+
+.power-restore {
+  position: fixed;
+  inset: 0;
+  background: white;
+  z-index: 9999;
+  animation: powerRestoreFlash 1.2s ease-out;
+}
+
+@keyframes powerRestoreFlash {
+
+  0%   { opacity: 0; }
+  10%  { opacity: 1; }
+  20%  { opacity: 0; }
+  35%  { opacity: 0.8; }
+  50%  { opacity: 0; }
+  70%  { opacity: 0.5; }
+  100% { opacity: 0; }
+
+}
+
+@keyframes restoreGlow {
+
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+
+  20% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  60% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.15);
+  }
+
+}
+
+// electrical panel
+/* PANEL WRAPPER */
+.panel-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* BACKGROUND IMAGE */
+.zoom-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* COMMON SWITCH STYLE */
+.panel-switch {
+  position: absolute;
+
+  background: url('/assets/level2/rotator-switch.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  cursor: pointer;
+
+  transition: transform 0.25s ease;
+  transform-origin: center;
+}
+
+/* INDIVIDUAL SWITCH CONTROL */
+.switch1 {
+  width: 30%;
+  height: 30%;
+}
+
+.switch2 {
+  width: 30%;
+  height: 30%;
+}
+
+.switch3 {
+  width: 30%;
+  height: 30%;
+}
+
+/* CLICK FEEDBACK */
+.panel-switch:active {
+  transform: scale(0.9);
+}
+
+/* OPTIONAL DEBUG (use temporarily) */
+/*
+.panel-switch {
+  border: 1px solid red;
+}
+*/
+
+  .hotspot-electrical-panel{
+
+    position:absolute;
+    top: 21%;
+    left: 44%;
+    width: 15%;
+    height: 20%;
+    cursor:pointer;
+
+    /* debug color */
+    // background:rgba(255,0,0,0.25);
+
+    }
+
+
+    /* OVERLAY */
+.zoom-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+}
+
+/* ENVELOPE */
+.envelope {
+  width: 300px;
+  height: 200px;
+  background: #f5e6c8;
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+  text-align: center;
+
+  transition: transform 0.3s ease;
+}
+
+.envelope:active {
+  transform: scale(0.95);
+}
+
+/* TEXT */
+.hint-text {
+  font-size: 14px;
+  color: #333;
+}
+
+/* POSTCARD */
+.postcard-container img {
+  width: 350px;
+  border-radius: 10px;
+
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+.hotspot-envelope{
+
+  position:absolute;
+  top: 55%;
+  left: 67%;
+  width: 15%;
+  height: 20%;
+  cursor:pointer;
+
+  /* debug color */
+  // background:rgba(255,0,0,0.25);
+
+
+}
+
+
+.envelope-img{
+  width: 70%;
+  height: 40%;
+  position: relative;
+  left: 15%;
+}
+
+.postcard-img{
+  width: 40%;
+  height: 40%;
+  position: relative;
+  left: 28%;
+}
+
+
+
+.hotspot-glass-panel{
+
+  position:absolute;
+  top: 60%;
+  left: 10%;
+  width: 18%;
+  height: 20%;
+  cursor:pointer;
+  z-index: 20;
+
+  /* debug color */
+  // background:rgba(255,0,0,0.25);
+
+
+}
+
+/* FULL SCREEN OVERLAY */
+.panel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 10, 20, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+/* FRAME WRAPPER */
+.frame-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 90%;
+}
+
+/* FRAME IMAGE */
+.frame-bg {
+  width: 100%;
+  display: block;
+
+}
+
+/* CONTENT INSIDE FRAME */
+.panel-box {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 45%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #00eaff;
+  font-family: 'Orbitron', sans-serif;
+  z-index: 2;
+}
+
+/* TITLE */
+.panel-box h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+/* LABELS */
+.panel-box label {
+  font-size: 12px;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+/* INPUT + SELECT */
+.panel-box select,
+.panel-box input {
+  margin-top: 5px;
+  padding: 8px;
+  background: rgba(0, 20, 40, 0.7);
+  border: 1px solid #00eaff;
+  color: #00eaff;
+  border-radius: 4px;
+  outline: none;
+}
+
+/* RESULT BOX */
+.panel-result {
+  margin-top: 15px;
+  padding: 12px;
+  background: rgba(0, 255, 120, 0.08);
+  border: 1px solid #00ff9f;
+  text-align: center;
+  font-size: 15px;
+  color: #74e103;
+  box-shadow: 0 0 8px #2eff0e, 0 0 15px rgba(0, 255, 159, 0.6), inset 0 0 8px rgba(0, 255, 159, 0.4);
+  border-radius: 6px;
+  animation: glowPulse 1.5s infinite alternate;
+}
+
+/* BUTTONS */
+.panel-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.panel-actions button,
+.continue-btn {
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid #00eaff;
+  color: #00eaff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* HOVER EFFECT */
+.panel-actions button:hover,
+.continue-btn:hover {
+  background: #00eaff;
+  color: #000;
+  box-shadow: 0 0 10px #00eaff;
+}
+
+.panel-overlay {
+  background: rgba(5, 10, 20, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+
+.password-wrapper {
+
+  position: relative;
+  width: 17%;
+
+}
+
+.password-toggle {
+
+  position: absolute;
+
+  right: 12px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  font-size: 22px;
+
+  cursor: pointer;
+
+  color: #666;
+
+}
+
+.login-error {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  margin-top: 10px;
+
+  color: #ff4d4f;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+/* ================= HR ROOM HOTSPOT ================= */
+
+.hr-room-enter-hotspot {
+    position: absolute;
+    top: 7%;
+    left: 33%;
+    width: 38%;
+    height: 82%;
+    cursor: pointer;
+    z-index: 9999;
+    background: transparent;
+}
+
+
+/* ================= LEVEL TRANSITION ================= */
+
+.screen-fade {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at center,
+      #1c2738 0%,
+      #0d1117 55%,
+      #000000 100%
+    );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.screen-fade.active {
+  opacity: 1;
+}
+
+/* ================= CONTENT ================= */
+
+.transition-content {
+  text-align: center;
+  animation: transitionFade 0.8s ease forwards;
+}
+
+/* ================= SUBTITLE ================= */
+
+.transition-subtitle {
+  color: rgba(255,255,255,0.55);
+  font-size: clamp(14px, 1.4vw, 22px);
+  letter-spacing: 0.4em;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  animation: subtitleFade 1.2s ease infinite alternate;
+}
+
+/* ================= TITLE ================= */
+
+.transition-title {
+  font-size: clamp(38px, 5vw, 90px);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: #f5f7fa;
+  text-shadow:
+    0 0 12px rgba(255,255,255,0.25),
+    0 0 28px rgba(120,180,255,0.25);
+  animation:
+    glowPulse 1.8s ease-in-out infinite;
+}
+
+/* ================= LINE ================= */
+
+.transition-line {
+  width: 0;
+  height: 3px;
+  margin: 1.8rem auto 0;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #8ab4ff,
+      transparent
+    );
+  animation: lineExpand 1s ease forwards;
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0.7;
+    text-shadow:
+      0 0 8px rgba(255,255,255,0.15),
+      0 0 18px rgba(120,180,255,0.18);
+  }
+  100% {
+    opacity: 1;
+    text-shadow:
+      0 0 18px rgba(255,255,255,0.35),
+      0 0 38px rgba(120,180,255,0.35);
+  }
+}
+
+@keyframes lineExpand {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 280px;
+    opacity: 1;
+  }
+}
+
+@keyframes transitionFade {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes subtitleFade {
+  from {
+    opacity: 0.35;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+
+
+// .password-wrapper {
+
+//   position: relative;
+
+//   width: 100%;
+
+// }
+
+.password-toggle {
+
+  position: absolute;
+
+  right: 12px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  font-size: 22px;
+
+  cursor: pointer;
+
+  color: #666;
+
+}
+
+.login-error {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  margin-top: 10px;
+
+  color: #ff4d4f;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+}
+
+/* ================= HR ROOM HOTSPOT ================= */
+
+.hr-room-enter-hotspot {
+    position: absolute;
+    top: 7%;
+    left: 33%;
+    width: 38%;
+    height: 82%;
+    cursor: pointer;
+    z-index: 9999;
+    background: transparent;
+}
+
+
+/* ================= LEVEL TRANSITION ================= */
+
+.screen-fade {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at center,
+      #1c2738 0%,
+      #0d1117 55%,
+      #000000 100%
+    );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.screen-fade.active {
+  opacity: 1;
+}
+
+/* ================= CONTENT ================= */
+
+.transition-content {
+  text-align: center;
+  animation: transitionFade 0.8s ease forwards;
+}
+
+/* ================= SUBTITLE ================= */
+
+.transition-subtitle {
+  color: rgba(255,255,255,0.55);
+  font-size: clamp(14px, 1.4vw, 22px);
+  letter-spacing: 0.4em;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  animation: subtitleFade 1.2s ease infinite alternate;
+}
+
+/* ================= TITLE ================= */
+
+.transition-title {
+  font-size: clamp(38px, 5vw, 90px);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: #f5f7fa;
+  text-shadow:
+    0 0 12px rgba(255,255,255,0.25),
+    0 0 28px rgba(120,180,255,0.25);
+  animation:
+    glowPulse 1.8s ease-in-out infinite;
+}
+
+/* ================= LINE ================= */
+
+.transition-line {
+  width: 0;
+  height: 3px;
+  margin: 1.8rem auto 0;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #8ab4ff,
+      transparent
+    );
+  animation: lineExpand 1s ease forwards;
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0.7;
+    text-shadow:
+      0 0 8px rgba(255,255,255,0.15),
+      0 0 18px rgba(120,180,255,0.18);
+  }
+  100% {
+    opacity: 1;
+    text-shadow:
+      0 0 18px rgba(255,255,255,0.35),
+      0 0 38px rgba(120,180,255,0.35);
+  }
+}
+
+@keyframes lineExpand {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 280px;
+    opacity: 1;
+  }
+}
+
+@keyframes transitionFade {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes subtitleFade {
+  from {
+    opacity: 0.35;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+
+
+// HINT MESSAGE SECTION
+
+
+// .hint-bulb {
+//   position: absolute;
+//   bottom: 3%;
+//   left: 2%;
+//   width: 4%;
+//   min-width: 40px;
+//   max-width: 70px;
+//   cursor: pointer;
+//   z-index: 100;
+// }
+.hint-bulb {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 80px;
+  height: 80px;
+  z-index: 999999;
+
+}
+
+.hint-bulb img {
+  width: 100%;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.hint-bulb:hover img {
+  transform: scale(1.08);
+}
+
+.hint-panel {
+  position: fixed;
+  bottom: 20px;
+  left: 120px;
+
+  width: 304px;
+  max-width: 28vw;
+
+  padding: 10px 14px;
+
+  background: rgba(20,20,20,0.95);
+  border: 2px solid #f3d36b;
+  border-radius: 12px;
+
+  z-index: 999999;
+}
+
+.hint-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.hint-title {
+  color: #f3d36b;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.hint-text {
+  color: white;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+@keyframes hintSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

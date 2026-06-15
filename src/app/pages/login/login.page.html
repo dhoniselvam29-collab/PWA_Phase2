@@ -1,0 +1,223 @@
+<ion-content class="auth-content" [fullscreen]="true">
+
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="auth-wrapper">
+
+    <!-- Game Header -->
+    <div class="game-header">
+
+      <!-- <div class="logo-icon">
+        <ion-icon name="game-controller"></ion-icon>
+      </div> -->
+
+      <!-- <h1 class="game-title">
+        MAD
+        <span class="title-accent">
+          EYE
+        </span>
+      </h1>
+
+      <p class="game-subtitle">
+        Solve. Escape. Survive.
+      </p> -->
+
+    </div>
+
+    <!-- Card -->
+    <div class="auth-card">
+
+      <div class="card-glow"></div>
+
+      <h2 class="card-title">
+        Welcome Back!
+      </h2>
+
+      <p class="card-sub">
+        Sign in to continue your journey
+      </p>
+
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="onLogin()">
+
+        <!-- Username -->
+        <div
+          class="input-group"
+          [class.error]="isFieldInvalid('username')">
+
+          <label class="input-label">
+            Username
+          </label>
+
+          <div class="input-wrapper">
+
+            <ion-icon
+              name="person-outline"
+              class="input-icon">
+            </ion-icon>
+
+            <input
+              class="custom-input"
+              type="text"
+              placeholder="Enter username"
+              formControlName="username"
+            />
+
+          </div>
+
+          <span
+            class="error-msg"
+            *ngIf="isFieldInvalid('username')">
+
+            <ion-icon
+              name="alert-circle-outline">
+            </ion-icon>
+
+            Username is required
+
+          </span>
+
+        </div>
+
+        <!-- Password -->
+        <div
+          class="input-group"
+          [class.error]="isFieldInvalid('password')">
+
+          <label class="input-label">
+            Password
+          </label>
+
+          <div class="input-wrapper">
+
+            <ion-icon
+              name="lock-closed-outline"
+              class="input-icon">
+            </ion-icon>
+
+            <input
+  class="custom-input"
+  [type]="showPassword ? 'text' : 'password'"
+  placeholder="Enter password"
+  formControlName="password"
+/>
+
+<ion-icon
+  class="password-toggle"
+  [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+  (click)="togglePassword()">
+</ion-icon>
+
+          </div>
+
+          <span
+            class="error-msg"
+            *ngIf="isFieldInvalid('password')">
+
+            <ion-icon
+              name="alert-circle-outline">
+            </ion-icon>
+
+            Password is required
+
+          </span>
+
+        </div>
+        <div
+  class="error-box"
+  *ngIf="loginError">
+
+  <ion-icon
+    name="alert-circle">
+  </ion-icon>
+
+  Invalid username or password
+
+</div>
+
+        <!-- Login Button -->
+        <button
+          class="btn-primary"
+          type="submit"
+          [disabled]="isLoading">
+
+          <span *ngIf="!isLoading">
+
+            <ion-icon
+              name="flash-outline">
+            </ion-icon>
+
+            Sign In
+
+          </span>
+
+          <ion-spinner
+            *ngIf="isLoading"
+            name="crescent">
+          </ion-spinner>
+
+        </button>
+
+      </form>
+
+      <!-- Divider -->
+      <div class="auth-divider">
+        <span></span>
+        <p>or</p>
+        <span></span>
+      </div>
+
+      <!-- Social Buttons
+      <div class="social-row">
+
+        <button class="btn-social">
+          <ion-icon name="logo-google"></ion-icon>
+        </button>
+
+        <button class="btn-social">
+          <ion-icon name="logo-discord"></ion-icon>
+        </button>
+
+        <button class="btn-social">
+          <ion-icon name="logo-twitch"></ion-icon>
+        </button>
+
+      </div> -->
+
+      <!-- Signup -->
+      <p class="switch-auth">
+
+        Don't have an Account?
+
+        <a
+          (click)="goToSignup()"
+          class="link-accent">
+
+          Sign Up
+
+        </a>
+
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- <div class="video-overlay" *ngIf="showIntroVideo">
+  <video
+    #introVideo
+    autoplay
+    playsinline
+    (ended)="onVideoEnded()">
+
+    <source src="../../../assets/MAD-Intro_Compressed.mp4" type="video/mp4">
+  </video>
+</div> -->
+
+</ion-content>

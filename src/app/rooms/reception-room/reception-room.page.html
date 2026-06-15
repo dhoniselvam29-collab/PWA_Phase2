@@ -1,0 +1,613 @@
+<ion-content fullscreen>
+
+  <!-- ================= GAME WRAPPER ================= -->
+  <div class="game-wrapper">
+    <div class="scene fade">
+      <div class="scene-inner"  [class.game-transition]="isTransitioning">
+
+        <div
+        class="settings-menu-btn"
+        (click)="toggleSettings()">
+      
+        <img
+          src="assets/images/hr-room/settingsmenu.png"
+          alt="settings">
+      
+      </div>
+      
+      <!-- SETTINGS OVERLAY -->
+      
+      <div
+        class="settings-overlay"
+        *ngIf="showSettings">
+      
+        <!-- BLUR BACKGROUND -->
+        <div
+          class="settings-backdrop"
+          (click)="toggleSettings()">
+        </div>
+      
+        <!-- SETTINGS POPUP -->
+        
+      <app-settings
+      *ngIf="showSettings"
+      (closePopup)="showSettings = false">
+      </app-settings>
+      
+      </div>
+        
+        <div *ngIf="showHint" class="hint-message"  [ngClass]="hintPosition" [class.fade-out]="hintFadingOut">
+          {{ hintMessage }}
+        </div>
+
+          <!-- ================= INVENTORY (TOP RIGHT) ================= -->
+        <div class="inventory">
+        <div
+          class="inventory-item"
+          *ngFor="let item of inventory"
+          [attr.data-type]="item"
+          draggable="true"
+          (dragstart)="onInventoryDragStart($event, item)"
+        >
+
+          <ng-container [ngSwitch]="item">
+
+            <span *ngSwitchCase="'M'">M</span>
+            <span *ngSwitchCase="'A'">A</span>
+            <span *ngSwitchCase="'D'">D</span>
+
+            <img *ngSwitchCase="'HEX'" src="assets/images/reception-room/hexagon-item.png" />
+            <img *ngSwitchCase="'KEY'" src="assets/images/reception-room/key.png" />
+            <img *ngSwitchCase="'TORCH'" src="assets/images/reception-room/torch.png" />
+
+          </ng-container>
+
+        </div>
+      </div>
+
+        <!-- HINT SYSTEM -->
+  <ng-container *ngIf="
+    currentView === 'remote' ||
+    currentView === 'blackBox' ||
+    currentView === 'openCupboard'
+  ">
+
+    <!-- Bulb -->
+    <div
+      class="hint-bulb"
+      (click)="toggleHint(currentView)">
+
+      <img
+        src="assets/images/common/bulb.png" />
+
+    </div>
+
+    <!-- Panel -->
+    <div
+      *ngIf="activeHint === currentView"
+      class="hint-panel">
+
+      <button
+        class="hint-close"
+        (click)="closeHint()">
+        ✕
+      </button>
+
+      <div class="hint-title">
+        Hint
+      </div>
+
+      <div class="hint-text">
+        {{ hintMessages[currentView] }}
+      </div>
+
+    </div>
+
+  </ng-container>
+
+
+      <!-- ================= MAIN IMAGE ================= -->
+      <ng-container *ngIf="images[currentView] as img">
+        <img
+          class="scene-image fade-image"
+          [class.unlock-fade]="isDoorUnlockAnimating"
+          [src]="img"
+          alt="scene"
+          (load)="imageLoaded = true"
+          (error)="imageLoaded = true">
+      </ng-container>
+
+      <!-- ================= FRONT & BACK ================= -->
+      <ng-container *ngIf="imageLoaded && (currentView === 'front' || currentView === 'back')">
+
+        <div
+          *ngIf="currentView === 'front'"
+          class="hotspot table-hotspot debug"
+          (click)="navigateTo('table')">
+        </div>
+
+        <div
+          *ngIf="currentView === 'front' || currentView === 'back'"
+          class="hotspot center-table debug"
+          (click)="navigateTo('centerTable')">
+        </div>
+
+        <ion-img
+          src="assets/images/reception-room/left-arrow.png"
+          class="nav-arrow left"
+          (click)="toggleRoom()">
+        </ion-img>
+
+        <ion-img
+          src="assets/images/reception-room/right-arrow.png"
+          class="nav-arrow right"
+          (click)="toggleRoom()">
+        </ion-img>
+
+        <!-- Decorative key-hole -->
+        <div *ngIf="currentView === 'front'" class="front-key-hole">
+          <img src="assets/images/reception-room/key-hole.png" />
+        </div>
+
+        <div
+          *ngIf="currentView === 'front'"
+          class="hotspot small-cupboard-hotspot debug"
+          (click)="navigateTo('smallCupboard')">
+        </div>
+
+        <!-- Lamp Hint -->
+        <div
+          *ngIf="currentView === 'front'"
+          class="lamp-hint-hotspot"
+          (click)="showTemporaryHint('The lamp is already on.', 'lamp')">
+        </div>
+
+        <!-- Under Table Hint -->
+        <div
+          *ngIf="currentView === 'front' || currentView === 'back'"
+          class="hotspot under-table debug"
+          (click)="showTemporaryHint('There’s nothing underneath.', 'underTable')">
+        </div>
+
+        <!-- Black Box on Cupboard (Puzzle 2) -->
+        <div
+          *ngIf="currentView === 'back'"
+          class="hotspot black-box debug"
+          (click)="enterBlackBox()">
+        </div>
+
+        <!-- Hollow Hexagon Item (Puzzle 3) -->
+       <!-- Torch Item (IN FRONT) -->
+        <div
+          *ngIf="currentView === 'back' && !collectedTorch"
+          class="hotspot torch-item"
+          (click)="collectTorch()">
+
+          <img
+            src="assets/images/reception-room/torch.png"
+            class="torch-img"
+            [class.fly]="animateTorch" />
+
+        </div>
+
+        <!-- Hexagon Item (BEHIND) -->
+        <div
+          *ngIf="currentView === 'back' && !collectedHexItem"
+          class="hotspot hexagon-item"
+          (click)="collectedTorch ? collectHexItem() : null">
+
+          <img
+            src="assets/images/reception-room/hexagon-item.png"
+            class="hex-item-img"
+            [class.fly]="animateHexItem"
+            [class.locked]="!collectedTorch" />
+
+        </div>
+
+        <!-- Blue Vessel Showpiece -->
+        <div
+          *ngIf="currentView === 'back'"
+          class="hotspot blue-vessel">
+
+          <img
+            src="assets/images/reception-room/blue-vessel.png"
+            class="blue-vessel-img" />
+
+        </div>
+
+        <!-- Right Side Table Hotspot (Back View) -->
+        <div
+          *ngIf="currentView === 'back'"
+          class="hotspot back-table debug"
+          (click)="navigateTo('sideTable')">
+        </div>
+
+        <!-- Trophy Hint -->
+        <!-- <div
+          *ngIf="currentView === 'back'"
+          class="trophy-hint-hotspot"
+          (click)="showTemporaryHint('Golden - Silver - Bronze', 'trophy')">
+        </div> -->
+
+        <!-- DOOR LETTER DROP ZONE (ONLY BACK VIEW) -->
+        <ng-container *ngIf="currentView === 'back'">
+
+          <div
+            *ngIf="!doorFullyUnlocked"
+            class="door-letter-zone"
+            (dragover)="allowDrop($event)"
+            (drop)="onDoorLetterDrop($event)"
+            (click)="onDoorClick()">
+
+            <span *ngIf="doorLetters.M" class="door-letter door-m">M</span>
+            <span *ngIf="doorLetters.A" class="door-letter door-a">A</span>
+            <span *ngIf="doorLetters.D" class="door-letter door-d">D</span>
+
+          </div>
+
+          <ng-container *ngIf="currentView === 'back'">
+                 <!-- CLICKABLE HOTSPOT -->
+                <div
+                  *ngIf="doorFullyUnlocked"
+                  class="door-enter-hotspot"
+                  (click)="goToOfficeBay()">
+                </div>
+          </ng-container>
+
+        </ng-container>
+
+      </ng-container>
+
+      <!-- ================= RECEPTION TABLE ================= -->
+      <ng-container *ngIf="currentView === 'table'">
+
+        <div class="hotspot pen-box debug" (click)="navigateTo('penBox')"></div>
+        <div class="hotspot laptop debug" (click)="navigateTo('laptop')"></div>
+        <div class="hotspot flower-vase debug" (click)="navigateTo('flowerVase')"></div>
+        <div class="hotspot telephone debug" (click)="navigateTo('telephone')"></div>
+
+        <ion-img
+          src="assets/images/reception-room/back-arrow.png"
+          class="back-arrow center"
+          (click)="goBack()">
+        </ion-img>
+
+      </ng-container>
+
+      <!-- ================= CENTER TABLE ================= -->
+      <ng-container *ngIf="currentView === 'centerTable'">
+
+        <div
+          class="hotspot remote debug"
+          (click)="navigateTo('remote')">
+        </div>
+
+        <ion-img
+          src="assets/images/reception-room/back-arrow.png"
+          class="back-arrow center"
+          (click)="goBack()">
+        </ion-img>
+
+      </ng-container>
+
+      <!-- ================= FLOWER VASE ================= -->
+      <ng-container *ngIf="currentView === 'flowerVase'">
+
+        <div
+          class="hotspot page-hotspot debug"
+          (click)="navigateTo('page')">
+        </div>
+
+        <ion-img
+          src="assets/images/reception-room/back-arrow.png"
+          class="back-arrow center"
+          (click)="goBack()">
+        </ion-img>
+
+      </ng-container>
+
+      <!-- ================= REMOTE (PUZZLE 1) ================= -->
+      <ng-container *ngIf="currentView === 'remote'">
+
+        <!-- Slanted Number Picker -->
+        <div class="remote-ui slant">
+          <div class="picker" *ngFor="let digit of code; let i = index">
+            <button (click)="changeDigit(i, 1)">▲</button>
+            <div class="digit">{{ digit }}</div>
+            <button (click)="changeDigit(i, -1)">▼</button>
+          </div>
+        </div>
+
+        <ion-img
+          src="assets/images/reception-room/back-arrow.png"
+          class="back-arrow center"
+          (click)="goBack()">
+        </ion-img>
+
+      </ng-container>
+
+      <!-- ================= M REMOTE (SUCCESS) ================= -->
+      <ng-container *ngIf="currentView === 'mRemote'">
+
+        <div
+          *ngIf="!collectedM"
+          class="letter-m"
+          [class.fly]="animateM"
+          (click)="collectM()">
+          M
+        </div>
+
+        <ion-img
+          src="assets/images/reception-room/back-arrow.png"
+          class="back-arrow center"
+          (click)="goBack()">
+        </ion-img>
+
+      </ng-container>
+
+      <!-- ================= SIMPLE DETAIL VIEWS ================= -->
+      <ng-container *ngIf="
+        currentView === 'penBox' ||
+        currentView === 'laptop' ||
+        currentView === 'telephone' ||
+        currentView === 'page'
+      ">
+
+        <ion-img
+          src="assets/images/reception-room/back-arrow.png"
+          class="back-arrow center"
+          (click)="goBack()">
+        </ion-img>
+
+      </ng-container>
+
+      <!-- ================= Laptop message ================= -->
+      <ng-container *ngIf="currentView === 'laptop'">
+        <div
+          class="laptop-hint-hotspot"
+          (click)="showTemporaryHint('The laptop won’t turn on.', 'laptop')">
+        </div>
+      </ng-container>
+
+      <!-- ================= Telephone message ================= -->
+      <ng-container *ngIf="currentView === 'telephone'">
+        <div
+          class="telephone-hint-hotspot"
+          (click)="showTemporaryHint('There’s no signal.', 'telephone')">
+        </div>
+      </ng-container>
+
+      <!-- ================= BLACK BOX (PUZZLE 2) ================= -->
+      <ng-container *ngIf="imageLoaded && currentView === 'blackBox'">
+
+        <div class="black-box-overlay" *ngIf="showHexPuzzle">
+
+          <!-- RED HEX -->
+          <div class="hex hex-red" (click)="cycleHex('red')">
+            <svg viewBox="0 0 100 100" class="hex-outline">
+              <polygon points="50,3 95,25 95,75 50,97 5,75 5,25"/>
+            </svg>
+            <div class="dot red"></div>
+            <ng-container *ngFor="let slot of getActiveSlots('red')">
+              <div class="rect left red"  [ngClass]="slot"></div>
+              <div class="rect right red" [ngClass]="slot"></div>
+            </ng-container>
+          </div>
+
+          <!-- BLUE HEX -->
+          <div class="hex hex-blue" (click)="cycleHex('blue')">
+            <svg viewBox="0 0 100 100" class="hex-outline">
+              <polygon points="50,3 95,25 95,75 50,97 5,75 5,25"/>
+            </svg>
+            <div class="dot blue"></div>
+            <ng-container *ngFor="let slot of getActiveSlots('blue')">
+              <div class="rect left blue"  [ngClass]="slot"></div>
+              <div class="rect right blue" [ngClass]="slot"></div>
+            </ng-container>
+          </div>
+
+          <!-- YELLOW HEX -->
+          <div class="hex hex-yellow" (click)="cycleHex('yellow')">
+            <svg viewBox="0 0 100 100" class="hex-outline">
+              <polygon points="50,3 95,25 95,75 50,97 5,75 5,25"/>
+            </svg>
+            <div class="dot yellow"></div>
+            <ng-container *ngFor="let slot of getActiveSlots('yellow')">
+              <div class="rect left yellow"  [ngClass]="slot"></div>
+              <div class="rect right yellow" [ngClass]="slot"></div>
+            </ng-container>
+          </div>
+
+        </div>
+
+        <!-- ================= LETTER A ================= -->
+        <div
+          *ngIf="showLetterA && !collectedA"
+          class="letter-a"
+          [class.fly]="animateA"
+          (click)="collectA()">
+          A
+        </div>
+
+
+        <ion-img
+          src="assets/images/reception-room/back-arrow.png"
+          class="back-arrow center"
+          (click)="goBack()">
+        </ion-img>
+
+      </ng-container>
+
+        <!-- ================= SIDE TABLE VIEW ================= -->
+        <ng-container *ngIf="imageLoaded && currentView === 'sideTable'">
+
+          <!-- Glass -->
+          <div class="glass-vessel debug" (click)="toggleGlassPuzzle()">
+
+            <img
+              src="assets/images/reception-room/glass.png"
+              class="glass-img" />
+
+            <!-- Light Key Inside -->
+            <img
+              *ngIf="!collectedKey"
+              src="assets/images/reception-room/key.png"
+              class="key-inside"
+              [class.rise]="animateKeyRise"
+              [class.unlocked]="keyUnlocked" 
+              [class.fly]="animateKeyFly"
+              (click)="handleKeyClick($event)" />
+
+          <!-- Roman Boxes -->
+          <div class="roman-box-container" *ngIf="showGlassPuzzle">
+
+            <div
+              class="roman-box"
+              *ngFor="let box of glassBoxes; let i = index"
+               (click)="cycleGlassBox(i); $event.stopPropagation()">
+              {{ glassBoxes[i] === -1 ? '?' : romanValues[glassBoxes[i]] }}
+            </div>
+
+          </div>
+          </div>
+
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goBack()">
+          </ion-img>
+
+        </ng-container>
+
+        <!-- ================= SMALL CUPBOARD ================= -->
+        <ng-container *ngIf="currentView === 'smallCupboard'">
+
+          <!-- Cupboard Locked Hint Hotspot -->
+          <div
+            class="cupboard-center-hint"
+            (click)="showTemporaryHint('The cupboard is locked.', 'cupboard')">
+          </div>
+
+          <div
+            class="cupboard-key-hole"
+            (click)="onKeyHoleClick($event)"
+            (dragover)="allowDrop($event)"
+            (drop)="onKeyDrop($event)">
+
+            <img src="assets/images/reception-room/key-hole.png" />
+
+          </div>
+
+          <!-- Opening Overlay Animation -->
+          <img
+            *ngIf="showOpenOverlay"
+            src="assets/images/reception-room/open-cupboardd.png"
+            class="cupboard-overlay" />
+
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goBack()">
+          </ion-img>
+
+        </ng-container>
+
+        <!-- ================= OPEN CUPBOARD ================= -->
+        <ng-container *ngIf="currentView === 'openCupboard'">
+
+          <!-- DROP ZONE -->
+          <div
+            class="hex-drop-zone"
+            (dragover)="allowDrop($event)"
+            (drop)="onHexDrop($event)"
+            (click)="onFilledHexClick()">
+
+            <!-- BEFORE PLACING -->
+            <img
+              *ngIf="!hexPlaced"
+              src="assets/images/reception-room/filled-hexagon.png"
+              class="filled-hex-img" 
+              style="pointer-events: none;" />
+
+            <!-- AFTER PLACING -->
+            <img
+              *ngIf="hexPlaced"
+              src="assets/images/reception-room/color-hexagon.png"
+              class="filled-hex-img fade-in" />
+
+            <!-- COLOR PUZZLE LAYER -->
+            <div *ngIf="hexPlaced && showColorPuzzle" class="color-layer">
+
+              <!-- TOP -->
+              <div
+                class="color-hex top"
+                [ngClass]="colorOptions[hexColorStates.top]"
+                (click)="cycleColor('top')">
+              </div>
+
+              <!-- BOTTOM -->
+              <div
+                class="color-hex bottom"
+                [ngClass]="colorOptions[hexColorStates.bottom]"
+                (click)="cycleColor('bottom')">
+              </div>
+
+              <!-- RIGHT -->
+              <div
+                class="color-hex right"
+                [ngClass]="colorOptions[hexColorStates.right]"
+                (click)="cycleColor('right')">
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- LETTER D -->
+          <div
+            *ngIf="showLetterD && !collectedD"
+            class="letter-d"
+            [class.fly]="animateD"
+            (click)="collectD()">
+            D
+          </div>
+
+          <ion-img
+            src="assets/images/reception-room/back-arrow.png"
+            class="back-arrow center"
+            (click)="goBack()">
+          </ion-img>
+
+        </ng-container>
+
+
+     </div>
+
+    </div>
+  </div>
+
+<!-- ================= LEVEL TRANSITION ================= -->
+
+<div
+  class="screen-fade"
+  [class.active]="isTransitioning">
+  <div class="transition-content">
+    <div class="transition-subtitle">
+      Entering
+    </div>
+    <div class="transition-title">
+      OFFICE BAY AREA
+    </div>
+    <div class="transition-line"></div>
+  </div>
+</div>
+
+<div *ngIf="isLoading" class="game-loader">
+  <div class="loader-content">
+    <div class="spinner"></div>
+    <div class="loader-text">
+      {{ loadingMessage }}
+    </div>
+  </div>
+</div>
+</ion-content>

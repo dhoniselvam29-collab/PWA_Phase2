@@ -1,0 +1,57 @@
+<ion-content class="start-bg">
+
+  <div class="overlay">
+
+   <div class="button-group">
+
+  <button class="game-btn start-btn" (click)="newGame()">
+    <span class="icon">▶</span>
+    <span class="text">START GAME</span>
+  </button>
+
+  <button class="game-btn continue-btn" (click)="resumeGame()">
+    <span class="icon">⏎</span>
+    <span class="text">CONTINUE</span>
+  </button>
+
+  </div>
+
+  </div>
+
+  <!-- TRANSITION SCREEN -->
+  <div
+    class="screen-fade"
+    [class.active]="showTransition">
+
+    <div class="transition-content">
+
+      <div class="transition-subtitle">
+        Entering
+      </div>
+
+      <div class="transition-title">
+        RECEPTION ROOM
+      </div>
+
+      <div class="transition-line"></div>
+
+    </div>
+
+  </div>
+
+  <div
+  *ngIf="showNoSavePopup"
+  class="custom-popup">
+  <div class="popup-box">
+    <div class="popup-message">
+      {{ popupMessage }}
+    </div>
+    <button
+      class="popup-btn"
+      (click)="showNoSavePopup = false">
+      OK
+    </button>
+  </div>
+  </div>
+
+</ion-content>

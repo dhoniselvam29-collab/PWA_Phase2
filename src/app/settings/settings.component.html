@@ -1,0 +1,265 @@
+<!-- =========================================================
+ SETTINGS POPUP
+========================================================= -->
+
+<div class="metal-popup">
+
+  <!-- HEADER -->
+  <div class="popup-header">
+
+    <div class="popup-title">
+      SETTINGS
+    </div>
+
+    <div
+      class="close-btn"
+      (click)="closeSettings()">
+
+      ✕
+
+    </div>
+
+  </div>
+
+  <!-- BODY -->
+  <div class="popup-body">
+
+    <!-- LEFT MENU -->
+    <!-- LEFT MENU -->
+<div class="left-menu">
+
+  <div
+    class="menu-item"
+    [class.active]="selectedOption === 'player'"
+    (click)="selectedOption = 'player'">
+
+    <ion-icon name="person"></ion-icon>
+    <span>PLAYER INFO</span>
+
+  </div>
+
+  <div
+    class="menu-item"
+    [class.active]="selectedOption === 'sound'"
+    (click)="selectedOption = 'sound'">
+
+    <ion-icon name="volume-high"></ion-icon>
+    <span>SOUND</span>
+
+  </div>
+
+
+  <div
+    class="menu-item"
+    [class.active]="selectedOption === 'achievements'"
+    (click)="selectedOption = 'achievements'">
+
+    <ion-icon name="trophy"></ion-icon>
+    <span>ACHIEVEMENTS</span>
+
+  </div>
+
+  <div
+    class="menu-item logout-item"
+    [class.active]="selectedOption === 'logout'"
+    (click)="selectedOption = 'logout'">
+
+    <ion-icon name="log-out"></ion-icon>
+    <span>LOGOUT</span>
+
+  </div>
+
+</div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="right-content">
+
+      <!-- PLAYER -->
+      <div *ngIf="selectedOption === 'player'">
+
+        <div class="player-header">
+
+          <div class="player-avatar">
+            {{ playerAvatar }}
+          </div>
+        
+          <div class="section-title">
+            {{ playerName | uppercase }}
+          </div>
+        
+        </div>
+
+        <p class="description">
+          Escape the abandoned office by solving hidden puzzles,
+          unlocking confidential files and surviving every floor.
+        </p>
+
+        <!-- <div class="info-row">
+
+          <div class="info-box">
+            <div class="label">
+              LEVEL
+            </div>
+
+            <div class="value">
+              {{ currentLevel }}
+            </div>
+          </div>
+
+          <div class="info-box">
+            <div class="label">
+              ID
+            </div>
+
+            <div class="value">
+              {{ playerId }}
+            </div>
+          </div>
+
+        </div> -->
+
+        <!-- PROGRESS BAR -->
+        <div class="progress-wrapper">
+
+          <div class="progress-bar">
+            <div
+  class="progress-fill"
+  [style.width.%]="progressPercentage">
+</div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- SOUND -->
+      <!-- SOUND -->
+<div *ngIf="selectedOption === 'sound'">
+
+  <div class="section-title">
+    SOUND SETTINGS
+  </div>
+
+  <div class="toggle-card">
+
+    <div class="toggle-row">
+
+      <div class="toggle-label">
+        SOUND EFFECTS
+      </div>
+
+      <ion-toggle
+  [checked]="soundEnabled"
+  (ionChange)="toggleSound($event)">
+</ion-toggle>
+
+    </div>
+
+  </div>
+
+</div>
+
+      <!-- PROGRESS -->
+      <div *ngIf="selectedOption === 'progress'">
+
+        <div class="section-title">
+          GAME PROGRESS
+        </div>
+
+        <div class="progress-item completed">
+          ✓ HR Department Escaped
+        </div>
+
+        <div class="progress-item completed">
+          ✓ Meeting Room Completed
+        </div>
+
+        <div class="progress-item active">
+          ▶ Find Security Keycard
+        </div>
+
+        <div class="progress-item pending">
+          ○ Reach Floor 4
+        </div>
+
+      </div>
+
+      <!-- ACHIEVEMENTS -->
+      <div *ngIf="selectedOption === 'achievements'">
+
+        <div class="section-title">
+          ACHIEVEMENTS
+        </div>
+
+        <div class="achievement-list">
+
+          <div
+            class="achievement-box"
+            [class.completed]="receptionCompleted">
+        
+            🏆 Reception Area
+        
+          </div>
+        
+          <div
+            class="achievement-box"
+            [class.completed]="bayAreaCompleted">
+        
+            🏆 Office Bay Area
+        
+          </div>
+        
+          <div
+            class="achievement-box"
+            [class.completed]="hrAreaCompleted">
+        
+            🏆 HR Area
+        
+          </div>
+        
+        </div>
+
+      </div>
+
+      <!-- LOGOUT -->
+<div *ngIf="selectedOption === 'logout'" class="logout-section">
+
+  <div class="logout-card">
+
+    <div class="warning-icon">
+      ⚠
+    </div>
+
+    <div class="logout-message">
+      Are you sure you want to logout from the game?
+    </div>
+
+    <div class="logout-subtext">
+      Your progress has been saved. You can continue your escape journey later.
+    </div>
+
+    <div class="logout-actions">
+
+      <button
+        class="logout-confirm-btn"
+        (click)="confirmLogout()">
+        YES
+      </button>
+
+      <button
+        class="logout-cancel-btn"
+        (click)="cancelLogout()">
+        NO
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+    </div>
+
+  </div>
+
+</div>

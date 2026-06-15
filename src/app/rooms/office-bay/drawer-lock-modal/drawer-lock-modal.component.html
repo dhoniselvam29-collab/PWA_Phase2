@@ -1,0 +1,38 @@
+<ion-content class="lock-wrapper">
+
+  <button class="close-btn" (click)="close()">✖</button>
+
+  <div class="panel" [class.shake]="wrongAttempt">
+
+    <div class="boxes">
+
+      <div class="box red"
+           (click)="cycle('red')">
+        {{ lockValues.red }}
+      </div>
+
+      <div class="box yellow"
+           (click)="cycle('yellow')">
+        {{ lockValues.yellow }}
+      </div>
+
+      <div class="box green"
+           (click)="cycle('green')">
+        {{ lockValues.green }}
+      </div>
+
+      <div class="box blue"
+           (click)="cycle('blue')">
+        {{ lockValues.blue }}
+      </div>
+
+    </div>
+
+    <button class="ok-btn"
+            (click)="checkCode()">
+      OK
+    </button>
+
+  </div>
+
+</ion-content>

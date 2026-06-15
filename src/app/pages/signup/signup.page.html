@@ -1,0 +1,260 @@
+<ion-content class="auth-content" [fullscreen]="true">
+
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="auth-wrapper">
+
+    <!-- Back Button -->
+    <div
+      class="back-btn"
+      (click)="goToLogin()">
+
+      <ion-icon
+        name="arrow-back-outline">
+      </ion-icon>
+
+      <span>Back to Login</span>
+
+    </div>
+
+    <!-- Header -->
+    <div class="game-header">
+
+      <!-- <div class="logo-icon">
+        <ion-icon
+          name="game-controller">
+        </ion-icon>
+      </div> -->
+
+      <!-- <h1 class="game-title">
+        MAD
+        <span class="title-accent">
+          EYE
+        </span>
+      </h1>
+
+      <p class="game-subtitle">
+        Solve. Escape. Survive.
+      </p> -->
+
+    </div>
+
+    <!-- Card -->
+    <div class="auth-card">
+
+      <div class="card-glow"></div>
+
+      <h2 class="card-title">
+        Join the Arena
+      </h2>
+
+      <p class="card-sub">
+        Create your account to start playing
+      </p>
+
+      <form
+        [formGroup]="signupForm"
+        (ngSubmit)="onSignup()">
+
+        <!-- Username -->
+        <div
+        class="input-group"
+        [class.error]="
+          isFieldInvalid('username')
+          || usernameExists
+        ">
+
+          <label class="input-label">
+            Username
+          </label>
+
+          <div class="input-wrapper">
+
+            <ion-icon
+              name="person-outline"
+              class="input-icon">
+            </ion-icon>
+
+            <input
+            class="custom-input"
+            type="text"
+            placeholder="Choose unique username"
+            formControlName="username"
+            (input)="onUsernameChange()"
+          />
+
+          </div>
+
+          <span
+            class="error-msg"
+            *ngIf="isFieldInvalid('username')">
+
+            <ion-icon
+              name="alert-circle-outline">
+            </ion-icon>
+
+            Username must contain
+            at least 3 characters
+
+          </span>
+
+          <span
+  class="error-msg"
+  *ngIf="usernameExists">
+
+  <ion-icon
+    name="alert-circle-outline">
+  </ion-icon>
+
+  Username already exists.
+  Please choose another username.
+
+</span>
+
+        </div>
+
+        <!-- Password -->
+        <div
+          class="input-group"
+          [class.error]="isFieldInvalid('password')">
+
+          <label class="input-label">
+            Password
+          </label>
+
+          <div class="input-wrapper">
+
+            <ion-icon
+              name="lock-closed-outline"
+              class="input-icon">
+            </ion-icon>
+
+            <input
+            class="custom-input"
+            [type]="showPassword ? 'text' : 'password'"
+            placeholder="Enter password"
+            formControlName="password"
+          />
+
+          <ion-icon
+            class="password-toggle"
+            [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+            (click)="togglePassword()">
+          </ion-icon>
+
+          </div>
+
+          <span
+            class="error-msg"
+            *ngIf="isFieldInvalid('password')">
+
+            <ion-icon
+              name="alert-circle-outline">
+            </ion-icon>
+
+            Password must be
+            at least 4 characters
+
+          </span>
+
+        </div>
+
+        <!-- Avatar Picker -->
+        <div class="avatar-section">
+
+          <label class="input-label">
+            Pick Your Avatar
+          </label>
+
+          <div class="avatar-row">
+
+            <div
+              class="avatar-item"
+              *ngFor="
+                let av of avatars;
+                let i = index
+              "
+              [class.selected]="selectedAvatar === i"
+              (click)="selectAvatar(i)">
+
+              <span>{{ av }}</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div
+        class="success-msg"
+        *ngIf="accountCreated">
+
+        <ion-icon
+          name="checkmark-circle">
+        </ion-icon>
+
+        Account created successfully!
+
+
+      </div>
+
+        <!-- Signup Button -->
+        <button
+          class="btn-primary"
+          type="submit"
+          [disabled]="isLoading">
+
+          <span *ngIf="!isLoading">
+
+            <ion-icon
+              name="rocket-outline">
+            </ion-icon>
+
+            Create Account
+
+          </span>
+
+          <ion-spinner
+            *ngIf="isLoading"
+            name="crescent">
+          </ion-spinner>
+
+        </button>
+
+      </form>
+
+      <!-- Login Link -->
+      <p class="switch-auth">
+
+        Already a player?
+
+        <a
+          (click)="goToLogin()"
+          class="link-accent">
+
+          Sign In
+
+        </a>
+
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="video-overlay" *ngIf="showIntroVideo">
+  <video
+    #introVideo
+    autoplay
+    playsinline
+    (ended)="onVideoEnded()">
+
+    <source src="../../../assets/MAD-Intro_Compressed.mp4" type="video/mp4">
+  </video>
+</div>
+</ion-content>

@@ -1,0 +1,198 @@
+.start-bg {
+  --background: url('../../assets/images/common/start-screen.png')
+    no-repeat center center / cover;
+  background-color: lightgrey;
+  height: 100%;
+}
+
+/* ===========================
+   OVERLAY
+=========================== */
+
+.overlay {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 22%;
+}
+
+/* ===========================
+   BUTTON GROUP
+=========================== */
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.game-btn {
+  width: 430px;
+  height: 82px;
+  display: flex;
+  align-items: center;
+  border-radius: 14px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s ease;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  // background: linear-gradient(
+  //   180deg,
+  //   #f5f6f8,
+  //   #dde2e8
+  // );
+  color: #20344b;
+  border: 2px solid #c8cfd7;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* HOVER */
+
+.game-btn:hover {
+  background: linear-gradient(
+    180deg,
+    #22497c,
+    #142c49
+  );
+  color: #ffffff;
+  border-color: #caced3;
+  box-shadow:
+    0 0 20px rgba(36, 49, 61, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
+}
+
+/* ICON */
+
+.game-btn .icon {
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  flex-shrink: 0;
+  transition: color 0.25s ease;
+}
+
+.game-btn:hover .icon {
+  color: #ffffff;
+}
+
+/* TEXT */
+
+.game-btn .text {
+  flex: 1;
+  text-align: center;
+  margin-right: 70px;
+}
+
+/* CLICK */
+
+.game-btn:active {
+  transform: scale(0.97);
+}
+
+/* ===========================
+   TRANSITION SCREEN
+=========================== */
+
+.screen-fade {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at center,
+      #1c2738 0%,
+      #0d1117 55%,
+      #000000 100%
+    );
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+
+  z-index: 99999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.screen-fade.active {
+  opacity: 1;
+}
+
+.transition-content {
+  text-align: center;
+}
+
+.transition-subtitle {
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.4em;
+  margin-bottom: 1rem;
+}
+
+.transition-title {
+  color: white;
+  font-size: clamp(40px, 5vw, 80px);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+}
+
+.transition-line {
+  width: 280px;
+  height: 3px;
+  margin: 1.5rem auto 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #8ab4ff,
+    transparent
+  );
+}
+
+/* ===========================
+   No saved game popup
+=========================== */
+.custom-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+}
+
+.popup-box {
+  width: 280px;
+  background: #1a2230;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+}
+
+.popup-message {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.popup-btn {
+  background: #8ab4ff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}

@@ -1,0 +1,15 @@
+// For information on how to create your own theme, please refer to:
+// https://ionicframework.com/docs/theming/
+
+:root {
+    --ion-font-family: 'Blinker';
+  }
+
+@font-face {
+    font-family: 'Blinker';
+    src: url('../assets/fonts/Blinker/Blinker/Blinker-Regular.ttf');
+}
+   @font-face {
+    font-family: 'HackbotFreeTrial';
+    src: url('../../src/assets/fonts/HackbotFreeTrial.otf');
+  }

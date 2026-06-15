@@ -1,0 +1,974 @@
+<link
+href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
+rel="stylesheet"
+/>
+<div
+  class="instruction-box"
+  *ngIf="showInstructionBox"
+  [class.fade-out]="instructionFadingOut">
+
+  {{ instructionMessage }}
+
+</div>
+@if (isFlickering) {
+  <div class="power-flicker"></div>
+}
+@if (isPowerRestoring) {
+  <div class="power-restore"></div>
+}
+<div
+class="scene-container"
+(dragover)="allowDrop($event)"
+(drop)="onTorchSceneDrop($event)">
+
+<div
+  class="settings-menu-btn"
+  (click)="toggleSettings()">
+
+  <img
+    src="assets/images/hr-room/settingsmenu.png"
+    alt="settings">
+
+</div>
+
+<div
+  class="settings-overlay"
+  *ngIf="showSettings">
+
+  <div
+    class="settings-backdrop"
+    (click)="toggleSettings()">
+  </div>
+
+  <app-settings
+    *ngIf="showSettings"
+    (closePopup)="showSettings = false">
+  </app-settings>
+
+</div>
+
+<img
+[src]="getSceneImage()"
+class="scene-image"
+/>
+
+  <!-- HOTSPOTS FOR CUPBOARD VIEW -->
+  @if (currentAngle.name === 'cupboardView') {
+
+    <div
+      class="hotspot-lock"
+      (click)="openPuzzle()">
+    </div>
+
+    <div
+      class="hotspot-bookshelf"
+      (click)="openBookshelfZoom()">
+    </div>
+
+          <!--  Eraser Shelf Hotspot -->
+<div
+class="hotspot-eraser-shelf"
+(click)="openEraserZoom()">
+</div>
+
+
+<!-- Envelope hotspot should be available in dark mode also -->
+@if (!hasEnvelope) {
+  <div
+  class="hotspot-envelope"
+  (click)=" openEnvelope()">
+</div>
+}
+
+<!-- electrical panel -->
+
+@if (panelRevealed) {
+<div
+  class="hotspot-electrical-panel"
+  (click)="openElectricalPanel()">
+</div>
+}
+
+  }
+
+
+
+  <!-- HOTSPOT FOR LAPTOP VIEW -->
+  @if (currentAngle.name === 'hrDoor') {
+    <div
+      class="hotspot-laptop"
+      (click)="openLaptopZoom()">
+    </div>
+
+
+    <div
+      class="hotspot-drawer"
+      (click)="openDrawerZoom()">
+    </div>
+
+
+
+    <div
+class="hotspot-hr-door"
+(click)="openHrDoorZoom()">
+</div>
+  }
+
+  <!-- NAVIGATION -->
+  <button
+    class="nav-btn left"
+    (click)="goPrev()">
+
+  </button>
+
+  <button
+    class="nav-btn right"
+    (click)="goNext()">
+
+  </button>
+
+</div>
+
+<!-- BOOKSHELF ZOOM -->
+@if (isBookshelfZoomOpen) {
+  <div class="zoom-overlay">
+
+    <div class="cupboard-wrapper">
+
+      <img
+      [src]="
+        isGlassUnlocked
+          ? 'assets/level2/bookshelf-open.png'
+          : isCupboardPuzzleSolved
+            ? 'assets/level2/bookshelf-glass.png'
+            : 'assets/level2/bookshelf-zoom.png'
+      "
+      class="zoom-image"
+    />
+
+    @if (isGlassUnlocked) {
+
+        @for (card of cards; track card.id) {
+
+          @if (!inventory.includes(card.id)) {
+
+            <div
+              class="hotspot-card"
+              [style.top.%]="card.top"
+              [style.left.%]="card.left"
+              (click)="collectCard(card.id)">
+            </div>
+
+          }
+
+        }
+
+      }
+
+    </div>
+
+    @if (!isCupboardPuzzleSolved) {
+      <!-- FIRST LOCK -->
+      <div
+        class="hotspot-bookshelf2"
+        (click)="openPuzzle()">
+      </div>
+    }
+
+    @if (isCupboardPuzzleSolved && !isGlassUnlocked) {
+      <!-- SECOND LOCK (GLASS PANEL) -->
+      <div
+        class="hotspot-glass-panel"
+        (click)="openGlassPanelFlow()">
+      </div>
+    }
+
+    <button
+      class="close-btn"
+      (click)="closeBookshelfZoom()">
+
+    </button>
+
+  </div>
+}
+
+<!-- LAPTOP ZOOM -->
+@if (isLaptopZoomOpen) {
+  <div class="zoom-overlay laptop-wrapper">
+
+    <!-- <div
+    class="hotspot-laptop-hint"
+    (click)="showTemporaryHint('Admin laptop.')">
+  </div> -->
+
+  <div
+  class="laptop-drop-zone"
+  (click)="showTemporaryHint('Admin laptop.')"
+  (dragover)="allowDrop($event)"
+  (drop)="onDrop($event)">
+
+      <!-- <img
+        [src]="hasChargerConnected
+          ? 'assets/level2/charger-connect.png'
+          : 'assets/level2/laptop-zoom.png'"
+        class="zoom-image" /> -->
+        <img
+  [src]="hasChargerConnected
+    ? 'assets/level2/charger-connect.png'
+    : 'assets/level2/laptop-zoom.png'"
+>
+@if (hasChargerConnected) {
+
+  <div
+    class="hotspot-laptop-screen"
+    (click)="openLaptopLogin()">
+  </div>
+
+}
+
+      <!-- Screen Area -->
+      <div class="laptop-screen-area">
+
+        @if (!hasChargerConnected) {
+          <div class="screen-content off">
+            <div class="battery-overlay">
+              <div class="battery-popup">
+                <h2>Connect Charger.</h2>
+                <p>Please connect the charger to power on the laptop.</p>
+                <!-- <button class="close-btn">Close</button> -->
+              </div>
+            </div>
+          </div>
+        }
+
+        @if (hasChargerConnected) {
+          <div class="screen-content on">
+
+            @if (laptopBooting) {
+              <div class="windows-loading">
+                <div class="spinner"></div>
+                <h2 class="welcome">Welcome</h2>
+              </div>
+            }
+
+          </div>
+        }
+
+      </div>
+
+    </div>
+
+    <button
+      class="close-btn"
+      (click)="closeLaptopZoom()">
+
+    </button>
+
+  </div>
+}
+
+<!-- FULL SCREEN OS OVERLAY -->
+@if (bootStage === 'login' || bootStage === 'desktop') {
+<div class="os-overlay">
+
+  @if (bootStage === 'login') {
+    <div class="windows-login-full">
+
+      <!-- 🔙 Back Button -->
+      <button class="login-back-btn" (click)="exitOS()">← Back</button>
+
+      <h2 class="username">Admin (john)</h2>
+
+      <div class="password-wrapper">
+
+        <input
+          [type]="showLaptopPassword ? 'text' : 'password'"
+          [(ngModel)]="passwordInput"
+          placeholder="Enter Password" />
+
+        <ion-icon
+          class="password-toggle"
+          [name]="
+            showLaptopPassword
+              ? 'eye-off-outline'
+              : 'eye-outline'
+          "
+          (click)="toggleLaptopPassword()">
+        </ion-icon>
+
+      </div>
+
+      <div
+  class="login-error"
+  *ngIf="loginError">
+
+  <ion-icon
+    name="alert-circle-outline">
+  </ion-icon>
+
+  Incorrect password
+
+</div>
+
+      <button (click)="checkPassword()">Login</button>
+
+    </div>
+  }
+  @if (bootStage === 'desktop') {
+    <div class="windows-desktop-full">
+    <!-- Invisible Hotspot -->
+  <div
+  class="desktop-hotspot"
+  (click)="openExcel()">
+</div>
+
+
+<!-- Dummy File 1 -->
+<div
+  class="desktop-hotspot-report"
+  (click)="openReportFile()">
+</div>
+
+<!-- Dummy File 2 -->
+<div
+  class="desktop-hotspot-finance"
+  (click)="openFinanceFile()">
+</div>
+
+  <!--  Log Off Button -->
+  <button class="logoff-btn" (click)="logOff()">
+    Log off
+  </button>
+    </div>
+  }
+
+</div>
+}
+@if (isExcelOpen) {
+<div class="excel-overlay">
+
+  <div class="excel-window">
+
+    <!-- Header -->
+    <div class="excel-header">
+      <div class="excel-title">
+        <span class="excel-icon">📊</span>
+        AccessCardData.xlsx
+      </div>
+
+      <div class="excel-controls">
+        <button class="close-btn-excel" (click)="closeExcel()">✖</button>
+      </div>
+    </div>
+
+    <!-- Fake Toolbar -->
+    <div class="excel-toolbar">
+      <span>File</span>
+      <span>Home</span>
+      <span>Insert</span>
+      <span>Data</span>
+      <span>Review</span>
+    </div>
+
+    <!-- Sheet -->
+    <div class="excel-sheet">
+      <table>
+        <thead>
+          <tr>
+            <th>Cabin Door</th>
+            <th>Access Code</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Admin Block</td>
+            <td>ADM2</td>
+          </tr>
+          <tr>
+            <td>Finance Room</td>
+            <td>FNC5</td>
+          </tr>
+          <tr>
+            <td>Server Room</td>
+            <td>SRV1</td>
+          </tr>
+          <tr>
+            <td>HR Cabin</td>
+            <td>{{ hrCabinCode }}</td>
+          </tr>
+          <tr>
+            <td>Meeting Room A</td>
+            <td>MTA4</td>
+          </tr>
+          <tr>
+            <td>Meeting Room B</td>
+            <td>MTB6</td>
+          </tr>
+          <tr>
+            <td>Security Office</td>
+            <td>SEC9</td>
+          </tr>
+          <tr>
+            <td>Director Cabin</td>
+            <td>DIR7</td>
+          </tr>
+          <tr>
+            <td>Storage Room</td>
+            <td>STR2</td>
+          </tr>
+          <tr>
+            <td>IT Support</td>
+            <td>ITS8</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+}
+
+@if (isReportFileOpen) {
+
+  <div class="excel-overlay">
+
+    <div class="excel-window2">
+
+      <img
+        src="assets/level2/report-file.png"
+        class="excel-image">
+
+      <button
+        class="close-btn-excel2"
+        (click)="closeReportFile()">
+        ✖
+      </button>
+
+    </div>
+
+  </div>
+
+  }
+
+  @if (isFinanceFileOpen) {
+
+    <div class="excel-overlay">
+
+      <div class="excel-window2">
+
+        <img
+          src="assets/level2/finance-file.png"
+          class="excel-image">
+
+        <button
+          class="close-btn-excel2"
+          (click)="closeFinanceFile()">
+          ✖
+        </button>
+
+      </div>
+
+    </div>
+
+    }
+
+
+
+<!--  DRAWER -->
+@if (isDrawerZoomOpen) {
+
+<div class="zoom-overlay">
+
+
+  @if (!isDrawerUnlocked) {
+
+
+      <img
+        src="assets/level2/drawer-zoom.png"
+        class="zoom-image" />
+
+
+
+      <div
+        class="hotspot-drawer-hint"
+        (click)="showTemporaryHint('The drawer is locked.')">
+      </div>
+
+
+    <div
+      class="hotspot-drawer-lock"
+      (click)="openDrawerLock()">
+    </div>
+
+  }
+
+  @if (isDrawerUnlocked) {
+
+
+    <!-- STEP 1: BOTH AVAILABLE -->
+    @if (!chargerCollectedInDrawer && !idCardCollectedInDrawer) {
+      <img src="assets/level2/drawer-both.png" class="zoom-image" />
+
+      <div class="hotspot-charger" (click)="collectCharger()"></div>
+      <div class="hotspot-id-card" (click)="collectIdCard()"></div>
+    }
+
+    <!-- STEP 2A: Charger taken first -->
+    @if (chargerCollectedInDrawer && !idCardCollectedInDrawer) {
+      <img src="assets/level2/drawer-idcard-only.png" class="zoom-image" />
+
+      <div class="hotspot-id-card" (click)="collectIdCard()"></div>
+    }
+
+    <!-- STEP 2B: ID card taken first -->
+    @if (idCardCollectedInDrawer && !chargerCollectedInDrawer) {
+      <img src="assets/level2/drawer-charger-only.png" class="zoom-image" />
+
+      <div class="hotspot-charger" (click)="collectCharger()"></div>
+    }
+
+    <!-- STEP 3: BOTH COLLECTED -->
+    @if (chargerCollectedInDrawer && idCardCollectedInDrawer) {
+      <img src="assets/level2/drawer-empty.png" class="zoom-image" />
+    }
+
+  }
+
+  <!-- CLOSE BUTTON -->
+  <button
+    class="close-btn"
+    (click)="closeDrawerZoom()">
+
+  </button>
+
+</div>
+}
+@if (inventory.length > 0) {
+  <div class="inventory-panel">
+
+
+
+    @for (item of inventory; track item) {
+
+      <div
+        class="inventory-item"
+        draggable="true"
+        (dragstart)="onDragStart($event, item)"
+        (click)="onInventoryItemClick(item)">
+
+        <img
+        [src]="
+          item === 'charger' ? 'assets/level2/charger.png' :
+          item === 'eraser' ? 'assets/level2/eraser.png' :
+          item === 'torch' ? 'assets/level2/torch.png' :
+          item === 'envelope' ? 'assets/level2/envelope.png' :
+          item === 'id-card' ? 'assets/level2/id-card.png' :
+          'assets/level2/access-card.png'
+        "
+      />
+
+      @if (
+        item !== 'charger' &&
+        item !== 'eraser' &&
+        item !== 'torch' &&
+        item !== 'envelope' &&
+        item !== 'id-card'
+      ) {
+        <div class="card-label">{{ item }}</div>
+      }
+
+      </div>
+
+    }
+
+  </div>
+}
+
+@if (currentAngle.name === 'centerView') {
+
+  <!-- Desk -->
+  <div
+    class="hotspot-desk"
+    (click)="openDeskZoom()">
+  </div>
+
+  <!-- Torch -->
+  @if (!hasTorch) {
+    <div
+      class="hotspot-torch"
+      (click)="openTorchZoom()">
+    </div>
+  }
+
+
+
+
+}
+
+
+
+@if (isDeskZoomOpen) {
+  <div class="zoom-overlay desk-wrapper">
+
+    <div class="desk-container">
+
+      <img
+        src="assets/level2/desk-zoom.png"
+        class="zoom-image" />
+
+<div
+class="hotspot-desk-hint"
+(click)="showTemporaryHint('Erase to reveal.')">
+</div>
+
+      <!-- Password -->
+      <!-- <div class="password-text">
+        john_AX09
+      </div> -->
+      <div class="password-text">
+        {{ dynamicPassword }}
+      </div>
+
+      <!-- Scribble Layer -->
+      <canvas
+#eraseCanvas
+class="scribble-canvas"
+(dragover)="allowDrop($event)"
+(drop)="onEraserDrop($event)">
+</canvas>
+
+    </div>
+
+    <button
+      class="close-btn"
+      (click)="closeDeskZoom()">
+
+    </button>
+
+  </div>
+}
+
+@if (isEraserZoomOpen) {
+  <div class="zoom-overlay">
+
+    <img
+      [src]="
+        hasEraser
+          ? 'assets/level2/eraser-shelf-empty.png'
+          : 'assets/level2/eraser-zoom.png'
+      "
+      class="zoom-image" />
+
+    @if (!hasEraser) {
+      <div
+        class="hotspot-eraser"
+        (click)="collectEraser()">
+      </div>
+    }
+
+    <button
+      class="close-btn"
+      (click)="closeEraserZoom()">
+    </button>
+
+  </div>
+}
+
+<!-- @if (isTorchZoomOpen) {
+  <div class="zoom-overlay">
+
+    <img
+      src="assets/level2/torch-zoom.png"
+      class="zoom-image" />
+
+    @if (!hasTorch) {
+      <div
+        class="hotspot-torch-pick"
+        (click)="collectTorch()">
+      </div>
+    }
+
+    <button
+      class="close-btn"
+      (click)="closeTorchZoom()">
+      ✖
+    </button>
+
+  </div>
+} -->
+
+
+@if (isHrDoorZoomOpen) {
+  <div class="zoom-overlay">
+
+    <img
+    [src]="isHrDoorUnlocked
+      ? 'assets/level2/hr-door-open.png'
+      : 'assets/level2/hr-door-zoom.png'"
+    class="zoom-image" />
+
+@if (!isHrDoorUnlocked) {
+
+  <div
+    class="hotspot-hr-door-hint"
+    (click)="showTemporaryHint('The HR door is locked.')">
+  </div>
+
+}
+
+@if (isHrDoorUnlocked) {
+
+  <div
+    class="hr-room-enter-hotspot"
+    (click)="goToHrRoom()">
+  </div>
+
+}
+
+    <!-- Access Machine Hotspot -->
+    <div
+      class="hotspot-access-machine"
+      (click)="openAccessMachineZoom()">
+    </div>
+
+    <button
+      class="close-btn"
+      (click)="closeHrDoorZoom()">
+
+    </button>
+
+  </div>
+}
+@if (isAccessMachineZoomOpen) {
+  <div class="zoom-overlay">
+
+    <div
+      class="access-machine-wrapper"
+      (dragover)="allowDrop($event)"
+      (drop)="onAccessCardDrop($event)"
+    >
+
+      <img
+        src="assets/level2/access-machine-zoom.png"
+        class="zoom-image" />
+
+        @if (accessStatus === 'granted') {
+          <div class="access-result success">
+            ACCESS GRANTED
+          </div>
+        }
+
+        @if (accessStatus === 'denied') {
+          <div class="access-result denied">
+            ACCESS DENIED
+          </div>
+        }
+
+    </div>
+
+    <button
+      class="close-btn"
+      (click)="closeAccessMachineZoom()">
+
+    </button>
+
+  </div>
+}
+@if (isElectricalPanelOpen) {
+
+  <div class="zoom-overlay">
+
+    <div class="panel-wrapper">
+
+      <!-- Background Panel Image -->
+      <img
+        src="assets/level2/electrical-panel-zoom.png"
+        class="zoom-image"
+      />
+
+      <!-- SWITCH 1 -->
+      <div
+        class="panel-switch switch1"
+        [style.transform]="'rotate(' + switch1Angle + 'deg)'"
+        (click)="rotateSwitch(1)"
+        style="top: 70%; left: 10%;">
+      </div>
+
+      <!-- SWITCH 2 -->
+      <div
+        class="panel-switch switch2"
+        [style.transform]="'rotate(' + switch2Angle + 'deg)'"
+        (click)="rotateSwitch(2)"
+        style="top: 70%; left: 35%;">
+      </div>
+
+      <!-- SWITCH 3 -->
+      <div
+        class="panel-switch switch3"
+        [style.transform]="'rotate(' + switch3Angle + 'deg)'"
+        (click)="rotateSwitch(3)"
+        style="top: 70%; left: 63%;">
+      </div>
+
+    </div>
+
+    <button
+      class="close-btn"
+      (click)="closeElectricalPanel()">
+
+    </button>
+
+  </div>
+
+}
+@if (isEnvelopeZoomOpen) {
+
+  <div class="zoom-overlay">
+
+    <!-- STEP 1: OPEN ENVELOPE -->
+    @if (envelopeStep === 'open') {
+      <div class="envelope-container" (click)="openEnvelopeStep()">
+
+        <img
+          src="assets/level2/envelope-closed.png"
+          class="envelope-img"
+        />
+
+        <!-- <p class="hint-text">
+          Open the envelope...
+        </p> -->
+
+      </div>
+    }
+
+    <!-- STEP 2: SHOW CLUE -->
+    @if (envelopeStep === 'clue') {
+      <div class="envelope-container" (click)="openEnvelopeStep()">
+
+        <img
+          src="assets/level2/envelope-clue.png"
+          class="postcard-img"
+        />
+
+      </div>
+    }
+
+    <button class="close-btn" (click)="closeEnvelope()"></button>
+
+  </div>
+
+}
+
+  <!-- glassdoor panel -->
+  <div *ngIf="isPanelOpen" class="panel-overlay">
+
+    <div class="frame-wrapper">
+
+      <!-- FRAME IMAGE -->
+      <img src="assets/level2/frame.png" class="frame-bg" />
+
+      <!-- CONTENT INSIDE FRAME -->
+      <div class="panel-box">
+
+        <h2>Access Control System</h2>
+
+        <label>Select Door</label>
+        <select [(ngModel)]="selectedDoor">
+          <option value="">-- Select --</option>
+          <option value="HR">HR Cabin</option>
+          <option value="FINANCE">Finance Room</option>
+          <option value="SERVER">Server Room</option>
+          <option value="ADMIN">Admin Block</option>
+          <option value="MTA">Meeting Room A</option>
+          <option value="MTB">Meeting Room B</option>
+          <option value="SEC">Security Office</option>
+          <option value="DIR">Director Cabin</option>
+          <option value="STR">Storage Room</option>
+          <option value="ITS">IT Support</option>
+        </select>
+
+        <label>Enter Code</label>
+        <input [(ngModel)]="enteredCode" placeholder="Enter Access Code" />
+
+        <div *ngIf="generatedCard" class="panel-result">
+          Access Card No: {{ generatedCard }}
+        </div>
+
+        <div class="panel-actions">
+          <button (click)="submitPanel()">Submit</button>
+          <button (click)="closePanel()">Cancel</button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+<div
+  class="screen-fade"
+  [class.active]="showTransition">
+  <div class="transition-content">
+    <div class="transition-subtitle">
+      Entering
+    </div>
+    <div class="transition-title">
+      HR ROOM
+    </div>
+    <div class="transition-line"></div>
+  </div>
+
+  <div *ngIf="isLoading" class="game-loader">
+  <div class="loader-content">
+    <div class="spinner"></div>
+    <div class="loader-text">
+      {{ loadingMessage }}
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- HINT SYSTEM -->
+<ng-container *ngIf="
+ isDrawerZoomOpen ||
+ isPanelOpen ||
+ bootStage === 'login'
+">
+
+  <!-- Bulb -->
+  <div
+  class="hint-bulb"
+  (click)="toggleHint(currentView)">
+
+  <img
+    src="assets/level2/bulb.png"
+    style="width:100%;height:100%;" />
+
+</div>
+
+  <!-- Panel -->
+  <div
+  *ngIf="activeHint === currentView"
+  class="hint-panel">
+
+
+    <button
+      class="hint-close"
+      (click)="closeHint()">
+      ✕
+    </button>
+
+    <div class="hint-title">
+      Hint
+    </div>
+
+    <div class="hint-text">
+      {{ hintMessages[currentView] }}
+
+    </div>
+
+  </div>
+
+</ng-container>
