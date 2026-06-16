@@ -818,8 +818,6 @@ handleComputerClick() {
     }, 2000);
     return;
   }
-
-  // already powered → allow password UI
 }
 
 handleBoxClick() {
@@ -1252,8 +1250,6 @@ async completeGame(playerName: string) {
 
   const seconds = result.seconds;
 
-  // 👇 FINAL FORMAT
-
   this.finalTime = `${minutes}:${seconds.toString().padStart(2, '0')} mins`;
 
   console.log('Game Completed Time:', this.finalTime);
@@ -1301,7 +1297,6 @@ updateDragPosition(event: MouseEvent) {
       this.passwordError = false;
       this.emptyPasswordError = false;
   
-      // Existing logic...
       this.showEmployeeData = false;
       this.showCodeScreen = false;
   
@@ -1349,7 +1344,6 @@ updateDragPosition(event: MouseEvent) {
 
     const now = new Date();
   
-    // TIME (10:23 format)
     let hours = now.getHours();
     const minutes = now.getMinutes().toString().padStart(2, '0');
   
@@ -1357,9 +1351,8 @@ updateDragPosition(event: MouseEvent) {
   
     this.lockTime = `${displayHours}:${minutes}`;
   
-    // ✅ DATE (Mon, 17 August)
     const options: Intl.DateTimeFormatOptions = {
-      weekday: 'short',   // 👈 THIS CHANGE
+      weekday: 'short',  
       day: 'numeric',
       month: 'long'
     };
@@ -1376,7 +1369,7 @@ updateDragPosition(event: MouseEvent) {
   
     this.updateLockScreenTime();
   
-    // start live clock
+
     this.lockTimer = setInterval(() => {
       this.updateLockScreenTime();
     }, 1000);
@@ -1385,8 +1378,7 @@ updateDragPosition(event: MouseEvent) {
   hideUnlockScreen() {
 
     this.unlockHiding = true;
-  
-    // stop timer
+
     if (this.lockTimer) {
       clearInterval(this.lockTimer);
     }
@@ -1413,7 +1405,6 @@ updateDragPosition(event: MouseEvent) {
     this.showLaptopWallpaper = true;
     this.isOnLaptopScreen = true;
   
-    // ✅ SHOW PENDING POPUP HERE
     if (this.pendingPopup && this.isComputerPowered) {
       this.pendingPopup = false;
       this.triggerComputerPopup();
@@ -1426,12 +1417,10 @@ updateDragPosition(event: MouseEvent) {
   
       this.codeError = false;
   
-      // ❌ HIDE ALL INTERMEDIATE SCREENS
       this.showCodeScreen = false;
       this.showWelcomeMessage = false;
       this.showNextArrow = false;
-  
-      // ✅ FINAL SCREEN
+
       this.showEmployeeData = true;
   
     } else {
@@ -1467,7 +1456,6 @@ updateDragPosition(event: MouseEvent) {
       return;
     }
   
-    // ✅ NORMAL FLOW
     if (this.currentView !== 'table2') return;
   
     this.viewStack.push(this.currentView);
@@ -1552,9 +1540,9 @@ updateDragPosition(event: MouseEvent) {
   toggleSection(section: string) {
 
     if (this.openSection === section) {
-      this.openSection = null; // collapse
+      this.openSection = null; 
     } else {
-      this.openSection = section; // open clicked
+      this.openSection = section; 
     }
   
   }
@@ -1573,16 +1561,14 @@ updateDragPosition(event: MouseEvent) {
   insertBatteryToWallClock() {
 
     this.wallClockOn = true;
-  
-    // show current time immediately
+
     const now = new Date();
   
     const hh = now.getHours().toString().padStart(2, '0');
     const mm = now.getMinutes().toString().padStart(2, '0');
   
     this.clockTime = `${hh}:${mm}`;
-  
-    // start real-time clock
+ 
     this.startWallClock();
   
   }
@@ -1590,11 +1576,9 @@ updateDragPosition(event: MouseEvent) {
   onBatteryDroppedToClock() {
 
     this.wallClockOn = true;
-  
-    // show current time immediately
+
     this.getCurrentTime();
   
-    // start running clock
     this.startWallClock();
   
   }
@@ -1655,10 +1639,8 @@ async setMobileTime() {
 
   const newTime = `${hh}:${mm}`;
 
-  // update mobile
   this.mobileTime = newTime;
 
-  // update wall clock
   this.clockTime = newTime;
 
     await this.gameService.updateRoomState(
@@ -1669,7 +1651,6 @@ async setMobileTime() {
     }
   );
 
-  // stop real-time clock
   this.manualTimeSet = true;
 
   if (this.clockInterval) {
@@ -1683,7 +1664,6 @@ toggleTimeEdit() {
 
   if (!this.editMode) {
 
-    // ENTER EDIT MODE
     this.editMode = true;
 
     this.editHours = this.displayHours;
@@ -1691,14 +1671,11 @@ toggleTimeEdit() {
 
   } else {
 
-    // SAVE TIME FROM MOBILE
     this.displayHours = this.editHours;
     this.displayMinutes = this.editMinutes;
 
-    // stop real clock
     this.manualTimeSet = true;
 
-    // stop interval
     if (this.clockInterval) {
       clearInterval(this.clockInterval);
       this.clockInterval = null;
@@ -1711,7 +1688,6 @@ toggleTimeEdit() {
     // update MOBILE
     this.mobileTime = `${hh}:${mm}`;
 
-    // update DIGITAL WALL CLOCK
     this.clockTime = `${hh}:${mm}`;
 
     // SAVE TO SUPABASE
@@ -1835,28 +1811,25 @@ toggleTimeEdit() {
 
     this.mobileNavStack.push(this.activeApp);
     this.activeApp = 'mail';
-  
-    // ✅ If already approved → special flow
+
     if (this.isMailApproved) {
   
       this.mailState = 'loading';
   
       setTimeout(() => {
-        this.mailState = 'approved'; // 👈 NEW STATE
+        this.mailState = 'approved';
       }, 2000);
   
       return;
     }
   
-    // normal flow
     this.mailState = 'loading';
   
     setTimeout(() => {
       this.mailState = 'form';
     }, 4000);
   }
-  
-  /* SEND MAIL */
+
   sendMail() {
 
     const validMail =
@@ -1871,10 +1844,8 @@ toggleTimeEdit() {
       return;
     }
   
-    // ✅ Mobile success
     this.mailState = 'success';
-  
-    // ✅ SAVE APPROVAL STATE
+ 
     this.mailSentSuccessfully = true;
       this.gameService.updateRoomState(
         'hr-room',
@@ -1885,13 +1856,12 @@ toggleTimeEdit() {
       
     this.isInternApproved = true;
   
-    // ✅ If computer already ON → show or queue popup
     if (this.isComputerPowered) {
   
       if (this.isOnLaptopScreen) {
         this.triggerComputerPopup();
       } else {
-        this.pendingPopup = true; // 👈 WAIT until laptop opens
+        this.pendingPopup = true; 
         this.gameService.updateRoomState(
           'hr-room',
           {
@@ -1919,15 +1889,12 @@ toggleTimeEdit() {
   
     this.activeApp = 'mail';
   
-    // STEP 1 → LOADING GIF
     this.mailState = 'loading';
   
     setTimeout(() => {
   
-      // STEP 2 → SUCCESS GIF
       this.mailState = 'success';
   
-      // 🔥 IMPORTANT → mark approved
       this.isMailApproved = true;
       this.gameService.updateRoomState(
         'hr-room',
@@ -1941,25 +1908,21 @@ toggleTimeEdit() {
   
       setTimeout(() => {
   
-        // STEP 3 → GO BACK TO WALLPAPER
         this.showLaptopWallpaper = true;
         this.activeApp = 'apps';
         this.mobileNavStack = [];
   
-      }, 3000); // show success.gif for 3 sec
+      }, 3000); 
   
-    }, 2000); // loading duration
+    }, 2000); 
   }
 
   closeApprovalPopup() {
 
-    // CLOSE POPUP
     this.showApprovalScreen = false;
   
-    // RETURN TO LAPTOP WALLPAPER
     this.showLaptopWallpaper = true;
   
-    // RESET MESSAGE SCREEN
     this.showMessageScreen = false;
   }
 
@@ -2073,8 +2036,7 @@ toggleTimeEdit() {
     if(this.currentView !== 'cupboard' || this.cupboardOpened) return;
   
     if(this.cursorIndex === -1) return;
-  
-    // NUMBER INPUT
+
     if(/^[0-9]$/.test(event.key)){
   
       if(this.cursorIndex > 4) return;
@@ -2087,7 +2049,7 @@ toggleTimeEdit() {
   
     }
   
-    // BACKSPACE
+
     if(event.key === "Backspace"){
   
       if(this.cursorIndex <= 0) return;
@@ -2117,8 +2079,7 @@ toggleTimeEdit() {
       setTimeout(()=>{
   
         this.blinkWrong = false;
-  
-        // hide wrong digits automatically
+
         this.resetCupboard();
   
       },800);
@@ -2167,12 +2128,10 @@ toggleTimeEdit() {
 
     this.activeLocker = group;
   
-    // reset puzzle every time
     this.lockerTiles = [1, 1, 1];
   
     this.viewStack.push(this.currentView);
     this.showPuzzlePopup = true;
-    // this.imageLoaded = false;
   }
 
   cycleLockerTile(index: number) {
@@ -2195,7 +2154,6 @@ toggleTimeEdit() {
   
     if (!isCorrect) return;
   
-    // ✅ CORRECT CASE
     if (this.activeLocker === 'locker4') {
   
       this.lockerUnlocked = true;
@@ -2219,7 +2177,7 @@ toggleTimeEdit() {
         'sequence'
       );
   
-      // go back to lockers
+
       setTimeout(() => {
         this.goBack();
       }, 800);
@@ -2306,7 +2264,7 @@ toggleTimeEdit() {
       this.showUnlock = false;
       this.showPattern = true;
       this.unlockHiding = false;
-    }, 300); // match animation
+    }, 300);
   }
   
   selectDot(index: number) {
@@ -2359,8 +2317,6 @@ toggleTimeEdit() {
     this.isDrawing = false;
   
     console.log('Pattern:', this.selectedDots);
-  
-    // ✅ Check pattern
     if (this.selectedDots.join() === this.correctPattern.join()) {
       this.onSuccess();
     } else {
@@ -2440,7 +2396,6 @@ toggleTimeEdit() {
   
     let points = '';
   
-    // draw selected dots
     this.selectedDots.forEach(id => {
   
       const el = document.querySelector(`[data-id="${id}"]`) as HTMLElement;
@@ -2454,7 +2409,6 @@ toggleTimeEdit() {
       points += `${x},${y} `;
     });
   
-    // 🔥 LIVE LINE (this was missing in your code)
     const liveX = event.clientX - rect.left;
     const liveY = event.clientY - rect.top;
   
@@ -2629,12 +2583,11 @@ onSuccess() {
   setTimeout(() => {
     this.showPattern = false;
 
-    // ✅ SHOW MENU + WALLPAPER
     this.showMobileApps = true;
     this.showMenuIcon = true;
     this.showAppsRow = false;
 
-    this.showWallpaper = true; // 👈 IMPORTANT
+    this.showWallpaper = true; 
 
   }, 500);
 }
@@ -2668,7 +2621,6 @@ openZoomApp() {
   this.activeApp = 'zoom';
 }
 
-// ERROR
 onError() {
 
   this.patternError = true;
@@ -2692,7 +2644,6 @@ onPatternMove(event: MouseEvent) {
   
     const touch = event.touches[0];
   
-    // ✅ NOW VALID
     this.updatePatternLine(touch.clientX, touch.clientY);
   
     const element = document.elementFromPoint(touch.clientX, touch.clientY);
@@ -2738,7 +2689,6 @@ onPatternMove(event: MouseEvent) {
   
     let points = '';
   
-    // draw selected dots
     this.selectedDots.forEach(id => {
       const el = document.querySelector(`[data-id="${id}"]`) as HTMLElement;
       const r = el.getBoundingClientRect();
@@ -2749,7 +2699,6 @@ onPatternMove(event: MouseEvent) {
       points += `${px},${py} `;
     });
   
-    // 🔥 add live cursor ONLY while drawing
     if (this.drawingPattern) {
       const liveX = x - rect.left;
       const liveY = y - rect.top;
@@ -2781,7 +2730,6 @@ onPatternMove(event: MouseEvent) {
       points += `${px},${py} `;
     });
   
-    // 👇 ADD LIVE POINTER
     const liveX = x - rect.left;
     const liveY = y - rect.top;
   
@@ -2845,13 +2793,12 @@ onPatternMove(event: MouseEvent) {
 
     this.showMailError = false;
 
-    // inside apps → go back
     if (this.mobileNavStack.length > 0) {
       this.activeApp = this.mobileNavStack.pop() as any;
       return;
     }
   
-    // if no history → go to MENU SCREEN
+
     this.goToMobileHome();
   }
 
@@ -2932,7 +2879,6 @@ onPatternMove(event: MouseEvent) {
 
     this.viewStack.push(this.currentView);
   
-    // ✅ IF ALL CONDITIONS SOLVED
     if (this.exitUnlocked) {
   
       this.currentView = 'openedexit';
@@ -2971,7 +2917,6 @@ onPatternMove(event: MouseEvent) {
   
     const nextView = order[newIndex];
   
-    // ✅ OPENED EXIT SUPPORT
     if (nextView === 'exit' && this.exitUnlocked) {
   
       this.currentView = 'openedexit';
@@ -3004,7 +2949,6 @@ onPatternMove(event: MouseEvent) {
   
     const nextView = order[newIndex];
   
-    // ✅ OPENED EXIT SUPPORT
     if (nextView === 'exit' && this.exitUnlocked) {
   
       this.currentView = 'openedexit';
@@ -3052,13 +2996,11 @@ onPatternMove(event: MouseEvent) {
 
     this.viewStack.push(this.currentView);
   
-    // ✅ LOCKER FIX (zoomed locker)
     // if (view === 'zoomedlocker' && this.hasKey) {
     //   this.currentView = 'openedkeylocker';
     // }
     if (view === 'zoomedlocker') {
 
-  // key locker already opened
   if (this.keyLockerOpened) {
 
     this.currentView = 'openedkeylocker';
@@ -3136,7 +3078,6 @@ onPatternMove(event: MouseEvent) {
   openBlueBox() {
     this.viewStack.push(this.currentView);
   
-    // ✅ If already opened → always show opened view
     if (this.hasBattery) {
       this.currentView = 'openedbox';
     } else {
@@ -3224,8 +3165,7 @@ onPatternMove(event: MouseEvent) {
         );
       }
   
-      // 🚫 DO NOT navigate anywhere
-      // Stay in tray view
+
     }, 800);
   }
 
@@ -3250,14 +3190,12 @@ onPatternMove(event: MouseEvent) {
   goBack() {
 
     this.playClick();
-    // ✅ close locker popup
     if (this.showPuzzlePopup) {
       this.showPuzzlePopup = false;
       return;
     }
   
-    // ✅ SPECIAL CASE:
-    // biometric back after access granted
+ 
     if (
       this.currentView === 'biometric' &&
       this.exitUnlocked

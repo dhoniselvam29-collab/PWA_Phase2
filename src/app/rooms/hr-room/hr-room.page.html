@@ -6,10 +6,6 @@
 
         <!-- ================= SETTINGS BUTTON ================= -->
 
-<!-- SETTINGS BUTTON ONLY -->
-
-<!-- SETTINGS BUTTON -->
-
 <div
   class="settings-menu-btn"
   (click)="toggleSettings()">
@@ -20,19 +16,14 @@
 
 </div>
 
-<!-- SETTINGS OVERLAY -->
-
 <div
   class="settings-overlay"
   *ngIf="showSettings">
 
-  <!-- BLUR BACKGROUND -->
   <div
     class="settings-backdrop"
     (click)="toggleSettings()">
   </div>
-
-  <!-- SETTINGS POPUP -->
   
 <app-settings
 *ngIf="showSettings"
@@ -41,8 +32,6 @@
 
 </div>
 
-
-        <!-- ================= MAIN IMAGE ================= -->
         <ng-container *ngIf="images[currentView] as img">
           <img
   class="scene-image fade-image"
@@ -55,7 +44,6 @@
   alt="hr-scene">
         </ng-container>
 
-        <!-- ================= MAIN VIEW ================= -->
         <ng-container *ngIf="imageLoaded && currentView === 'main'">
 
           <div
@@ -71,13 +59,11 @@
           (click)="navigateTo('bookshelf1')">
         </div>
       
-        <!-- Middle Shelf -->
         <div 
           class="bookshelf-hotspot shelf-2"
           (click)="navigateTo('bookshelf2')">
         </div>
       
-        <!-- Right Shelf -->
         <div 
           class="bookshelf-hotspot shelf-3"
           (click)="navigateTo('bookshelf3')">
@@ -92,23 +78,16 @@
 
         <ng-container *ngIf="currentView === 'table1' && imageLoaded">
 
-          <!-- <div class="hotspot mobile-hotspot"
-     (click)="navigateTo('mobilezoom')">
-</div> -->
-
-<!-- TRAY HOTSPOT -->
 <div class="hotspot tray-hotspot"
      (click)="navigateTo('tray')">
 </div>
 
-          <!-- RIGHT ARROW -->
           <ion-img
             src="assets/images/reception-room/right-arrow.png"
             class="nav-arrow right"
             (click)="navigateTo('table2')">
           </ion-img>
         
-          <!-- BACK ARROW -->
           <ion-img
             src="assets/images/reception-room/back-arrow.png"
             class="back-arrow center"
@@ -119,13 +98,8 @@
 
         <ng-container *ngIf="currentView === 'table2' && imageLoaded">
 
-          <!-- <div class="hotspot mobile-hotspot-table2"
-     (click)="navigateTo('mobilezoom')">
-</div> -->
-
 <div class="socket-zone" (click)="openSocketZoom()"></div>
 
-<!-- TRAY HOTSPOT -->
 <div class="hotspot tray-hotspot-table2"
      (click)="navigateTo('tray')">
 </div>
@@ -160,20 +134,12 @@
             class="table-wire-connected"
           /> -->
 
-         
-
-
-          <!-- ✅ PASSWORD SYSTEM -->
-          
-        
-          <!-- LEFT -->
           <ion-img
             src="assets/images/reception-room/left-arrow.png"
             class="nav-arrow left"
             (click)="navigateTo('table1')">
           </ion-img>
         
-          <!-- BACK -->
           <ion-img
             src="assets/images/reception-room/back-arrow.png"
             class="back-arrow center"
@@ -185,7 +151,6 @@
         <ng-container *ngIf="currentView === 'zoomedtable2' ">
           <div class="switch-board">
 
-            <!-- LEFT SWITCH -->
             <div 
               class="switch" 
               [class.on]="leftSwitchOn"
@@ -193,7 +158,6 @@
               <div class="switch-knob"></div>
             </div>
           
-            <!-- RIGHT SWITCH -->
             <div 
               class="switch" 
               [class.on]="rightSwitchOn"
@@ -246,8 +210,6 @@
         
             </div>
          -->
-            <!-- PASSWORD INPUT -->
-            <!-- PASSWORD INPUT -->
 <div *ngIf="!showWelcomeMessage && !showLaptopWallpaper" class="login-container">
 
   <div class="password-box">
@@ -270,13 +232,11 @@
     Incorrect Password
   </div>
 
-    <!-- LOGIN BUTTON -->
     <div class="login-div">
     <button class="login-btn" (click)="submitPassword()">
       LOGIN
     </button>
   </div>
-    <!-- ERROR MESSAGE -->
     
 
   </div>
@@ -320,9 +280,6 @@
   📩 You have a new message request
 </div>
 
-<!-- MESSAGE SCREEN -->
-<!-- MESSAGE SCREEN -->
-<!-- MESSAGE SCREEN -->
 <div *ngIf="showMessageScreen" class="message-screen">
 
   <div class="message-box1">
@@ -344,12 +301,10 @@
 
 </div>
 
-<!-- SUCCESS POPUP -->
 <div *ngIf="showApprovalScreen" class="approval-screen">
 
   <div class="approval-box">
 
-    <!-- CLOSE -->
     <div
       class="close-success"
       (click)="closeApprovalPopup()">
@@ -384,7 +339,6 @@
   || currentView === 'bookshelf2' 
   || currentView === 'bookshelf3'">
 
-  <!-- BACK ARROW -->
   <ion-img
     src="assets/images/reception-room/back-arrow.png"
     class="back-arrow center"
@@ -433,10 +387,6 @@
       <div class="letter letter3" (click)="cycleLetter(2,1)">{{ letterRows[2][1] }}</div>
     </div>
 
-    <!-- OK BUTTON -->
-    <!-- <button class="ok-btn" (click)="checkLetterPuzzle()">OK</button> -->
-
-    <!-- CLOSE -->
     <div class="close-btn" (click)="closeLetterPopup()">✕</div>
 
   </div>
@@ -452,7 +402,6 @@
 
         <ng-container *ngIf="currentView === 'openedkeylocker' && imageLoaded">
 
-          <!-- KEY INSIDE LOCKER -->
           <img
             *ngIf="!hrInventory.includes('KEY')"
             src="assets/images/reception-room/key.png"
@@ -486,8 +435,6 @@
 
         <ng-container *ngIf="currentView === 'table' && imageLoaded">
           <div class="table-scene">
-
-            <!-- 📱 PHONE BODY (ALWAYS VISIBLE) -->
             <img
               src="assets/images/hr-room/mobile.png"
               class="mobile-on-table"
@@ -499,8 +446,6 @@
               class="mobile-apps-screen"
               *ngIf="showMobileApps"
             /> -->
-
-            <!-- ================= MOBILE APP MENU ================= -->
 <!-- ================= MOBILE UI ================= -->
 <div *ngIf="showMobileApps" class="mobile-apps-ui">
 
@@ -510,7 +455,6 @@
     <img src="assets/images/hr-room/phone.png" />
   </div>
 
-  <!-- <div class="app-content"> -->
     <div *ngIf="showWallpaper" class="wallpaper-bg">
       <img src="assets/images/hr-room/wallpaper.png" />
     </div>
@@ -616,7 +560,7 @@
     <!-- Notifications -->
     <div class="setting-item">
 
-      <!-- HEADER -->
+
       <div class="setting-header" (click)="toggleSection('notifications')">
         <span>Notifications</span>
     
@@ -643,8 +587,7 @@
     
     </div>
   
-    <!-- Storage -->
-   <!-- STORAGE -->
+
 <div class="setting-item">
   <div class="setting-header" (click)="toggleSection('storage')">
     <span>Storage</span>
@@ -683,8 +626,6 @@
   </div>
 </div>
 
-
-<!-- DEVICE -->
 <div class="setting-item">
   <div class="setting-header" (click)="toggleSection('device')">
     <span>Device</span>
@@ -701,17 +642,11 @@
   
   </div>
 
-
-  <!-- ================= REACT APP SCREEN ================= -->
-  <!-- ================= CLUES APP ================= -->
 <div *ngIf="activeApp === 'react'" class="clues-panel">
 
-  <!-- ❌ BEFORE TOGGLE -->
   <div *ngIf="!isCluesUnlocked" class="clues-empty">
     No clues available.
   </div>
-
-  <!-- ✅ AFTER TOGGLE -->
 
     <div *ngIf="isCluesUnlocked" class="clues-content">
 
@@ -740,16 +675,12 @@
 </div>
 
 
-  <!-- ================= TIMER APP ================= -->
   <div *ngIf="activeApp === 'timer'" class="mobile-app-screen">
 
-    <!-- TITLE -->
     <div class="timer-title">Clock</div>
   
-    <!-- TIME SECTION -->
     <div class="timer-box">
   
-      <!-- HOURS -->
       <div class="time-wrapper">
         <div class="time-block">
   
@@ -766,8 +697,7 @@
       </div>
   
       <div class="colon">:</div>
-  
-      <!-- MINUTES -->
+ 
       <div class="time-wrapper">
         <div class="time-block">
   
@@ -785,32 +715,26 @@
   
     </div>
   
-    <!-- BUTTON -->
     <button class="timer-btn" (click)="toggleTimeEdit()">
       {{ editMode ? 'Set' : 'Edit' }}
     </button>
   
   </div>
 
-  <!-- MAIL APP -->
   <div *ngIf="activeApp === 'mail'" class="mobile-app-screen mail-app" [ngClass]="{
     'transparent-bg': mailState === 'loading' || mailState === 'success'
   }">
 
-    <!-- LOADING -->
     <div *ngIf="mailState === 'loading'" class="mail-loading">
       <img src="assets/images/hr-room/gmail.gif" />
     </div>
   
-    <!-- MAIL UI -->
     <div *ngIf="mailState === 'form'" class="gmail-container">
-  
-      <!-- HEADER -->
+
       <div class="gmail-header">
         New Message
       </div>
   
-      <!-- BODY -->
       <div class="gmail-body-wrapper">
   
         <div class="field" (click)="focusInput(toInput)">
@@ -833,7 +757,6 @@
           Thank you
         </p>
   
-        <!-- ✅ SEND BUTTON NOW BELOW MESSAGE -->
         <div class="send-wrapper">
           <button (click)="sendMail()">Send</button>
         </div>
@@ -842,7 +765,6 @@
   
     </div>
   
-    <!-- SUCCESS -->
     <div *ngIf="mailState === 'success'" class="mail-success">
       <img src="assets/images/hr-room/success.gif" alt="success" />
       <p>Request Sent Successfully</p>
@@ -930,7 +852,6 @@
 <!-- </div> -->
 </div>
           
-            <!-- 🔓 UNLOCK IMAGE -->
             <div class="unlock-overlay" *ngIf="showUnlock">
               <img
                 src="assets/images/hr-room/unlock.png"
@@ -979,7 +900,6 @@
           
             </div>
 
-<!-- ================= TIMER SCREEN ================= -->
 <div *ngIf="showTimer" class="timer-screen fade-scale">
 
   <!-- DISPLAY MODE -->
@@ -1005,7 +925,7 @@
           
           </div>
         
-          <!-- 🔙 Back Arrow (Placed LAST so it stays on top) -->
+
           <ion-img
             src="assets/images/reception-room/back-arrow.png"
             class="back-arrow center table-back"
@@ -1025,13 +945,7 @@
         </ng-container> -->
 
         <ng-container *ngIf="currentView === 'unplugged' && imageLoaded">
-
-          <!-- DRAG START ZONE (over plug head at bottom) -->
-         
-        
-          <!-- SOCKET DROP ZONE -->
-          
-        
+              
           <ion-img
             src="assets/images/reception-room/back-arrow.png"
             class="back-arrow center"
@@ -1040,7 +954,6 @@
         
         </ng-container>
 
-        <!-- ================= ARROWS (DECLARED ONLY ONCE) ================= -->
         <ng-container *ngIf="imageLoaded && (currentView === 'main' || currentView === 'exit' || currentView === 'side')">
 
           <ion-img
@@ -1143,12 +1056,10 @@
   (click)="navigateTo('cupboard')">
 </div>
 
-          <!-- CLOCK HOTSPOT -->
           <div 
             class="clock-zone" *ngIf="!batteryInsertedInClock" (click)="handleClockClick()">
           </div>
         
-          <!-- BIOMETRIC HOTSPOT -->
           <div 
             class="biometric-zone"
             (click)="openBiometric()">
@@ -1260,16 +1171,8 @@
         
         </ng-container>
 
-        <!-- ================= OPEN CUPBOARD VIEW ================= -->
 <ng-container *ngIf="currentView === 'opencupboard' && imageLoaded">
 
-  <!-- BOOK CLICK AREA -->
-  <!-- <div
-    class="book-zone"
-    (click)="openBook()">
-  </div> -->
-
-  <!-- BACK -->
   <ion-img
     src="assets/images/reception-room/back-arrow.png"
     class="back-arrow center"
@@ -1311,12 +1214,6 @@
         
         <ng-container *ngIf="currentView === 'biometric' && imageLoaded">
 
-          <!-- <div
-  class="biometric-click-zone"
-  (click)="handleBiometricClick()">
-</div> -->
-        
-           <!-- BIOMETRIC DROP ZONE -->
   <div class="biometric-drop-zone" (click)="handleBiometricClick()"></div>
 
   <!-- ACCESS GRANTED -->
@@ -1465,16 +1362,10 @@
 
           <div *ngIf="showPuzzlePopup" class="puzzle-wrapper">
 
-            <!-- MAIN PANEL -->
             <div class="puzzle-box">
           
-              <!-- TOP METAL DESIGN -->
               <div class="top-metal-strip"></div>
           
-              <!-- CLOSE -->
-              <!-- <div class="close-btn" (click)="goBack()">
-                ✕
-              </div> -->
           
               <!-- TILE AREA -->
               <div class="puzzle-div">
@@ -1514,7 +1405,6 @@
           
               </div>
           
-              <!-- BOTTOM LINE -->
               <div class="bottom-strip">
           
                 <div class="line"></div>
@@ -1550,7 +1440,6 @@
             </div>
           </div> -->
         
-          <!-- BACK -->
           <ion-img
             src="assets/images/reception-room/back-arrow.png"
             class="back-arrow center"
@@ -1566,7 +1455,6 @@
             [src]="images.panel"
           /> -->
         
-          <!-- GREEN INPUT -->
           <div class="green-display" [class.error]="errorState">
         
             <input
@@ -1579,17 +1467,14 @@
         
           </div>
         
-          <!-- ERROR TEXT -->
           <div class="code-error" *ngIf="errorState">
             CODE MISMATCH
           </div>
         
-          <!-- ENTER BUTTON -->
           <button class="enter-btn" (click)="submitCode()">
             ENTER
           </button>
         
-          <!-- BACK -->
           <ion-img
             src="assets/images/reception-room/back-arrow.png"
             class="back-arrow center"
@@ -1598,7 +1483,6 @@
         
         </ng-container>
 
-        <!-- ================= COMPUTER VIEW ================= -->
         <ng-container *ngIf="currentView === 'computer'">
 
           <ion-img src="assets/images/reception-room/back-arrow.png" class="back-arrow center"
@@ -1629,7 +1513,7 @@
     currentView === 'zoomedmonitor'
   "
 >
-  <!-- Bulb -->
+
   <div
     class="hint-bulb"
     (click)="toggleHint(currentView)"
@@ -1640,7 +1524,6 @@
     />
   </div>
 
-  <!-- Hint Panel -->
   <div
     *ngIf="activeHint === currentView"
     class="hint-panel"
@@ -1703,13 +1586,11 @@ class="drag-preview"
 [style.left.px]="dragX"
 [style.top.px]="dragY">
 
-<!-- KEY -->
 <img
   *ngIf="dragItem === 'KEY'"
   src="assets/images/reception-room/key.png"
   class="drag-item-img">
 
-<!-- BATTERY -->
 <img
   *ngIf="dragItem === 'BATTERY'"
   src="assets/images/hr-room/battery.png"

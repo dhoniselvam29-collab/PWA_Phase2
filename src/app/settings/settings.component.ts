@@ -113,25 +113,17 @@ this.progressPercentage =
   }
     }
   
- 
-  /* ACTIVE TAB */
 
   activeTab: string = 'player';
 
-  /* ADD THIS */
-
   selectedOption: string = 'player';
 
-  /* AUDIO */
-
   soundVolume: number = 70;
-  /* GAME DATA */
 
   currentLevel: number = 1;
 
   puzzlesSolved: number = 18;
 
-  /* ADD THIS */
   roomsCleared: number = 7;
 
   currentRoom: string = 'HR Department';
@@ -171,11 +163,8 @@ this.progressPercentage =
       this.soundEnabled
     );
   }
-  /* CLOSE POPUP */
+ 
   confirmLogout() {
-
-    // Optional:
-    // localStorage.clear();
   
     this.closePopup.emit();
   

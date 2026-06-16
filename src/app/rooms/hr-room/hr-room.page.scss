@@ -1374,7 +1374,6 @@ ion-content {
 }
 
 
-/* ✨ POPUP ANIMATION */
 @keyframes popupScale {
   from {
     transform: scale(0.7);
@@ -1442,7 +1441,6 @@ ion-content {
   position: relative;
 }
 
-/* ARROWS */
 .arrow {
   font-size: clamp(0.8rem, 2vw, 1.2rem);
   cursor: pointer;
@@ -1616,7 +1614,7 @@ ion-content {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* behind menu */
+    z-index: 1; 
   }
   
   .wallpaper-bg img {
@@ -1654,14 +1652,6 @@ ion-content {
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-/* MESSAGE SCREEN */
-/* =========================
-   MESSAGE SCREEN OVERLAY
-========================= */
-
-/* =========================
-   MESSAGE SCREEN
-========================= */
 
 .message-screen{
   position:absolute;
@@ -2024,7 +2014,6 @@ ion-content {
     // transform: scale(1.3);
   }
   
-  /* ================= SVG LINE ================= */
   
   .pattern-svg {
     // position: absolute;
@@ -2064,13 +2053,11 @@ ion-content {
     to { opacity: 1; transform: scale(1); }
   }
   
-  /* KEY placed visually inside tray */
   .key-inside-tray {
     position: absolute;
   
-    /* 🔥 Adjust THESE only */
-    bottom: 40%;   /* controls vertical position */
-    left: 30%;     /* controls horizontal position */
+    bottom: 40%;
+    left: 30%;    
   
     width: 60px;
   
@@ -2130,7 +2117,6 @@ ion-content {
     object-fit: contain;
   }
 
-  /* 🔥 DARK OVERLAY */
   .locker-popup {
     position: absolute;
     inset: 0;
@@ -2143,23 +2129,20 @@ ion-content {
     z-index: 999;
   }
 
-/* 🔥 POPUP BOX */
 .locker-popup-box {
   width: 240px;
   padding: 18px;
 
-  background: #1a1a1a; /* flat color */
+  background: #1a1a1a; 
   border: 2px solid #ffffff;
 
-  border-radius: 6px; /* slight, not heavy */
+  border-radius: 6px;
 
   text-align: center;
   color: #ffffff;
 
-  /* ❌ removed glow & shadow */
 }
 
-/* TITLE */
 .locker-title {
   font-size: 13px;
   margin-bottom: 12px;
@@ -2167,7 +2150,6 @@ ion-content {
   color: #cccccc;
 }
 
-/* INPUT */
 .locker-input {
   width: 100%;
   padding: 8px;
@@ -2205,14 +2187,12 @@ ion-content {
   background: #3a3a3a;
 }
 
-/* ERROR */
 .locker-error {
   color: #ff4d4d;
   margin-top: 8px;
   font-size: 11px;
 }
 
-/* ANIMATION */
 @keyframes popupScale {
   from {
     transform: scale(0.7);
@@ -2224,7 +2204,6 @@ ion-content {
   }
 }
 
-/* SHAKE EFFECT */
 @keyframes shake {
   0% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
@@ -2272,8 +2251,6 @@ ion-content {
 
   .locker-click-zone {
     position: absolute;
-  
-    /* 🔧 Adjust based on your image */
     top: 30%;
     left: 40%;
     width: 20%;
@@ -2311,7 +2288,6 @@ ion-content {
     cursor: pointer;
   }
 
-  /* POPUP BACKDROP */
 .letter-popup {
   position: fixed;
   top: 0;
@@ -2325,7 +2301,6 @@ ion-content {
   z-index: 999;
 }
 
-/* BOX */
 .letter-box {
   background: #f2f2f2;
   padding: 30px 20px;
@@ -2335,14 +2310,12 @@ ion-content {
   position: relative;
 }
 
-/* ROW */
 .letter-row {
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
 }
 
-/* LETTER */
 .letter {
   width: 45%;
   padding: 12px 0;
@@ -2370,7 +2343,7 @@ ion-content {
 .letter4{
   background: #6E2C2C;
 }
-/* BUTTON */
+
 .ok-btn {
   margin-top: 15px;
   padding: 8px 20px;
@@ -2388,7 +2361,7 @@ ion-content {
   width: 31%;
   height: 29%;
 }
-/* CLOSE BUTTON */
+
 .close-btn {
   position: absolute;
   bottom: -25px;
@@ -2405,7 +2378,6 @@ ion-content {
   font-size: 20px;
   cursor: pointer;
 }
-  /* GREEN DISPLAY BOX */
 
   .green-display {
     position: absolute;
@@ -2429,8 +2401,6 @@ ion-content {
   }
   
 
-/* ERROR BLINK */
-
 .green-display.error input {
   background: red;
   color: white;
@@ -2451,8 +2421,6 @@ ion-content {
   50% { opacity: 0.3; }
 }
 
-/* ENTER BUTTON */
-
 .enter-btn {
   position: absolute;
   top: 65%;
@@ -2469,8 +2437,6 @@ ion-content {
   from { opacity: 1; }
   to { opacity: 0; }
 }
-
-/* OPEN ANIMATION */
 
 .locker-open-animation {
   animation: openEffect 0.5s ease forwards;
@@ -2543,7 +2509,6 @@ ion-content {
     transition: transform 0.3s ease, filter 0.3s ease;
   }
 
-  /* Noticeboard hotspot in side view */
 .noticeboard-zone {
   position: absolute;
   top: 14%;
@@ -2620,7 +2585,6 @@ ion-content {
     height: 5%;
 }
 
-/* MOBILE CONTAINER */
 .mobile-apps-ui {
   position: relative;
   width: 100%;
@@ -2654,8 +2618,6 @@ ion-content {
 //   overflow: hidden;
 // }
 
-
-/* FOOTER */
 .mobile-footer {
   position: absolute;
     bottom: 0;
@@ -2681,7 +2643,6 @@ ion-content {
   }
 }
 
-/* ☰ */
 .menu-icon1 {
   width: 40%;
   position: relative;
@@ -2696,7 +2657,6 @@ ion-content {
   margin: 4px 0;
 }
 
-/* ◻ */
 .square-icon {
   width: 32%;
   height: 50%;
@@ -2707,7 +2667,7 @@ ion-content {
 .mail-popup{
   color: #000;
 }
-/* ← */
+
 .back-icon {
   width: 28%;
   height: 46%;
@@ -2762,8 +2722,6 @@ ion-content {
 //   transform: rotate(45deg);
 // }
 
-/* ================= SETTINGS PANEL ================= */
-/* ROOT FONT SCALING */
 .settings-container {
   padding: 30px 10px 10px;
   background: linear-gradient(180deg, #1a0f05, #0e0703);
@@ -2779,7 +2737,6 @@ ion-content {
   border-radius: 15px;
 }
 
-/* PANEL */
 .settings-panel {
   width: 50%;
   padding: 1.2rem;
@@ -2789,31 +2746,26 @@ ion-content {
   box-shadow: 0 0.5rem 1.2rem rgba(0,0,0,0.5);
 }
 
-/* ITEM */
 .setting-item {
   border-bottom: 2px solid rgba(255, 255, 255, 0.06);
   padding: 0.6rem 0;
 }
 
-/* HEADER */
+
 .setting-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  /* 👇 Responsive font */
   font-size: clamp(1.20rem, 0.6vw, 1rem);
   font-weight: 500;
   color: #e6d5c3;
 }
 
-/* VALUE TEXT */
 .setting-header .value {
   font-size: clamp(0.75rem, 1.3vw, 0.9rem);
   color: #cbb8a3;
 }
 
-/* ARROW */
 .arrow {
   transition: transform 0.3s ease;
   color: #cbb8a3;
@@ -2828,7 +2780,7 @@ ion-content {
 .settings-text{
 
 }
-/* TEXT */
+
 .settings-text {
   font-size: clamp(0.8rem, 1.4vw, 1rem);
   color: #d7c6b3;
@@ -2841,7 +2793,6 @@ ion-content {
   padding: 10px 0;
 }
 
-/* ACCORDION */
 .accordion-content {
   padding: 0.6rem 0 0.3rem 0;
   animation: slideDown 0.25s ease;
@@ -2849,7 +2800,6 @@ ion-content {
   font-size: clamp(0.75rem, 1.3vw, 0.9rem);
 }
 
-/* PROGRESS BAR */
 .progress-bar {
   width: 100%;
   height: 0.4rem;
@@ -2865,7 +2815,6 @@ ion-content {
   border-radius: 10px;
 }
 
-/* TOGGLE */
 .toggle-switch {
   position: relative;
   width: 2.3rem;
@@ -2899,7 +2848,6 @@ ion-content {
   position: absolute;
 }
 
-/* ACTIVE */
 .toggle-switch input:checked + .toggle-slider {
   background: #4caf50; 
 }
@@ -2908,7 +2856,7 @@ ion-content {
   transform: translateX(1.1rem);
 }
 
-/* ANIMATION */
+
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -2920,7 +2868,6 @@ ion-content {
   }
 }
 
-/* ================= CLUES PANEL ================= */
 
 .clues-panel {
   // position: absolute;
@@ -2935,7 +2882,6 @@ ion-content {
   // box-shadow: 0 0 25px rgba(0,0,0,0.7);
 }
 
-/* NO CLUES */
 
 .clues-empty {
   text-align: center;
@@ -2944,7 +2890,6 @@ ion-content {
   opacity: 0.8;
 }
 
-/* CLUES CONTENT */
 
 .clues-content {
   text-align: center;
@@ -2960,7 +2905,6 @@ ion-content {
 
   // box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
-/* ================= BACK BUTTON ================= */
 
 .app-back-btn {
   position: absolute;
@@ -3009,8 +2953,7 @@ ion-content {
 
 }
  
-/* SCREEN */
-/* ⚠️ DO NOT CHANGE POSITION AGAIN */
+
 .mobile-app-screen.mail-app {
   position: absolute;
   width: 100%;
@@ -3023,7 +2966,6 @@ ion-content {
   flex-direction: column;
 }
 
-/* CONTAINER FULL FIT */
 .gmail-container {
   display: flex;
   flex-direction: column;
@@ -3032,7 +2974,6 @@ ion-content {
   
 }
 
-/* HEADER */
 .gmail-header {
   height: 40px;
   display: flex;
@@ -3044,7 +2985,6 @@ ion-content {
   color: #000;
 }
 
-/* BODY SCROLL AREA */
 .gmail-body-wrapper {
   flex: 1;
   overflow-y: auto;
@@ -3053,7 +2993,6 @@ ion-content {
   padding-bottom: 60px;
 }
 
-/* FIELD ROW */
 .field {
   display: flex;
   align-items: center;
@@ -3061,23 +3000,23 @@ ion-content {
   gap: 10px;
 }
 
-/* LABEL */
+
 .field span:first-child {
   width: 44px;
   font-size: 11px;
   color: #5f6368;
 }
 
-/* INPUT */
+
 .field input {
   flex: 1;
-  min-width: 0;            /* 🔥 IMPORTANT: prevents flex overflow */
+  min-width: 0;          
   border: none;
   outline: none;
   background: transparent;
   font-size: 13px;
   color: #000;
-  white-space: nowrap;     /* keep text in one line */
+  white-space: nowrap;   
   overflow-x: auto;  
 }
 
@@ -3156,14 +3095,12 @@ ion-content {
   background: transparent;
 }
 
-/* DIVIDER */
 .divider {
   height: 1px;
   background: #ddd;
   margin: 6px 0;
 }
 
-/* TEXTAREA FIX (IMPORTANT) */
 .message-box {
   width: 100%;
   min-height: 120px;
@@ -3181,7 +3118,7 @@ ion-content {
   // margin-bottom: 10px;
 }
 
-/* BUTTON */
+
 .send-wrapper button {
   width: 40%;
   padding: 8px;
@@ -3190,7 +3127,7 @@ ion-content {
   border: none;
   border-radius: 10px;
 }
-/* FOOTER */
+
 .gmail-footer {
   padding: 8px;
   border-top: 1px solid #ddd;
@@ -3198,7 +3135,6 @@ ion-content {
   padding-bottom: 14px;
 }
 
-/* BUTTON */
 .gmail-footer button {
   width: 100%;
   padding: 10px;
@@ -3208,7 +3144,6 @@ ion-content {
   border-radius: 10px;
 }
 
-/* LOADING */
 .mail-loading {
   display: flex;
   justify-content: center;
@@ -3221,7 +3156,6 @@ ion-content {
   border-radius: 5px;
 }
 
-/* SUCCESS */
 .mail-success {
   display: flex;
   flex-direction: column;
@@ -3237,13 +3171,11 @@ ion-content {
   overflow: hidden;
 }
 
-/* GIF size */
 .mail-success img {
   width: 70px;
   border-radius: 5px;
 }
 
-/* TEXT */
 .mail-success p {
   font-size: 16px;
   color: #22c55e;
@@ -3261,7 +3193,6 @@ ion-content {
   overflow: hidden; 
 }
 
-/* MAIN CARD */
 .mail-card {
   background: #111827;
 
@@ -3287,7 +3218,6 @@ ion-content {
   height: 100%;
 }
 
-/* HEADER */
 .mail-header {
   width: 100%;
 
@@ -3316,7 +3246,6 @@ ion-content {
   white-space: nowrap;
 }
 
-/* BODY */
 .mail-body {
   flex: 1;
 
@@ -3331,7 +3260,6 @@ ion-content {
   overflow: hidden;
 }
 
-/* TITLE */
 .mail-title {
   margin: 0 0 1rem 0;
 
@@ -3344,7 +3272,6 @@ ion-content {
   line-height: 1.3;
 }
 
-/* TEXT */
 .mail-text {
   margin: 0;
 
@@ -3371,7 +3298,6 @@ ion-content {
   line-height: 1.3;
 }
 
-/* SUB TEXT */
 .mail-sub {
   margin-top: 1rem;
 
@@ -3382,7 +3308,6 @@ ion-content {
   line-height: 1.4;
 }
 
-/* ANIMATION */
 .mail-card {
   animation: popIn 0.3s ease;
 }
@@ -3399,7 +3324,6 @@ ion-content {
   }
 }
 
-/* ERROR POPUP */
 .error-popup {
   position: fixed;
   top: 0;
@@ -3456,7 +3380,6 @@ ion-content {
   gap: 16px;
 }
 
-/* EACH SWITCH */
 .switch {
   width: 26%;
   height: 74%;
@@ -3468,7 +3391,7 @@ ion-content {
   transition: all 0.2s ease;
 }
 
-/* KNOB */
+
 .switch-knob {
   width: 33%;
   height: 13%;
@@ -3939,7 +3862,7 @@ ion-content {
   cursor: pointer;
 }
 
-/* Yellow sticky inside noticeboard */
+
 .yellow-zone {
   position: absolute;
   top: 19%;
@@ -3949,7 +3872,7 @@ ion-content {
   cursor: pointer;
 }
 
-/* Blue sticky inside noticeboard */
+
 .blue-zone {
   position: absolute;
   top: 21%;
