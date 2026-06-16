@@ -2180,7 +2180,7 @@ toggleTimeEdit() {
 
       setTimeout(() => {
         this.goBack();
-      }, 800);
+      }, 3000);
     }
   }
 
