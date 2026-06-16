@@ -2181,7 +2181,7 @@ toggleTimeEdit() {
       setTimeout(() => {
         this.goBack();
       }, 3000);
-    }
+    } 
   }
 
   closeLockerPopup() {

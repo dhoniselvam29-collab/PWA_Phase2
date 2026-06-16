@@ -9,7 +9,8 @@ import { GameService } from '../services/game.service';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
+import { LeaderboardlistPage } from '../leaderboardlist/leaderboardlist.page';
 import { Router } from '@angular/router';
 
 @Component({
@@ -41,6 +42,7 @@ playerAvatar: string = '👾';
     constructor(
       private soundService: SoundService,
       private gameService: GameService,
+      private modalCtrl: ModalController,
       private router: Router
 
       
@@ -147,8 +149,19 @@ this.progressPercentage =
     console.log('Open Leaderboard');
   }
 
+  openPlayers() {
+    console.log('Open Players List');
+    this.router.navigateByUrl('/leaderboardlist');
+  }
 
+  async goToLeaderboard() {
+    const modal = await this.modalCtrl.create({
+      component: LeaderboardlistPage,
+      cssClass: 'leaderboard-modal'
+    });
 
+    await modal.present();
+  }
 
   async toggleSound(event: any) {
 

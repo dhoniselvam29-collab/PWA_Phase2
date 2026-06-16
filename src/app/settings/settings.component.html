@@ -54,6 +54,16 @@
   </div>
 
   <div
+  class="menu-item"
+  [class.active]="selectedOption === 'leaderboard'"
+  (click)="selectedOption = 'leaderboard'">
+
+  <ion-icon name="notifications"></ion-icon>
+  <span>LEADERBOARD</span>
+
+</div>
+
+  <div
     class="menu-item logout-item"
     [class.active]="selectedOption === 'logout'"
     (click)="selectedOption = 'logout'">
@@ -212,6 +222,33 @@
         </div>
 
       </div>
+
+<!-- NOTIFICATIONS -->
+<div *ngIf="selectedOption === 'leaderboard'">
+
+  <div class="section-title">
+    LEADERBOARD
+  </div>
+
+  <div class="leaderboard-list">
+
+    <div class="notification-text">
+      Compare your progress with other players in the organization.
+      <br><br>
+      Open the leaderboard to explore top performers and rankings.
+    </div>
+
+  </div>
+
+  <div class="notification-actions">
+
+    <button class="leaderboard-btn" (click)="goToLeaderboard()">
+      VIEW PLAYERS
+    </button>
+
+  </div>
+
+</div>
 
       <!-- LOGOUT -->
 <div *ngIf="selectedOption === 'logout'" class="logout-section">

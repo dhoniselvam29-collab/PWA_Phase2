@@ -1315,9 +1315,9 @@ ion-content {
 
 .hint-bulb {
   position: absolute;
-  bottom: 3%;
-  left: 2%;
-  width: 4%;
+  bottom: 6%;
+  left: 3%;
+  width: 6%;
   min-width: 40px;
   max-width: 70px;
   cursor: pointer;
@@ -1328,6 +1328,8 @@ ion-content {
   width: 100%;
   display: block;
   transition: transform 0.25s ease;
+  animation: goldGlow 2.4s ease-in-out infinite;
+  will-change: filter, transform, opacity;
 }
 
 .hint-bulb:hover img {
@@ -1342,9 +1344,9 @@ ion-content {
   max-width: 28vw;
   padding: 10px 14px;
   background: rgba(20, 20, 20, 0.95);
-  border: 2px solid #f3d36b;
+  border: 2px solid #F3D36B;
   border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
   animation: hintSlide 0.25s ease;
   z-index: 100;
 }
@@ -1361,7 +1363,7 @@ ion-content {
 }
 
 .hint-title {
-  color: #f3d36b;
+  color: #F3D36B;
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 8px;
@@ -1371,6 +1373,45 @@ ion-content {
   color: white;
   font-size: 14px;
   line-height: 1.5;
+}
+
+@keyframes goldGlow {
+  0% {
+    filter: drop-shadow(0 0 2px rgba(255, 215, 120, 0.25))
+            drop-shadow(0 0 6px rgba(255, 190, 60, 0.2));
+    opacity: 0.75;
+    transform: scale(1);
+  }
+
+  20% {
+    filter: drop-shadow(0 0 8px rgba(255, 220, 140, 0.6))
+            drop-shadow(0 0 16px rgba(255, 190, 70, 0.45))
+            drop-shadow(0 0 24px rgba(255, 160, 40, 0.25));
+    opacity: 0.9;
+  }
+
+  45% {
+    filter: drop-shadow(0 0 18px rgba(255, 235, 160, 1))
+            drop-shadow(0 0 36px rgba(255, 200, 80, 0.85))
+            drop-shadow(0 0 55px rgba(255, 160, 40, 0.55));
+    opacity: 1;
+    transform: scale(1.06);
+  }
+
+  65% {
+    filter: drop-shadow(0 0 12px rgba(255, 220, 130, 0.7))
+            drop-shadow(0 0 24px rgba(255, 180, 60, 0.5))
+            drop-shadow(0 0 40px rgba(255, 140, 30, 0.3));
+    opacity: 0.95;
+    transform: scale(1.03);
+  }
+
+  100% {
+    filter: drop-shadow(0 0 3px rgba(255, 200, 100, 0.25))
+            drop-shadow(0 0 6px rgba(255, 180, 60, 0.2));
+    opacity: 0.75;
+    transform: scale(1);
+  }
 }
 
 @keyframes hintSlide {
